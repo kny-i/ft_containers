@@ -80,7 +80,6 @@ namespace ft {
 //		void clear() {
 //			;
 //		}
-
 	private:
 		pointer first_pointer_;
 		pointer last_pointer_;
