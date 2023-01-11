@@ -7,7 +7,7 @@
 
 namespace ft {
 	template<class T, class Allocator = std::allocator<T> >
-	class vecotor {
+	class vector {
 	public:
 		typedef T value_type;
 		typedef Allocator allocator_type;
@@ -23,14 +23,14 @@ namespace ft {
 //		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
 		/* empty constructor */
-		vector() : first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(allocator_type()) {}
+		vector() : first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(allocator_type()) {}
 
 		/*  */
-		explicit vector(const Allocator &alloc) : first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(alloc) {}
+		explicit vector(const Allocator &alloc) : first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {}
 
 		/*  */
 //		explicit vector(size_type count, const T &val = T(), const Allocator &alloc = Allocator())
-//		: first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(alloc) {
+//		: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
 //			resize(count, val);
 //		}
 		/* range constructor */
@@ -53,21 +53,21 @@ namespace ft {
 //				construct(dest, *src);
 //			}
 //			last_ = first_ + other.size();
-		}
+//		}
 		/* operator overload */
 //		vector &operator=(const vector &other) {
 //			if (this != &other) {
 //				clear();
 //				resize(other.size());
 //				for (size_type i = 0; i < other.size(); i++) {
-//					first_ptr_[i] = other[i];
+//					first_pointer_[i] = other[i];
 //				}
 //			}
 //			return *this;
 //		}
 
 		/* destructor */
-		~vecotor() {
+		~vector() {
 //			clear();
 //			deallocate();
 			;
@@ -82,9 +82,9 @@ namespace ft {
 //		}
 
 	private:
-		pointer first_pointer;
-		pointer last_pointer;
-		pointer storage_last;
+		pointer first_pointer_;
+		pointer last_pointer_;
+		pointer storage_last_;
 		allocator_type alloc_;
 
 	};
