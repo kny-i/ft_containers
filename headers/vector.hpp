@@ -48,8 +48,13 @@ namespace ft {
 		}
 		~vecotor() {
 //			clear();
+//			deallocate();
 		}
-
+		void assign(size_type count, const T& value) {
+			clear();
+			reserve(count);
+			insert(begin(), count, value);
+		}
 		void clear() {
 			;
 		}
