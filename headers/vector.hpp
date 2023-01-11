@@ -19,15 +19,21 @@ namespace ft {
 		typedef typename Allocator::const_pointer const_pointer;
 		typedef pointer iterator;
 		typedef const_pointer const_iterator;
-		typedef ft::reverse_iterator<iterator> reverse_iterator;
-		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+//		typedef ft::reverse_iterator<iterator> reverse_iterator;
+//		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
+		/* empty constructor */
 		vector() : first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(allocator_type()) {}
+
+		/*  */
 		explicit vector(const Allocator &alloc) : first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(alloc) {}
-		explicit vector(size_type count, const T &val = T(), const Allocator &alloc = Allocator())
-		: first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(alloc) {
-			resize(count, val);
-		}
+
+		/*  */
+//		explicit vector(size_type count, const T &val = T(), const Allocator &alloc = Allocator())
+//		: first_ptr_(NULL), last_ptr_(NULL), storage_last_(NULL), alloc_(alloc) {
+//			resize(count, val);
+//		}
+		/* range constructor */
 //		template <typename InputIt>
 //		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
 //		typename ft::enable_if<!ft::is_integral<InputIt>::value,InputIt>::type* = NULL)
@@ -36,28 +42,44 @@ namespace ft {
 //			for (InputIt i = first; i != last; ++i) {
 //				push_back(*i);
 //			}
-		vector &operator=(const vector &other) {
-			if (this != &other) {
-				clear();
-				resize(other.size());
-				for (size_type i = 0; i < other.size(); i++) {
-					first_ptr_[i] = other[i];
-				}
-			}
-			return *this;
+		/* copy constructor */
+//		vector(vector const& other)
+//		: first_(NULL), last_(NULL), reserved_last_(NULL), alloc_(other.alloc_) {
+//			reserve(other.size());
+//
+//			pointer dest = first_;
+//			for (const_iterator src = other.begin(), last = other.end(); src != last;
+//				 ++dest, ++src) {
+//				construct(dest, *src);
+//			}
+//			last_ = first_ + other.size();
 		}
+		/* operator overload */
+//		vector &operator=(const vector &other) {
+//			if (this != &other) {
+//				clear();
+//				resize(other.size());
+//				for (size_type i = 0; i < other.size(); i++) {
+//					first_ptr_[i] = other[i];
+//				}
+//			}
+//			return *this;
+//		}
+
+		/* destructor */
 		~vecotor() {
 //			clear();
 //			deallocate();
-		}
-		void assign(size_type count, const T& value) {
-			clear();
-			reserve(count);
-			insert(begin(), count, value);
-		}
-		void clear() {
 			;
 		}
+//		void assign(size_type count, const T& value) {
+//			clear();
+//			reserve(count);
+//			insert(begin(), count, value);
+//		}
+//		void clear() {
+//			;
+//		}
 
 	private:
 		pointer first_pointer;
