@@ -1,6 +1,7 @@
 template < typename T, typename Allocator = std::allocator<T> >
 
 template < typename T, typename Allocator = std::allocator<T> >
+
 class vector
 {
 private :
