@@ -5,7 +5,8 @@ OBJS        = $(SRCS:.cpp=.o)
 DEPENDS     = $(OBJS:.o=.d)
 CXX         = c++
 headers = ./headers
-CXXFLAGS    = -std=c++17 -pedantic-errors -MMD -MP -I$(headers)
+iterator_headers = ./headers/iterator
+CXXFLAGS    = -std=c++17 -pedantic-errors -MMD -MP -I$(headers) -I$(iterator_headers)
 .PHONY: all
 all: $(NAME)
 
