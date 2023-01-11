@@ -1,25 +1,30 @@
-name = ft_containers
+NAME        = ft_conatiner
+SRCDIR      = ./srcs
+SRCS        = $(shell find $(SRCDIR) -name "*.cpp" -type f | xargs)
+OBJS        = $(SRCS:.cpp=.o)
+DEPENDS     = $(OBJS:.o=.d)
+CXX         = c++
+headers = ./headers
+CXXFLAGS    = -std=c++17 -pedantic-errors -MMD -MP -I$(headers)
+.PHONY: all
+all: $(NAME)
 
-CXX = g++
+-include $(DEPENDS)
 
-srcs = $(shell find ./srcs -type f -name *.cpp )
+$(NAME): $(OBJS)
+	$(CXX)	$(CXXFLAGS) -o $(NAME) $(OBJS)
 
-objs = $(srcs:%.cpp=objs/%.o)
-objs = $(srcs:%.cpp=objs/%.d)
+.PHONY: clean
+clean:
+	rm $(OBJS) $(DEPENDS)
 
-objs_dir = ./objs/
-deps_dir = ./deps/
-srcs_dit = ./srcs/
+.PHONY: fclean
+fclean: clean
+	rm -f $(NAME)
 
-objs = $(addprefix $(objs_dir), $(objs))
-srcs = $(addprefix $(srcs_dir), $(srcs))
+.PHONY: re
+re: fclean all
 
-CXXFLAGS += -std=++98
-
-deps_flags = -MMD -MP
-
-$(name):$(objs)
-	$(CXX) $(CXXFLAGS) $(objs) -o $@
-
-$(objs):$(srcs) $(objs_dir) $(deps_dir)
-	$(CXX) $(CXXFLAGS) -Iincs
+.PHONY: debug
+debug: CXXFLAGS += -g -fsanitize=integer -fsanitize=address -fsanitize=leak
+debug: re
