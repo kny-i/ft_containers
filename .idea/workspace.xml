@@ -9,7 +9,11 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="250ff1d4-f4a1-4551-a754-bd022d05ea7e" name="Changes" comment="" />
+    <list default="true" id="250ff1d4-f4a1-4551-a754-bd022d05ea7e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ft_conatiner" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/headers/iterator/iterator.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/headers/iterator/iterator.hpp" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,7 +53,7 @@
       <workItem from="1673269926117" duration="2112000" />
       <workItem from="1673339307384" duration="3828000" />
       <workItem from="1673416448394" duration="11304000" />
-      <workItem from="1673433816559" duration="9230000" />
+      <workItem from="1673433816559" duration="10959000" />
     </task>
     <servers />
   </component>
