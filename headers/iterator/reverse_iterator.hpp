@@ -1,6 +1,8 @@
 #pragma once
 
 #include <iterator.hpp>
+#include <iterator_traits.hpp>
+
 
 namespace ft {
 	template <class Iter>
