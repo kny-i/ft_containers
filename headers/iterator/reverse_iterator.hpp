@@ -11,7 +11,6 @@ namespace ft {
 					typename ft::iterator_traits<Iter>::value_type,
 					typename ft::iterator_traits<Iter>::difference_type,
 					typename ft::iterator_traits<Iter>::pointer,
-
 					typename ft::iterator_traits<Iter>::reference> {
 	private:
 		typedef ft::iterator_traits<Iter> traits_type;
@@ -41,6 +40,7 @@ namespace ft {
 		}
 		reference operator*() const {
 			Iter it = current_;
+			/* why */
 			--it;
 			return *it;
 		}
@@ -123,3 +123,4 @@ namespace ft {
 }
 
 
+#endif
