@@ -1,4 +1,5 @@
-#pragma once
+#ifndef REVERSE_ITERATOR
+#define REVERSE_ITERATOR
 
 #include <iterator.hpp>
 #include <iterator_traits.hpp>
