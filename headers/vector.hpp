@@ -110,7 +110,8 @@ namespace ft {
 			}
 		}
 
-	size_type capacity() const { storage_last_ - first_pointer_ };
+	size_type capacity() const { return storage_last_ - first_pointer_ ;}
+
 	template<class InputIt>
 	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL)
 	{
