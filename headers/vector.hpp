@@ -29,10 +29,10 @@ namespace ft {
 		explicit vector(const Allocator &alloc) : first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {}
 
 		/*  */
-//		explicit vector(size_type count, const T &val = T(), const Allocator &alloc = Allocator())
-//		: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
-//			resize(count, val);
-//		}
+		explicit vector(size_type count, const T &val = T(), const Allocator &alloc = Allocator())
+		: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
+			resize(count, val);
+		}
 		/* range constructor */
 //		template <typename InputIt>
 //		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
@@ -80,6 +80,37 @@ namespace ft {
 //		void clear() {
 //			;
 //		}
+	iterator begin() { return iterator(first_pointer_);}
+	const_iterator begin() const { return const_iterator(first_pointer_);}
+	iterator end() { return iterator(last_pointer_);}
+	const_iterator end() const { return const_iterator(last_pointer_);}
+	size_type size() const {return end() - begin();}
+
+	iterator erase(iterator position) { return erase(position, position + 1);}
+	iterator erase(iterator first, iterator last) {
+			size_type erase_size = std::distance(first, last);
+			pointer new_last = last_pointer_ - erase_size;
+			std::copy(last.base(), last, first.base());
+			destroy_range(new_last, last);
+			last_pointer_ = new_last;
+			return first;
+	}
+
+	template<class InputIt>
+	void insert()
+	void resize(size_type value_size, const_reference value) {
+		if (value_size < size()) {
+			erase(begin() + value_size, end());
+		} else if (value_size > size()){
+			insert(end(), value_size - size(), value);
+		}
+	}
+
+	void destroy_range(pointer first, pointer last) {
+		for (pointer p = first; p < last; p++) {
+			alloc_.destroy(p);
+		}
+	}
 	private:
 		pointer first_pointer_;
 		pointer last_pointer_;
