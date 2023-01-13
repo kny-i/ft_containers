@@ -5,6 +5,7 @@
 #include <iostream>
 #include <memory>
 #include <iterator>
+#include <reverse_iterator.hpp>
 namespace ft {
 	template<class T, class Allocator = std::allocator<T> >
 	class vector {
@@ -17,11 +18,8 @@ namespace ft {
 		typedef const value_type& const_reference;
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
-		typedef pointer iterator;
-		typedef const_pointer const_iterator;
-
-//		typedef ft::reverse_iterator<iterator> reverse_iterator;
-//		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
+		typedef ft::reverse_iterator<value_type> reverse_iterator;
+		typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
 		/* empty constructor */
 		vector() : first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(allocator_type()) {}
 
