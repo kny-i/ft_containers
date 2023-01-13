@@ -97,13 +97,29 @@ namespace ft {
 			return first;
 	}
 
+	size_type max_size() const {
+			return std::min<size_type>(alloc_.max_size(), std::numeric_limits<difference_type>::max());
+		}
+	void reserve(size_type value_size) {
+			if (value_size <= capacity()) {
+				return;
+			}
+			if (value_size > max_size()) {
+				throw std::length_error ( "allocator<T>::allocate(size_t n) 'n' exceeds maximum supported "
+										  "size");
+			}
+		}
+
+	size_type capacity() const { storage_last_ - first_pointer_ };
 	template<class InputIt>
 	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL)
 	{
 			size_type n = std::distance(first, last);
 			difference_type pos_dist = std::distance(begin(), pos);
 			size_type new_size = size() + n;
-//			if ()
+			if (capacity() < new_size) {
+				;
+			}
 	}
 	void resize(size_type value_size, const_reference value) {
 		if (value_size < size()) {
