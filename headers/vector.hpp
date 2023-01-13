@@ -6,6 +6,8 @@
 #include <memory>
 #include <iterator>
 #include <reverse_iterator.hpp>
+#include <random_access_iterator.hpp>
+
 namespace ft {
 	template<class T, class Allocator = std::allocator<T> >
 	class vector {
@@ -18,6 +20,8 @@ namespace ft {
 		typedef const value_type& const_reference;
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
+		typedef typename ft::random_access_iterator<value_type> iterator;
+		typedef typename ft::random_access_iterator<const value_type> const_iterator;
 		typedef ft::reverse_iterator<value_type> reverse_iterator;
 		typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
 		/* empty constructor */
