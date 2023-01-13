@@ -21,7 +21,6 @@ namespace ft {
 		typedef const_pointer const_iterator;
 //		typedef ft::reverse_iterator<iterator> reverse_iterator;
 //		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
-
 		/* empty constructor */
 		vector() : first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(allocator_type()) {}
 
@@ -65,7 +64,6 @@ namespace ft {
 //			}
 //			return *this;
 //		}
-
 		/* destructor */
 		~vector() {
 //			clear();
