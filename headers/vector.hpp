@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <memory>
-
+#include <iterator>
 namespace ft {
 	template<class T, class Allocator = std::allocator<T> >
 	class vector {
@@ -19,6 +19,7 @@ namespace ft {
 		typedef typename Allocator::const_pointer const_pointer;
 		typedef pointer iterator;
 		typedef const_pointer const_iterator;
+
 //		typedef ft::reverse_iterator<iterator> reverse_iterator;
 //		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 		/* empty constructor */
@@ -100,7 +101,7 @@ namespace ft {
 			size_type n = std::distance(first, last);
 			difference_type pos_dist = std::distance(begin(), pos);
 			size_type new_size = size() + n;
-			if ()
+//			if ()
 	}
 	void resize(size_type value_size, const_reference value) {
 		if (value_size < size()) {
