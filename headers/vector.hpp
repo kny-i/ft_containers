@@ -97,7 +97,13 @@ namespace ft {
 	}
 
 	template<class InputIt>
-	void insert()
+	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL)
+	{
+			size_type n = std::distance(first, last);
+			difference_type pos_dist = std::distance(begin(), pos);
+			size_type new_size = size() + n;
+			if ()
+	}
 	void resize(size_type value_size, const_reference value) {
 		if (value_size < size()) {
 			erase(begin() + value_size, end());
