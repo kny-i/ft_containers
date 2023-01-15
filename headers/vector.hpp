@@ -35,6 +35,7 @@ namespace ft {
 		: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
 			resize(count, val);
 		}
+
 		/* range constructor */
 //		template <typename InputIt>
 //		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
@@ -81,11 +82,21 @@ namespace ft {
 //		void clear() {
 //			;
 //		}
+
 	iterator begin() { return iterator(first_pointer_);}
 	const_iterator begin() const { return const_iterator(first_pointer_);}
 	iterator end() { return iterator(last_pointer_);}
 	const_iterator end() const { return const_iterator(last_pointer_);}
+	reverse_iterator rbegin()  {return reverse_iterator(last_pointer_);}
+	reverse_iterator rbegin() const {return reverse_iterator(last_pointer_);}
+	reverse_iterator rend()  {return reverse_iterator(last_pointer_);}
+	reverse_iterator rend() const {return reverse_iterator(last_pointer_);}
 	size_type size() const {return end() - begin();}
+
+	void clear() {
+		destroy_range(first_pointer_, last_pointer_);
+		last_pointer_ = first_pointer_;//why
+		}
 
 	iterator erase(iterator position) { return erase(position, position + 1);}
 	iterator erase(iterator first, iterator last) {
@@ -97,6 +108,12 @@ namespace ft {
 			return first;
 	}
 
+	pointer allocate(size_type value_type) {
+			if (value_type > max_size()) {
+				throw std::length_error("vector allocate no more size");
+			}
+			return alloc_.allcate(value_type);
+		}
 	size_type max_size() const {
 			return std::min<size_type>(alloc_.max_size(), std::numeric_limits<difference_type>::max());
 		}
@@ -108,6 +125,7 @@ namespace ft {
 				throw std::length_error ( "allocator<T>::allocate(size_t n) 'n' exceeds maximum supported "
 										  "size");
 			}
+			pointer ptr = allocate(value_size);
 		}
 
 	size_type capacity() const { return storage_last_ - first_pointer_ ;}
