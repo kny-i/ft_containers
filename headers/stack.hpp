@@ -11,7 +11,7 @@ namespace ft {
 		typedef Container container_type;
 		typedef size_t size_type;
 
-		explicit stack(const container_type &)
+		explicit stack(const container_type &);
 	};
 
 }
