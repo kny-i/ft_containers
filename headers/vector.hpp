@@ -175,6 +175,9 @@ namespace ft {
 			storage_last_ = tmp_storage_last;
 		}
 
+
+	allocator_type get_allocator() const { return alloc_;}
+
 	void resize(size_type value_size, const_reference value) {
 		if (value_size < size()) {
 			erase(begin() + value_size, end());
