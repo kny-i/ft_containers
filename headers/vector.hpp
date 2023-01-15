@@ -127,6 +127,18 @@ namespace ft {
 										  "size");
 			}
 			pointer ptr = allocate(value_size);
+
+			pointer old_first = first_pointer_;
+			pointer old_last = last_pointer_;
+
+			size_type old_capacity = capacity();
+
+			first_pointer_ = ptr;
+		/* why */
+			last_pointer_ = first_pointer_;
+			storage_last_ - first_pointer_ = value_size;
+
+
 		}
 
 	size_type capacity() const { return storage_last_ - first_pointer_ ;}
@@ -176,6 +188,17 @@ namespace ft {
 		}
 
 
+	void construct(pointer ptr) { alloc_.construct(ptr, T()); }
+
+	void construct(pointer ptr, const_reference value) {
+		alloc_.construct(ptr, value);
+	}
+
+	void construct_range(pointer first, pointer last) {
+		for (pointer p = first; p < last; p++) {
+			alloc_.construct(p);
+		}
+	}
 	allocator_type get_allocator() const { return alloc_;}
 
 	void resize(size_type value_size, const_reference value) {
