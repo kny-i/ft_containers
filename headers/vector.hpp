@@ -137,8 +137,15 @@ namespace ft {
 		/* why */
 			last_pointer_ = first_pointer_;
 			storage_last_ - first_pointer_ = value_size;
+			for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last_pointer_) {
+				construct(last_pointer_, *old_iter);
+			}
 
-
+			for (reverse_iterator riter = reverse_iterator(old_last), rend = reverse_iterator(old_first); riter != rend; ++riter) {
+				/* why */
+				destroy(&*riter);
+			}
+			alloc_.deallocate(old_first, old_capacity);
 		}
 
 	size_type capacity() const { return storage_last_ - first_pointer_ ;}
@@ -208,6 +215,8 @@ namespace ft {
 			insert(end(), value_size - size(), value);
 		}
 	}
+
+	void destroy(pointer ptr) {alloc_.destroy(ptr);}
 
 	void destroy_range(pointer first, pointer last) {
 		for (pointer p = first; p < last; p++) {
