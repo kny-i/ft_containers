@@ -6,6 +6,7 @@ DEPENDS     = $(OBJS:.o=.d)
 CXX         = c++
 headers = ./headers
 iterator_headers = ./headers/iterator
+utils = ./headers/utils
 CXXFLAGS    = -std=c++17 -pedantic-errors -MMD -MP -I$(headers) -I$(iterator_headers)
 .PHONY: all
 all: $(NAME)
