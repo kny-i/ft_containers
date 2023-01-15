@@ -18,7 +18,6 @@ namespace ft {
 		for (; first != last; ++first) {
 			if (*first != *inputiterator2)
 				return false;
-
 		}
 		return true;
 	}

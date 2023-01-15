@@ -4,9 +4,10 @@
 
 #include <iostream>
 #include <memory>
-#include <iterator>
+#include <iterator.hpp>
 #include <reverse_iterator.hpp>
 #include <random_access_iterator.hpp>
+#include <algorithm.hpp>
 
 namespace ft {
 	template<class T, class Allocator = std::allocator<T> >
@@ -37,14 +38,13 @@ namespace ft {
 		}
 
 		/* range constructor */
-//		template <typename InputIt>
-//		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),
-//		typename ft::enable_if<!ft::is_integral<InputIt>::value,InputIt>::type* = NULL)
-//		: first_(NULL), last_(NULL), reserved_last_(NULL), alloc_(alloc) {
-//			reserve(ft::distance(first, last));
-//			for (InputIt i = first; i != last; ++i) {
-//				push_back(*i);
-//			}
+		template <typename InputIt>
+		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),typename std::enable_if<!std::is_integral<InputIt>::value,InputIt>::type* = NULL): first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
+			reserve(ft::distance(first, last));
+			for (InputIt i = first; i != last; ++i) {
+				push_back(*i);
+			}
+		}
 		/* copy constructor */
 //		vector(vector const& other)
 //		: first_(NULL), last_(NULL), reserved_last_(NULL), alloc_(other.alloc_) {
