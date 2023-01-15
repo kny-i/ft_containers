@@ -46,28 +46,29 @@ namespace ft {
 			}
 		}
 		/* copy constructor */
-//		vector(vector const& other)
-//		: first_(NULL), last_(NULL), reserved_last_(NULL), alloc_(other.alloc_) {
-//			reserve(other.size());
-//
-//			pointer dest = first_;
-//			for (const_iterator src = other.begin(), last = other.end(); src != last;
-//				 ++dest, ++src) {
-//				construct(dest, *src);
-//			}
-//			last_ = first_ + other.size();
-//		}
+		vector(vector const& other)
+		: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(other.alloc_) {
+			reserve(other.size());
+			pointer dest = first_pointer_;
+			for (const_iterator src = other.begin(), last = other.end(); src != last;
+				 ++dest, ++src) {
+				construct(dest, *src);
+			}
+			last_pointer_ = first_pointer_ + other.size();
+		}
+
 		/* operator overload */
-//		vector &operator=(const vector &other) {
-//			if (this != &other) {
-//				clear();
-//				resize(other.size());
-//				for (size_type i = 0; i < other.size(); i++) {
-//					first_pointer_[i] = other[i];
-//				}
-//			}
-//			return *this;
-//		}
+		vector &operator=(const vector &other) {
+			if (this != &other) {
+				clear();
+				resize(other.size());
+				for (size_type i = 0; i < other.size(); i++) {
+					first_pointer_[i] = other[i];
+				}
+			}
+			return *this;
+		}
+
 		/* destructor */
 		~vector() {
 			clear();
