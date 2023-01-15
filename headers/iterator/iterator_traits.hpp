@@ -32,6 +32,15 @@ namespace ft {
 	};
 
 	//funcs
+	template <class InputIterator>
+	typename ft::iterator_traits<InputIterator>::difference_type distance(InputIterator first, InputIterator last) {
+		typename ft::iterator_traits<InputIterator>::difference_type size = 0;
+		while (first != last) {
+			++first;
+			++size;
+		}
+		return size;
+	}
 }
 
 #endif
