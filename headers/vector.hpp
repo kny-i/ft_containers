@@ -136,10 +136,11 @@ namespace ft {
 			}
 			pointer new_last = last_pointer_ + n;
 			construct_range(last_pointer_, new_last);
-			std::copy_backward();
+			std::copy_backward(pos, end(), new_last);
 			std::copy(first, last, pos);
 			last_pointer_ = new_last;
 	}
+
 	void resize(size_type value_size, const_reference value) {
 		if (value_size < size()) {
 			erase(begin() + value_size, end());
