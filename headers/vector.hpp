@@ -112,6 +112,18 @@ namespace ft {
 
 	size_type capacity() const { return storage_last_ - first_pointer_ ;}
 
+	size_type recommend_size(size_type new_size)
+	{
+			size_type maxsize = max_size();
+			if (maxsize < new_size) {
+				throw std::length_error ("vector recommend size error");
+			}
+			size_type cap = capacity();
+			if (maxsize / 2 <= cap) {
+				return (maxsize);
+			}
+			return (std::max<size_type>(new_size, cap * 2));
+	}
 	template<class InputIt>
 	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL)
 	{
@@ -119,8 +131,14 @@ namespace ft {
 			difference_type pos_dist = std::distance(begin(), pos);
 			size_type new_size = size() + n;
 			if (capacity() < new_size) {
-				;
+				reserve(recommend_size(new_size));
+				pos = begin() + pos_dist;
 			}
+			pointer new_last = last_pointer_ + n;
+			construct_range(last_pointer_, new_last);
+			std::copy_backward();
+			std::copy(first, last, pos);
+			last_pointer_ = new_last;
 	}
 	void resize(size_type value_size, const_reference value) {
 		if (value_size < size()) {
