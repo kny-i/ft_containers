@@ -92,7 +92,7 @@ namespace ft {
 	reverse_iterator rend()  {return reverse_iterator(last_pointer_);}
 	reverse_iterator rend() const {return reverse_iterator(last_pointer_);}
 	size_type size() const {return end() - begin();}
-
+	bool empty() const {return begin() == end();}
 	void clear() {
 		destroy_range(first_pointer_, last_pointer_);
 		last_pointer_ = first_pointer_;//why
@@ -130,6 +130,7 @@ namespace ft {
 
 	size_type capacity() const { return storage_last_ - first_pointer_ ;}
 
+
 	size_type recommend_size(size_type new_size)
 	{
 			size_type maxsize = max_size();
@@ -142,6 +143,7 @@ namespace ft {
 			}
 			return (std::max<size_type>(new_size, cap * 2));
 	}
+
 	template<class InputIt>
 	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL)
 	{
