@@ -1,7 +1,6 @@
 #ifndef VECTOR
 #define VECTOR
 
-
 #include <iostream>
 #include <memory>
 #include <iterator.hpp>
@@ -21,8 +20,10 @@ namespace ft {
 		typedef const value_type& const_reference;
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
-		typedef typename ft::random_access_iterator<value_type> iterator;
-		typedef typename ft::random_access_iterator<const value_type> const_iterator;
+//		const_pointetypedef typename ft::random_access_iterator<value_type> iterator;
+		typedef pointer iterator;
+		typedef const_pointer const_iterator;
+//		typedef typename ft::random_access_iterator<const value_type> const_iterator;
 		typedef ft::reverse_iterator<value_type> reverse_iterator;
 		typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
 		/* empty constructor */
@@ -75,14 +76,12 @@ namespace ft {
 			deallocate();
 			;
 		}
-//		void assign(size_type count, const T& value) {
-//			clear();
-//			reserve(count);
-//			insert(begin(), count, value);
-//		}
-//		void clear() {
-//			;
-//		}
+		void assign(size_type count, const T& value) {
+			clear();
+			reserve(count);
+			insert(begin(), count, value);
+		}
+
 
 	iterator begin() { return iterator(first_pointer_);}
 	const_iterator begin() const { return const_iterator(first_pointer_);}
@@ -97,13 +96,13 @@ namespace ft {
 	void clear() {
 		destroy_range(first_pointer_, last_pointer_);
 		last_pointer_ = first_pointer_;//why
-		}
+	}
 
 	iterator erase(iterator position) { return erase(position, position + 1);}
 	iterator erase(iterator first, iterator last) {
 			size_type erase_size = std::distance(first, last);
 			pointer new_last = last_pointer_ - erase_size;
-			std::copy(last.base(), last, first.base());
+//			std::copy(last.base(), last, first.base());
 			destroy_range(new_last, last);
 			last_pointer_ = new_last;
 			return first;
@@ -115,10 +114,10 @@ namespace ft {
 				throw std::length_error("vector allocate no more size");
 			}
 			return alloc_.allcate(value_type);
-		}
+	}
 	size_type max_size() const {
 			return std::min<size_type>(alloc_.max_size(), std::numeric_limits<difference_type>::max());
-		}
+	}
 	void reserve(size_type value_size) {
 			if (value_size <= capacity()) {
 				return;
@@ -128,7 +127,6 @@ namespace ft {
 										  "size");
 			}
 			pointer ptr = allocate(value_size);
-
 			pointer old_first = first_pointer_;
 			pointer old_last = last_pointer_;
 
@@ -166,7 +164,7 @@ namespace ft {
 	}
 
 	template<class InputIt>
-	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL)
+	void insert(iterator pos, InputIt first, InputIt last)
 	{
 			size_type n = std::distance(first, last);
 			difference_type pos_dist = std::distance(begin(), pos);
@@ -213,7 +211,8 @@ namespace ft {
 		if (value_size < size()) {
 			erase(begin() + value_size, end());
 		} else if (value_size > size()){
-			insert(end(), value_size - size(), value);
+//			insert(end(), value_size - size(), value);
+			;
 		}
 	}
 
@@ -235,7 +234,7 @@ namespace ft {
 	template <class T, class Alloc>
 	bool operator==(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
 		return (lhs.size() == rhs.size() &&
-				ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+		std::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
 
 	template <class T, class Alloc>
@@ -245,7 +244,7 @@ namespace ft {
 
 	template <class T, class Alloc>
 	bool operator<(const vector<T, Alloc>& lhs, const vector<T, Alloc>& rhs) {
-		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
+		return (std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
 											rhs.end()));
 	}
 
@@ -268,7 +267,6 @@ namespace ft {
 	void swap(vector<T, Alloc>& lhs, vector<T, Alloc>& rhs) {
 		lhs.swap(rhs);
 	}
-
 }
 
 #endif
