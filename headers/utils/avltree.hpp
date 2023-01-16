@@ -1,6 +1,9 @@
 #ifndef AVL_TREE
 #define AVL_TREE
 
+#define Left 1
+#define Right 2
+
 #include <libc.h>
 
 
@@ -35,6 +38,7 @@ int getHight(node_t *node)
 }
 
 /* erturn used root or created root */
+/* direction is the direction from parent to node */
 node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 {
 	node_t *pivot;
@@ -46,9 +50,17 @@ node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 	//			\
 	//			(node)
 	//			/    \	
-	//		(    )	(pivot)
-	//					\
-	//  				(     )
+	//		(  1  )	(pivot)
+	//				/		\
+	//  		(  2  )		(  3  )
+	//							
+	//     (parent)
+	//			\
+	//			(pivot)
+	//			/      \	
+	//		( node )    (  3  )
+	//		/	  \		
+	//  (  1  )   (  2  )
 	
 	pivot = node->right;
 	if (pivot != NULL) {
@@ -58,6 +70,12 @@ node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 	if (pivot == NULL) {
 		new_root = pivot;
 		return new_root;
+	}
+	if (direction == Left)
+	{
+		parent->left = pivot;
+	} else {
+		parent->right = pivot;
 	}
 	
 }
