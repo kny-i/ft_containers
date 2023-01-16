@@ -34,6 +34,7 @@ int getHight(node_t *node)
 	return tree_hight + 1;
 }
 
+/* erturn used root or created root */
 node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 {
 	node_t *pivot;
@@ -41,13 +42,23 @@ node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 
 	printf("left_rotate[%d]\n", node->num);
 
+	//     (parent)
+	//			\
+	//			(node)
+	//			/    \	
+	//		(    )	(pivot)
+	//					\
+	//  				(     )
+	
 	pivot = node->right;
 	if (pivot != NULL) {
-
+		node->right = pivot->left;
+		pivot->left = node;
 	}
 	if (pivot == NULL) {
 		new_root = pivot;
 		return new_root;
 	}
+	
 }
 #endif
