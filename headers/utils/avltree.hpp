@@ -85,7 +85,7 @@ node_t *rightRotate(node_t *root, node_t *node, node_t *parent, int direction)
 {
 	node_t *pivot;
 	node_t *new_root;
-	printf("left_rotate[%d]\n", node->num);
+	printf("right_rotate[%d]\n", node->num);
 
 	pivot = node->left;
 	if (pivot != NULL) {
@@ -108,10 +108,27 @@ node_t *rightRotate(node_t *root, node_t *node, node_t *parent, int direction)
 node_t *rightleftRotate(node_t *root, node_t *node, node_t *parent, int direction) {
 	node_t *new_root;
 
+	std::cout << "--right left rotate--" << node->num << std::endl;
+
 	new_root = rightRotate(root, node, parent, direction);
-	std::cout << "right rotate" << node->num << std::endl;
+
 	return leftRotate(new_root, node, parent, direction);
 }
 
 
+node_t *leftrightRotate(node_t *root, node_t *node, node_t *parent, int direction) {
+	node_t *new_root;
+
+	std::cout << "--left right rotate--" << node->num << std::endl;
+
+	new_root = leftRotate(root, node, parent, direction);
+
+	return rightRotate(new_root, node, parent, direction);
+}
+
+
+
+node_t *balancing(node_t *root, node_t *node, node_t *parent, int direction, int *branch, int num_branch) {
+
+}
 #endif
