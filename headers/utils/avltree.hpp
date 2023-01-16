@@ -5,6 +5,7 @@
 #define Right 2
 
 #include <libc.h>
+#include <iostream>
 
 
 struct node_t {
@@ -61,7 +62,8 @@ node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 	//		( node )    (  3  )
 	//		/	  \		
 	//  (  1  )   (  2  )
-	
+
+
 	pivot = node->right;
 	if (pivot != NULL) {
 		node->right = pivot->left;
@@ -100,6 +102,15 @@ node_t *rightRotate(node_t *root, node_t *node, node_t *parent, int direction)
 		parent->right = pivot;
 	}
 	return root;
+}
+
+
+node_t *rightleftRotate(node_t *root, node_t *node, node_t *parent, int direction) {
+	node_t *new_root;
+
+	new_root = rightRotate(root, node, parent, direction);
+	std::cout << "right rotate" << node->num << std::endl;
+	return leftRotate(new_root, node, parent, direction);
 }
 
 
