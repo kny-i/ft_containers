@@ -77,6 +77,9 @@ node_t *leftRotate(node_t *root, node_t *node, node_t *parent, int direction)
 	} else {
 		parent->right = pivot;
 	}
-	
+
+	return root;
 }
+
+node_t *node
 #endif
