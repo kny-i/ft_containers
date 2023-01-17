@@ -129,6 +129,14 @@ node_t *leftrightRotate(node_t *root, node_t *node, node_t *parent, int directio
 
 
 node_t *balancing(node_t *root, node_t *node, node_t *parent, int direction, int *branch, int num_branch) {
+	node_t *next;
+	node_t *new_root;
+
+	int left_hight, right_hight;
+
+	if (node == NULL || root == NULL) {
+		return root;
+	}
 
 }
 #endif
