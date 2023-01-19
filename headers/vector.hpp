@@ -180,6 +180,13 @@ namespace ft {
 			last_pointer_ = new_last;
 	}
 
+	template<class InputIt>
+	void insert(iterator pos, InputIt first, InputIt last, typename std::enableif<!std::is_integral<InputIt>::value, InputIt>::type* = NULL) {
+
+
+	{
+
+	}
 	void swap(vector &other) {
 			pointer tmp_first = other.first_pointer_;
 			pointer tmp_last = other.last_pointer_;
