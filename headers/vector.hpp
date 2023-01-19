@@ -185,7 +185,15 @@ namespace ft {
 			size_type n = std::distance(first_pointer_, last_pointer_);
 			difference_type pos_dist = std::distance(begin(), pos);
 			size_type new_size = size() + n;
-			//if (c)
+			if (capacity() < new_size) {
+				reserve(recommend_size(new_size));
+				pos = begin() + pos_dist;
+			}
+			pointer new_last = last + n;
+		construct_range(last_pointer_, new_last);
+		std::copy_backward(pos, end() ,new_size);
+		std::copy(first, last, pos);
+		last_pointer_ = new_last;
 	}
 	void swap(vector &other) {
 			pointer tmp_first = other.first_pointer_;
