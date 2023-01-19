@@ -173,7 +173,7 @@ namespace ft {
 				reserve(recommend_size(new_size));
 				pos = begin() + pos_dist;
 			}
-			pointer new_last = last_pointer_ + n;
+		pointer new_last = last_pointer_ + n;
 			construct_range(last_pointer_, new_last);
 			std::copy_backward(pos, end(), new_last);
 			std::copy(first, last, pos);
@@ -181,11 +181,11 @@ namespace ft {
 	}
 
 	template<class InputIt>
-	void insert(iterator pos, InputIt first, InputIt last, typename std::enableif<!std::is_integral<InputIt>::value, InputIt>::type* = NULL) {
-
-
-	{
-
+	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL) {
+			size_type n = std::distance(first_pointer_, last_pointer_);
+			difference_type pos_dist = std::distance(begin(), pos);
+			size_type new_size = size() + n;
+			//if (c)
 	}
 	void swap(vector &other) {
 			pointer tmp_first = other.first_pointer_;

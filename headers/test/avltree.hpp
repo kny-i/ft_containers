@@ -137,7 +137,7 @@ node_t *balancing(node_t *root, node_t *node, node_t *parent, int direction, int
 		return root;
 	}
 	if (num_branch > 0) {
-
+		
 	}
 }
 #endif
