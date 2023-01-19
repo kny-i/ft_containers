@@ -195,6 +195,7 @@ namespace ft {
 		std::copy(first, last, pos);
 		last_pointer_ = new_last;
 	}
+
 	void swap(vector &other) {
 			pointer tmp_first = other.first_pointer_;
 			pointer tmp_last = other.last_pointer_;
