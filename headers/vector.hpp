@@ -180,14 +180,14 @@ namespace ft {
 
 	template<class InputIt>
 	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL) {
-			size_type n = std::distance(first_pointer_, last_pointer_);
-			difference_type pos_dist = std::distance(begin(), pos);
-			size_type new_size = size() + n;
-			if (capacity() < new_size) {
-				reserve(recommend_size(new_size));
-				pos = begin() + pos_dist;
-			}
-			pointer new_last = last + n;
+		size_type n = std::distance(first_pointer_, last_pointer_);
+		difference_type pos_dist = std::distance(begin(), pos);
+		size_type new_size = size() + n;
+		if (capacity() < new_size) {
+			reserve(recommend_size(new_size));
+			pos = begin() + pos_dist;
+		}
+		pointer new_last = last + n;
 		construct_range(last_pointer_, new_last);
 		std::copy_backward(pos, end() ,new_size);
 		std::copy(first, last, pos);
@@ -225,7 +225,7 @@ namespace ft {
 		if (value_size < size()) {
 			erase(begin() + value_size, end());
 		} else if (value_size > size()){
-//			insert(end(), value_size - size(), value);
+			insert(end(), value_size - size(), value);
 			;
 		}
 	}
@@ -237,6 +237,8 @@ namespace ft {
 			alloc_.destroy(&*(p));
 		}
 	}
+
+
 	private:
 		pointer first_pointer_;
 		pointer last_pointer_;
