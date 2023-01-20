@@ -107,14 +107,12 @@ public:
 					const ft::random_access_iterator<Iterator2>& rhs) {
 		return !(lhs < rhs);
 	}
-
 	template <class Iter>
 	ft::random_access_iterator<Iter> operator+(
 			typename ft::random_access_iterator<Iter>::difference_type n,
 			const ft::random_access_iterator<Iter>& it) {
 		return ft::random_access_iterator<Iter>(it.base() + n);
 	}
-
 	template <class Iterator>
 	typename ft::random_access_iterator<Iterator>::difference_type operator-(
 			const ft::random_access_iterator<Iterator>& lhs,
