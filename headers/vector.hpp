@@ -226,7 +226,6 @@ namespace ft {
 			erase(begin() + value_size, end());
 		} else if (value_size > size()){
 			insert(end(), value_size - size(), value);
-			;
 		}
 	}
 
