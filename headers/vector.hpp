@@ -16,14 +16,12 @@ namespace ft {
 		typedef Allocator allocator_type;
 		typedef std::size_t size_type;
 		typedef std::ptrdiff_t difference_type;
-		typedef value_type& reference;
-		typedef const value_type& const_reference;
 		typedef typename Allocator::pointer pointer;
 		typedef typename Allocator::const_pointer const_pointer;
-//		const_pointetypedef typename ft::random_access_iterator<value_type> iterator;
-		typedef pointer iterator;
-		typedef const_pointer const_iterator;
-//		typedef typename ft::random_access_iterator<const value_type> const_iterator;
+		typedef typename Allocator::const_reference const_reference;
+		typedef typename Allocator::reference reference;
+		typedef typename ft::random_access_iterator<value_type> iterator;
+		typedef typename ft::random_access_iterator<const value_type> const_iterator;
 		typedef ft::reverse_iterator<value_type> reverse_iterator;
 		typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
 		/* empty constructor */
@@ -234,9 +232,9 @@ namespace ft {
 
 	void destroy(pointer ptr) {alloc_.destroy(ptr);}
 
-	void destroy_range(pointer first, pointer last) {
-		for (pointer p = first; p < last; p++) {
-			alloc_.destroy(p);
+	void destroy_range(iterator first, iterator last) {
+		for (iterator p = first; p < last; p++) {
+			alloc_.destroy(&*(p));
 		}
 	}
 	private:

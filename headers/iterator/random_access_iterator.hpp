@@ -88,6 +88,11 @@ public:
 		return lhs.base() < rhs.base();
 	}
 	template <class Iterator1, class Iterator2>
+	bool operator<(const ft::random_access_iterator<Iterator1>& lhs,
+				   const std::allocator<Iterator2>& rhs) {
+		return lhs.base() < rhs.base();
+	}
+	template <class Iterator1, class Iterator2>
 	bool operator<=(const ft::random_access_iterator<Iterator1>& lhs,
 					const ft::random_access_iterator<Iterator2>& rhs) {
 		return !(rhs < lhs);
