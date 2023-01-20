@@ -4,22 +4,29 @@
 #include <memory>
 
 namespace ft {
-	template <typename first_type, typename second_type>
+	template <typename pair_type>
 	class node{
 	public:
-		node(first_type first, second_type second) {
+		node(typename pair_type::first_type first, typename pair_type::second_type second) {
 
 		}
-
 	private:
-		first_type first;
-		second_type second;
+		typedef typename pair_type::first_type key_type;
+		typedef typename pair_type::value_type value_type;
+		key_type key_;
+		value_type value_;
 		node *left;
 		node *right;
+		node *parent;
 	};
 
-	template <typename first_type, typename second_type, typename Compare = std::less<first_type>
+	template <typename value_type, typename Compare = std::less<typename value_type::first_type>, class Allocator = std::allocator<typename value_type::first_type> >
 	class avltree {
+	private:
+		node<value_type> *root;
+
+
+	public:
 
 	};
 }
