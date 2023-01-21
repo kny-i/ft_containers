@@ -94,7 +94,12 @@ namespace ft {
 
 	reference operator[](size_type i) {return first_pointer_[i];}
 	const_reference operator[](size_type i) const {return first_pointer_[i];}
-	reference fron
+	reference front(){return *begin();}
+	const_reference front() const {return *begin();}
+	reference back() {return *(end() - 1);}
+	const_reference back() const {return *(end() - 1);}
+	pointer data() {return first_pointer_;}
+	const_pointer data() const {return first_pointer_;}
 
 	iterator begin() { return iterator(first_pointer_);}
 	const_iterator begin() const { return const_iterator(first_pointer_);}
