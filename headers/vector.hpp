@@ -81,6 +81,21 @@ namespace ft {
 		}
 
 
+	reference at(size_type i) {
+			if (i >= size())
+				throw std::out_of_range("vector no such a index");
+			return first_pointer_[i];
+		}
+	const_reference at(size_type i) const {
+		if (i >= size())
+			throw std::out_of_range("vector no such a index");
+		return first_pointer_[i];
+	}
+
+	reference operator[](size_type i) {return first_pointer_[i];}
+	const_reference operator[](size_type i) const {return first_pointer_[i];}
+	reference fron
+
 	iterator begin() { return iterator(first_pointer_);}
 	const_iterator begin() const { return const_iterator(first_pointer_);}
 	iterator end() { return iterator(last_pointer_);}
