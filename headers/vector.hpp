@@ -75,6 +75,7 @@ namespace ft {
 			;
 		}
 		void assign(size_type count, const T& value) {
+			/* reallocate */
 			if (count > capacity()) {
 				clear();
 				deallocate();
@@ -85,6 +86,7 @@ namespace ft {
 					construct(last_pointer_++, value);
 				}
 			}
+			/* expand last_pointer */
 			else if (count > size()) {
 				pointer p = first_pointer_;
 				for (size_type i = 0; i < count; ++i) {
@@ -97,9 +99,13 @@ namespace ft {
 					}
 				}
 			}
-
-			reserve(count);
-			insert(begin(), count, value);
+			/* update value inside */
+			else {
+				clear();
+				for (size_type i = 0; i < count; i++) {
+					construct(last_pointer_++ = value);
+				}
+			}
 		}
 
 
@@ -136,7 +142,7 @@ namespace ft {
 	bool empty() const {return begin() == end();}
 	void clear() {
 		destroy_range(first_pointer_, last_pointer_);
-		last_pointer_ = first_pointer_;//why
+		last_pointer_ = first_pointer_;
 	}
 
 	iterator erase(iterator position) { return erase(position, position + 1);}
