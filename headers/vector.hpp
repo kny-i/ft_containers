@@ -75,7 +75,29 @@ namespace ft {
 			;
 		}
 		void assign(size_type count, const T& value) {
-			clear();
+			if (count > capacity()) {
+				clear();
+				deallocate();
+				first_pointer_ = alloc_(count);
+				last_pointer_ = first_pointer_;
+				storage_last_ = first_pointer_ + count;
+				for (size_type i = 0; i < count; ++i) {
+					construct(last_pointer_++, value);
+				}
+			}
+			else if (count > size()) {
+				pointer p = first_pointer_;
+				for (size_type i = 0; i < count; ++i) {
+					if (i > size()) {
+						/* update last_pointer */
+						construct(last_pointer_++, value);
+					}
+					else {
+						*p++ = value;
+					}
+				}
+			}
+
 			reserve(count);
 			insert(begin(), count, value);
 		}
@@ -109,6 +131,7 @@ namespace ft {
 	reverse_iterator rbegin() const {return reverse_iterator(last_pointer_);}
 	reverse_iterator rend()  {return reverse_iterator(last_pointer_);}
 	reverse_iterator rend() const {return reverse_iterator(last_pointer_);}
+
 	size_type size() const {return end() - begin();}
 	bool empty() const {return begin() == end();}
 	void clear() {
