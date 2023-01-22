@@ -201,7 +201,7 @@ namespace ft {
 			if (value_type > max_size()) {
 				throw std::length_error("vector allocate no more size");
 			}
-			return alloc_.allcate(value_type);
+			return alloc_.allocate(value_type);
 	}
 	size_type max_size() const {
 			return std::min<size_type>(alloc_.max_size(), std::numeric_limits<difference_type>::max());
@@ -223,7 +223,7 @@ namespace ft {
 			first_pointer_ = ptr;
 		/* why */
 			last_pointer_ = first_pointer_;
-			storage_last_ - first_pointer_ = value_size;
+			storage_last_ = first_pointer_ + value_size;
 			for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last_pointer_) {
 				construct(last_pointer_, *old_iter);
 			}
