@@ -228,7 +228,7 @@ namespace ft {
 				construct(last_pointer_, *old_iter);
 			}
 
-			for (reverse_iterator riter = reverse_iterator(old_last), rend = reverse_iterator(old_first); riter != rend; ++riter) {
+			for (reverse_iterator riter = reverse_iterator(old_last),  rend = reverse_iterator(old_first); riter != rend; ++riter) {
 				/* why */
 				destroy(&*riter);
 			}
@@ -258,25 +258,27 @@ namespace ft {
 			return begin() + diss;
 		}
 
-	template<class InputIt>
-	void insert(iterator pos, InputIt first, InputIt last)
+	void insert(iterator pos, size_type value_size, const value_type &value)
 	{
-			size_type n = std::distance(first, last);
-			difference_type pos_dist = std::distance(begin(), pos);
-			size_type new_size = size() + n;
-			if (capacity() < new_size) {
-				reserve(recommend_size(new_size));
-				pos = begin() + pos_dist;
-			}
-		pointer new_last = last_pointer_ + n;
+		if (value_size == 0)
+			return;
+		difference_type pos_dist = std::distance(begin(), pos);
+		size_type new_size = size() + value_size;
+		if (capacity() < new_size) {
+			reserve(recommend_size(new_size));
+			pos = begin() + pos_dist;
+		}
+		pointer new_last = last_pointer_ + value_size;
 			construct_range(last_pointer_, new_last);
 			std::copy_backward(pos, end(), new_last);
-			std::copy(first, last, pos);
+			std::fill(pos, pos + value_size, new_last);
 			last_pointer_ = new_last;
 	}
 
 	template<class InputIt>
-	void insert(iterator pos, InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL) {
+	void insert(iterator pos, InputIt first, InputIt last,
+				typename std::enable_if<!std::is_integral<InputIt>::value,
+						InputIt>::type* = NULL){
 		size_type n = std::distance(first_pointer_, last_pointer_);
 		difference_type pos_dist = std::distance(begin(), pos);
 		size_type new_size = size() + n;
