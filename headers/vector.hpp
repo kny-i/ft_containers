@@ -93,8 +93,7 @@ namespace ft {
 					if (i > size()) {
 						/* update last_pointer */
 						construct(last_pointer_++, value);
-					}
-					else {
+					} else {
 						*p++ = value;
 					}
 				}
@@ -108,6 +107,40 @@ namespace ft {
 			}
 		}
 
+		template<class InputIt>
+		void assign(InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL){
+			size_type count = std::distance(first, last);
+			/* reallocate */
+			if (count > capacity()) {
+				clear();
+				deallocate();
+				first_pointer_ = alloc_(count);
+				last_pointer_ = first_pointer_;
+				storage_last_ = first_pointer_ + count;
+				for (InputIt head = first; head != last; ++head) {
+					construct(last_pointer_++, *head);
+				}
+			}
+				/* expand last_pointer */
+			else if (count > size()) {
+				pointer p = first_pointer_;
+				for (size_type i = 0; i < count; ++i) {
+					if (i > size()) {
+						/* update last_pointer */
+						construct(last_pointer_++, *first++);
+					} else {
+						*p++ = *first++;
+					}
+				}
+			}
+				/* update value inside */
+			else {
+				clear();
+				for (InputIt head = first; head != last; head++) {
+					construct(last_pointer_++ = *head);
+				}
+			}
+		}
 
 	reference at(size_type i) {
 			if (i >= size())
