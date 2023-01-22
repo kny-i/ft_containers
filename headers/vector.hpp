@@ -72,7 +72,6 @@ namespace ft {
 		~vector() {
 			clear();
 			deallocate();
-			;
 		}
 		void assign(size_type count, const T& value) {
 			/* reallocate */
