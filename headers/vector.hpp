@@ -177,6 +177,15 @@ namespace ft {
 		last_pointer_ = first_pointer_;
 	}
 
+	void push_back(const_reference value) {
+			if (last_pointer_ == storage_last_) {
+				reserve(recommend_size(size() + 1));
+			}
+			construct(last_pointer_, value);
+			++last_pointer_;
+		}
+	void pop_back() { destroy(--last_pointer_);}
+
 	iterator erase(iterator position) { return erase(position, position + 1);}
 	iterator erase(iterator first, iterator last) {
 			size_type erase_size = std::distance(first, last);
@@ -241,6 +250,13 @@ namespace ft {
 			}
 			return (std::max<size_type>(new_size, cap * 2));
 	}
+
+		/*  */
+	iterator insert(iterator pos, const value_type &value) {
+			size_type diss = pos - begin();
+			insert(pos, 1, value);
+			return begin() + diss;
+		}
 
 	template<class InputIt>
 	void insert(iterator pos, InputIt first, InputIt last)
