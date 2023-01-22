@@ -251,7 +251,7 @@ namespace ft {
 			return (std::max<size_type>(new_size, cap * 2));
 	}
 
-		/*  */
+		/* insert a value into specdfic pos */
 	iterator insert(iterator pos, const value_type &value) {
 			size_type diss = pos - begin();
 			insert(pos, 1, value);
