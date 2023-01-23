@@ -5,7 +5,7 @@
 #include <iterator>
 namespace ft {
 	template <typename T>
-class random_access_iterator : public ft::iterator<std::random_access_iterator_tag, T> {
+	class random_access_iterator : public ft::iterator<std::random_access_iterator_tag, T> {
 protected:
 	T *current_;
 public:

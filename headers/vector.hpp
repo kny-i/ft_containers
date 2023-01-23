@@ -227,7 +227,7 @@ namespace ft {
 			for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last_pointer_) {
 				construct(last_pointer_, *old_iter);
 			}
-			for (reverse_iterator riter = reverse_iterator(old_last),  rend = reverse_iterator(old_first); riter != rend; ++riter) {
+			for (iterator riter = old_last,  rend = old_first; riter != rend; --riter) {
 				/* why */
 				destroy(&*riter);
 			}
