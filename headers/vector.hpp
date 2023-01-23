@@ -227,7 +227,6 @@ namespace ft {
 			for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last_pointer_) {
 				construct(last_pointer_, *old_iter);
 			}
-
 			for (reverse_iterator riter = reverse_iterator(old_last),  rend = reverse_iterator(old_first); riter != rend; ++riter) {
 				/* why */
 				destroy(&*riter);
@@ -235,8 +234,8 @@ namespace ft {
 			alloc_.deallocate(old_first, old_capacity);
 		}
 
-	size_type capacity() const { return storage_last_ - first_pointer_ ;}
 
+	size_type capacity() const { return storage_last_ - first_pointer_ ;}
 
 	size_type recommend_size(size_type new_size)
 	{
@@ -271,7 +270,7 @@ namespace ft {
 		pointer new_last = last_pointer_ + value_size;
 			construct_range(last_pointer_, new_last);
 			std::copy_backward(pos, end(), new_last);
-			std::fill(pos, pos + value_size, new_last);
+			std::fill(pos, pos + value_size, value);
 			last_pointer_ = new_last;
 	}
 
