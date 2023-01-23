@@ -24,21 +24,33 @@ namespace ft {
 		node(const node& other): parent_(other.parent_), left_(other.left_), right_(other.right_), value_(other.value_), height(other.height) {}
 
 		diffrence_type balance() const {
-			size_type left_hight;
-			size_type right_hight;
+			size_type left_height;
+			size_type right_height;
 			if (left_) {
-				left_hight = left_->height;
+				left_height = left_->height;
 			} else {
-				left_hight = 0;
+				left_height = 0;
 			}
 			if(right_) {
-				right_hight = right_hight;
+				right_height = right_height;
+			} else {
+				right_height = 0;
 			}
+
 		}
 
 		void update_hight() {
 			size_type left_height;
 			size_type right_height;
+
+			if (left_) {
+				left_height = left_->height;
+			} else {
+				left_height = 0;
+			}
+			if(right_) {
+				right_height = right_height;
+			}
 		}
 	};
 };
