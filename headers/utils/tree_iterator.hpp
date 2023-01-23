@@ -2,14 +2,14 @@
 #define TREE_ITE
 
 #include <iterator>
-#include <iterator.hpp>
+#include "../iterator/iterator.hpp"
 
 namespace ft {
 
 	template <class T, class Node>
 	class tree_iterator : public ft::iterator<std::bidirectional_iterator_tag, T> {
 	public:
-		// この部分見直しする
+
 		typedef typename ft::iterator<std::bidirectional_iterator_tag,
 				T>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type
@@ -84,7 +84,7 @@ namespace ft {
 		return (!(lhs == rhs));
 	}
 
-}  // namespace ft
+}
 
 
 #endif
