@@ -24,20 +24,3 @@
 //}
 //
 
-#include <map>
-
-int	main()
-{
-	std::map<int , std::string> a;
-
-	a[0] = "hoge";
-	a[1] = "fuga";
-	a[2] = "piyo";
-	a[3] = "saga";
-
-	std::cout << (a.begin()->second) << std::endl;
-	std::cout << (a.end()->second) << std::endl;
-
-
-
-}
