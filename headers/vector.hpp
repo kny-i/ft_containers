@@ -190,7 +190,7 @@ namespace ft {
 	iterator erase(iterator first, iterator last) {
 			size_type erase_size = std::distance(first, last);
 			pointer new_last = last_pointer_ - erase_size;
-//			std::copy(last.base(), last, first.base());
+			std::copy(last.base(), last, first.base());
 			destroy_range(new_last, last);
 			last_pointer_ = new_last;
 			return first;
