@@ -5,6 +5,8 @@
 #include "node.hpp"
 #include "tree_iterator.hpp"
 #include "pair.hpp"
+
+/* in std::less, we use map_value_compare */
 namespace ft {
 	template <class Key, class T,  class Compare = std::less<Key>,
 	        class Allocator = std::allocator<ft::pair<const Key, T> > >
