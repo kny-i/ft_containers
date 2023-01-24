@@ -2,18 +2,19 @@
 
 #include <pair.hpp>
 #include <map>
-int	main()
-{
-	std::map<int , std::string> a;
 
-	std::pair<int, std::string> b(1, "hoge");
-	std::pair<int, std::string> c(2, "piyo");
-	a.insert(b);
-	std::pair<std::map<int, std::string>::iterator, bool > d = a.insert(c);
-	std::map<int, std::string>::iterator hoge = d.first;
-	std::cout << hoge->second << std::endl;
-
-}
+//int	main()
+//{
+//	std::map<int , std::string> a;
+//
+//	std::pair<int, std::string> b(1, "hoge");
+//	std::pair<int, std::string> c(2, "piyo");
+//	a.insert(b);
+//	std::pair<std::map<int, std::string>::iterator, bool > d = a.insert(c);
+//	std::map<int, std::string>::iterator hoge = d.first;
+//	std::cout << hoge->second << std::endl;
+//
+//}
 
 /*
 

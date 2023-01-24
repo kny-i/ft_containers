@@ -156,9 +156,11 @@ namespace ft {
 			node_pointer bottom_node;
 			if (alt_node == NULL) {
 				bottom_node = erase_node->parent_;
-			} else if (alt_node->parent_ == erase_node) {
+			}else if (alt_node->parent_ == erase_node) {
+				/*  */
 				bottom_node = alt_node;
 			} else {
+				/*  */
 				bottom_node = alt_node->parent_;
 			}
 

@@ -10,17 +10,11 @@ namespace ft {
 	class tree_iterator : public ft::iterator<std::bidirectional_iterator_tag, T> {
 	public:
 
-		typedef typename ft::iterator<std::bidirectional_iterator_tag,
-				T>::iterator_category iterator_category;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type
-				value_type;
-		typedef
-		typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type
-				difference_type;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::pointer
-				pointer;
-		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::reference
-				reference;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type value_type;
+		typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type difference_type;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::pointer pointer;
+		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::reference reference;
 
 	private:
 		typedef Node node_type;
@@ -45,7 +39,8 @@ namespace ft {
 
 		reference operator*() const { return node_->value_; }
 
-		/* why */
+
+		//iterator a.operator->()
 		pointer operator->() const { return (&(node_->value_)); }
 
 		tree_iterator& operator++() {
