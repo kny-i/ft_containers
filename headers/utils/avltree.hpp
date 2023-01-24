@@ -40,12 +40,8 @@ namespace ft {
 			begin_ = end_;
 		}
 
-		avltree(const avltree& other)
-				: compare_(other.compare_), node_alloc_(other.node_alloc_), size_(0) {
-			end_ = create_node();
-			end_->left_ = NULL;
-			begin_ = end_;
-			insert(other.begin(), other.end());
+		avltree(const avltree& other) {
+			*this = other;
 		}
 		avltree& operator=(const avltree& other) {
 			if (this != &other) {
