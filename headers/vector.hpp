@@ -20,8 +20,8 @@ namespace ft {
 		typedef typename Allocator::const_pointer const_pointer;
 		typedef typename Allocator::const_reference const_reference;
 		typedef typename Allocator::reference reference;
-		typedef typename ft::random_access_iterator<value_type> iterator;
-		typedef typename ft::random_access_iterator<const value_type> const_iterator;
+		typedef ft::random_access_iterator<value_type> iterator;
+		typedef ft::random_access_iterator<const value_type> const_iterator;
 		typedef ft::reverse_iterator<value_type> reverse_iterator;
 		typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
 		/* empty constructor */

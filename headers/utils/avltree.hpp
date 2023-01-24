@@ -33,9 +33,14 @@ namespace ft {
 		node_pointer end_;
 
 	public:
+
+		avltree(): compare_(Compare()), node_alloc_(Allocator()), size_(0), end_(create_node()) {
+			end_->left_ = NULL;
+			begin_ = end_;
+
+		}
 		avltree(map_value_compare comp, allocator_type alloc)
-		: compare_(comp), node_alloc_(alloc), size_(0) {
-			end_ = create_node();
+		: compare_(comp), node_alloc_(alloc), size_(0), end_(create_node()){
 			end_->left_ = NULL;
 			begin_ = end_;
 		}
