@@ -204,7 +204,7 @@ namespace ft {
 			return alloc_.allocate(value_type);
 	}
 	size_type max_size() const {
-			return std::min<size_type>(alloc_.max_size(), std::numeric_limits<difference_type>::max());
+			return alloc_.max_size();
 	}
 	void reserve(size_type value_size) {
 			if (value_size <= capacity()) {
