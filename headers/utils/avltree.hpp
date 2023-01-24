@@ -72,8 +72,8 @@ namespace ft {
 		size_type size() const { return size_; }
 
 		size_type max_size() const {
-			return (std::min<size_type>(node_alloc_.max_size(),
-										std::numeric_limits<difference_type>::max()));
+			return (node_alloc_.max_size());
+
 		}
 
 		ft::pair<iterator, bool> insert(const value_type& val) {
