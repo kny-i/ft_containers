@@ -45,6 +45,7 @@ namespace ft {
 
 		reference operator*() const { return node_->value_; }
 
+		/* why */
 		pointer operator->() const { return (&(node_->value_)); }
 
 		tree_iterator& operator++() {

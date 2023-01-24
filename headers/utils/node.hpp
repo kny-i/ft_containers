@@ -36,6 +36,7 @@ namespace ft {
 			} else {
 				right_height = 0;
 			}
+			return (left_height - right_height);
 
 		}
 
@@ -50,7 +51,11 @@ namespace ft {
 			}
 			if(right_) {
 				right_height = right_height;
+			} else {
+				right_height = 0;
 			}
+			height = 1 + std::max(left_height, right_height);
+
 		}
 		bool is_left() const { return (this == parent_->left_); }
 		bool is_right() const { return (this == parent_->right_); }
