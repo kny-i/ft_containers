@@ -74,6 +74,66 @@ namespace ft {
 										std::numeric_limits<difference_type>::max()));
 		}
 
+		std::pair<iterator, bool> insert(const value_type& val) {
+			node_pointer parent_node = end_;
+			node_pointer node = root();
+
+			while (node) {
+				parent_node = node;
+				if (comp_(val, parent_node->value_)) {
+					node = parent_node->left_;
+				} else if (comp_(parent_node->value_, val)) {
+					node = parent_node->right_;
+				} else {
+					// 同じvalが存在、insert失敗
+					return (std::make_pair(iterator(parent_node), false));
+				}
+			}
+
+			node_pointer new_node = create_node_at(val, parent_node);
+
+			rebalance_tree(new_node);
+
+			return std::make_pair(iterator(new_node), true);
+		}
+
+		iterator insert(iterator position, const value_type& val) {
+			node_pointer pos_node = position.base();
+			node_pointer parent_node;
+
+			// hint(position)の一つ前にinsertする時
+			if (pos_node == end_ || comp_(val, pos_node->value_)) {
+				node_pointer prev_node =
+						(pos_node == begin_) ? NULL : pos_node->prev_node();
+				if (pos_node == begin_ || comp_(prev_node->value_, val)) {
+					parent_node = (pos_node->left_ == NULL) ? pos_node : prev_node;
+				} else {
+					return (insert(val).first);
+				}
+				// 一つ後にinsertする時
+			} else if (comp_(pos_node->value_, val)) {
+				node_pointer next_node = pos_node->next_node();
+				if (next_node == end_ || comp_(val, next_node->value_)) {
+					parent_node = (pos_node->right_ == NULL) ? pos_node : next_node;
+				} else {
+					return (insert(val).first);
+				}
+			} else {
+				return (iterator(pos_node));
+			}
+			node_pointer new_node = create_node_at(val, parent_node);
+			rebalance_tree(new_node);
+			return (iterator(new_node));
+		}
+
+		template <class InputIterator>
+		void insert(InputIterator first, InputIterator last) {
+			for (InputIterator p = first; p != last; ++p) {
+				insert(*p);
+			}
+		}
+
+
 
 	};
 }
