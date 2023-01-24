@@ -108,7 +108,6 @@ namespace ft {
 			return node;
 		}
 
-		// why
 		node_ptr next_node() {
 			if (right_) {
 				return (right_->min_node());
@@ -131,7 +130,6 @@ namespace ft {
 			}
 		}
 
-		// why
 		node_ptr prev_node() {
 			if (left_) {
 				return (left_->max_node());
