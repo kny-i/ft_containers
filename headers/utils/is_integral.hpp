@@ -6,10 +6,10 @@ namespace ft {
 		static const bool value = T;
 	};
 
-
 	template <typename T>
 	struct is_integral_base
 			: is_integral_type<false> {};
+	//完全特殊化
 	template <>
 	struct is_integral_base <bool>
 			: is_integral_type<true> {};

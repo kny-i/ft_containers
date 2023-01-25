@@ -37,6 +37,7 @@ namespace ft {
 		}
 
 		/* range constructor */
+		//enable if はきく
 		template <typename InputIt>
 		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),typename std::enable_if<!std::is_integral<InputIt>::value,InputIt>::type* = NULL): first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
 			reserve(ft::distance(first, last));

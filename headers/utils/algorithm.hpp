@@ -22,9 +22,10 @@ namespace ft {
 		return true;
 	}
 
-//	template <class Inputrator1, class Inputrator2>
-//			bool lexicographical_compare(Inputrator1 first1, Inputrator1 last1, Inputrator2 first2, Inputrator2 last2) {
+	template <class Inputrator1, class Inputrator2>
+			bool lexicographical_compare(Inputrator1 first1, Inputrator1 last1, Inputrator2 first2, Inputrator2 last2) {
 //				for ()
-//			}
+					;
+			}
 };
 #endif
