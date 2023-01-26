@@ -4,7 +4,7 @@
 #include "pair.hpp"
 #include "avltree.hpp"
 #include "algorithm.hpp"
-
+#include "reverse_iterator.hpp"
 
 #include <iostream>
 namespace ft {
@@ -116,7 +116,7 @@ namespace ft {
 		mapped_type& operator[](const key_type& k) {
 			return tree_.insert(value_type(k, mapped_type())).first->second;
 		}
-		pair<iterator, bool> insert(const value_type& val) {
+		std::pair<iterator, bool> insert(const value_type& val) {
 			return tree_.insert(val);
 		}
 
@@ -147,10 +147,10 @@ namespace ft {
 		const_iterator upper_bound(const key_type& k) const {
 			return tree_.upper_bound(k);
 		}
-		pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
+		std::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
 			return tree_.equal_range(k);
 		}
-		pair<iterator, iterator> equal_range(const key_type& k) {
+		std::pair<iterator, iterator> equal_range(const key_type& k) {
 			return tree_.equal_range(k);
 		}
 		allocator_type get_allocator() const { return allocator_type(); }
@@ -160,7 +160,7 @@ namespace ft {
 	bool operator==(const map<Key, T, Compare, Alloc>& lhs,
 					const map<Key, T, Compare, Alloc>& rhs) {
 		return (lhs.size() == rhs.size() &&
-				ft::equal(lhs.begin(), lhs.end(), rhs.begin()));
+				std::equal(lhs.begin(), lhs.end(), rhs.begin()));
 	}
 
 	template <class Key, class T, class Compare, class Alloc>
@@ -172,7 +172,7 @@ namespace ft {
 	template <class Key, class T, class Compare, class Alloc>
 	bool operator<(const map<Key, T, Compare, Alloc>& lhs,
 				   const map<Key, T, Compare, Alloc>& rhs) {
-		return (ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
+		return (std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
 											rhs.end()));
 	}
 

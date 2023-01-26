@@ -5,6 +5,7 @@
 #include "node.hpp"
 #include "tree_iterator.hpp"
 #include "pair.hpp"
+#include "reverse_iterator.hpp"
 
 /* in std::less, we use map_value_compare */
 namespace ft {
@@ -19,7 +20,6 @@ namespace ft {
 		typedef ptrdiff_t difference_type;
 		typedef size_t size_type;
 
-	private:
 		typedef node<T> node_type;
 		typedef node_type* node_pointer;
 		typedef typename Allocator::template rebind<node_type>::other node_allocator_type;
@@ -36,7 +36,7 @@ namespace ft {
 
 	public:
 
-		avltree(): compare_(Compare()), node_alloc_(Allocator()), size_(0), end_(create_node()) {
+		avltree(): compare_(Compare()), node_alloc_(Allocator()), size_(0), begin_(), end_(create_node()) {
 			end_->left_ = NULL;
 			begin_ = end_;
 
@@ -93,7 +93,7 @@ namespace ft {
 					return (std::make_pair(iterator(parent_node), false));
 				}
 			}
-
+			//rootがない時にはparent_nodeがend_になってる
 			node_pointer new_node = create_node_at(val, parent_node);
 
 			rebalance_tree(new_node);
@@ -259,10 +259,11 @@ namespace ft {
 
 		node_pointer create_node_at(const value_type& val, node_pointer parent_node) {
 			node_pointer new_node = create_node(val);
-
+			//root を作るときがparent_node は　end_になり、end_->leftがnew_node
 			bool is_left = (parent_node == end_ || compare_(val, parent_node->value_));
 			new_node->connect_parent(parent_node, is_left);
 
+			//一番最初
 			if (is_left && parent_node == begin_) {
 				begin_ = new_node;
 			}
