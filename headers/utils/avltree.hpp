@@ -397,13 +397,13 @@ namespace ft {
 			while (node != end_) {
 				parent_node = node->parent_;
 				difference_type balance = node->get_scales();
-				if (balance == 2) {
-					if (node->left_->get_scales() == -1) {
+				if (balance == -2) {
+					if (node->left_->get_scales() == 1) {
 						rotate_left(node->left_);
 					}
 					rotate_right(node);
-				} else if (balance == -2) {
-					if (node->right_->get_scales() == 1) {
+				} else if (balance == 2) {
+					if (node->right_->get_scales() == -1) {
 						rotate_right(node->right_);
 					}
 					rotate_left(node);
