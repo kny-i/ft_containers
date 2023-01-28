@@ -23,7 +23,7 @@ namespace ft {
 
 		node(const node& other): parent_(other.parent_), left_(other.left_), right_(other.right_), value_(other.value_), height(other.height) {}
 
-		diffrence_type balance() const {
+		diffrence_type get_scales() const {
 			size_type left_height;
 			size_type right_height;
 			if (left_) {
@@ -37,10 +37,9 @@ namespace ft {
 				right_height = 0;
 			}
 			return (left_height - right_height);
-
 		}
 
-		void update_hight() {
+		void update_height() {
 			size_type left_height;
 			size_type right_height;
 

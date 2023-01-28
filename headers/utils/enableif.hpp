@@ -2,7 +2,7 @@
 #define ENABLE
 
 namespace ft {
-	template<bool B, typename T = void >
+	template<bool Bool, typename T = void >
 	struct enable_if {
 		typedef T type;
 	};

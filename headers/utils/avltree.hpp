@@ -6,12 +6,14 @@
 #include "tree_iterator.hpp"
 #include "pair.hpp"
 #include "reverse_iterator.hpp"
-
+#include <utility>
 /* in std::less, we use map_value_compare */
+
 namespace ft {
-	template <class Key, class T,  class Compare = std::less<Key>,
-	        class Allocator = std::allocator<ft::pair<const Key, T> > >
-	class avltree {
+
+	template <class Key, class T, class Compare = std::less<Key>,
+			class Allocator = std::allocator<ft::pair<const Key, T> > >
+	class avl_tree {
 	public:
 		typedef Key key_type;
 		typedef T value_type;
@@ -20,54 +22,64 @@ namespace ft {
 		typedef ptrdiff_t difference_type;
 		typedef size_t size_type;
 
+	private:
 		typedef node<T> node_type;
-		typedef node_type* node_pointer;
-		typedef typename Allocator::template rebind<node_type>::other node_allocator_type;
 
-		typedef tree_iterator<value_type , node_type > iterator;
+	public:
+		typedef node_type* node_pointer;
+
+		// わかりやすいサイト(https://in-neuro.hatenablog.com/entry/2018/08/01/114441)
+		typedef
+		typename Allocator::template rebind<node_type>::other node_allocator_type;
+
+		typedef tree_iterator<value_type, node_type> iterator;
 		typedef tree_iterator<const value_type, const node_type> const_iterator;
 
 	private:
-		map_value_compare compare_;
+		map_value_compare comp_;
 		node_allocator_type node_alloc_;
 		size_type size_;
 		node_pointer begin_;
 		node_pointer end_;
 
 	public:
-
-		avltree(): compare_(Compare()), node_alloc_(Allocator()), size_(0), begin_(), end_(create_node()) {
+		avl_tree(): comp_(Compare()), node_alloc_(Allocator()), size_(0), begin_(), end_(create_node()) {
 			end_->left_ = NULL;
 			begin_ = end_;
 
 		}
-		avltree(map_value_compare comp, allocator_type alloc)
-		: compare_(comp), node_alloc_(alloc), size_(0), end_(create_node()){
+		avl_tree(map_value_compare comp, allocator_type alloc)
+				: comp_(comp), node_alloc_(alloc), size_(0) {
+			end_ = create_node();
 			end_->left_ = NULL;
 			begin_ = end_;
 		}
 
-		avltree(const avltree& other) {
-			*this = other;
+		avl_tree(const avl_tree& other)
+				: comp_(other.comp_), node_alloc_(other.node_alloc_), size_(0) {
+			end_ = create_node();
+			end_->left_ = NULL;
+			begin_ = end_;
+			insert(other.begin(), other.end());
 		}
-		avltree& operator=(const avltree& other) {
+
+		~avl_tree() {
+			delete_tree();
+			delete_node(end_);
+		}
+
+		avl_tree& operator=(const avl_tree& other) {
 			if (this != &other) {
 				clear();
-				compare_ = other.compare_;
+				comp_ = other.comp_;
 				node_alloc_ = other.node_alloc_;
 				insert(other.begin(), other.end());
 			}
 			return (*this);
 		}
 
-		~avltree() {
-			delete_tree();
-			delete_node(end_);
-		}
-
-		/* is that constructor? */
-		iterator begin() {return (iterator(begin_));}
-		iterator begin() const {return (const_iterator(begin_));}
+		iterator begin() { return (iterator(begin_)); }
+		const_iterator begin() const { return (const_iterator(begin_)); }
 		iterator end() { return (iterator(end_)); }
 		const_iterator end() const { return (const_iterator(end_)); }
 
@@ -75,7 +87,6 @@ namespace ft {
 
 		size_type max_size() const {
 			return (node_alloc_.max_size());
-
 		}
 
 		ft::pair<iterator, bool> insert(const value_type& val) {
@@ -84,50 +95,25 @@ namespace ft {
 
 			while (node) {
 				parent_node = node;
-				if (compare_(val, parent_node->value_)) {
+				if (comp_(val, parent_node->value_)) {
 					node = parent_node->left_;
-				} else if (compare_(parent_node->value_, val)) {
+				} else if (comp_(parent_node->value_, val)) {
 					node = parent_node->right_;
 				} else {
 					// 同じvalが存在、insert失敗
-					return (std::make_pair(iterator(parent_node), false));
+					return (ft::make_pair(iterator(parent_node), false));
 				}
 			}
-			//rootがない時にはparent_nodeがend_になってる
+
 			node_pointer new_node = create_node_at(val, parent_node);
 
 			rebalance_tree(new_node);
 
-			return std::make_pair(iterator(new_node), true);
+			return ft::make_pair(iterator(new_node), true);
 		}
 
 		iterator insert(iterator position, const value_type& val) {
-			node_pointer pos_node = position.base();
-			node_pointer parent_node;
-
-			// hint(position)の一つ前にinsertする時
-			if (pos_node == end_ || compare_(val, pos_node->value_)) {
-				node_pointer prev_node =
-						(pos_node == begin_) ? NULL : pos_node->prev_node();
-				if (pos_node == begin_ || compare_(prev_node->value_, val)) {
-					parent_node = (pos_node->left_ == NULL) ? pos_node : prev_node;
-				} else {
-					return (insert(val).first);
-				}
-				// 一つ後にinsertする時
-			} else if (compare_(pos_node->value_, val)) {
-				node_pointer next_node = pos_node->next_node();
-				if (next_node == end_ || compare_(val, next_node->value_)) {
-					parent_node = (pos_node->right_ == NULL) ? pos_node : next_node;
-				} else {
-					return (insert(val).first);
-				}
-			} else {
-				return (iterator(pos_node));
-			}
-			node_pointer new_node = create_node_at(val, parent_node);
-			rebalance_tree(new_node);
-			return (iterator(new_node));
+			return insert(val);
 		}
 
 		template <class InputIterator>
@@ -136,31 +122,31 @@ namespace ft {
 				insert(*p);
 			}
 		}
+
 		void erase(iterator position) {
 			node_pointer erase_node = position.base();
 
 			if (erase_node == begin_) {
-				begin_ = erase_node->next_node();
+				begin_ = erase_node->get_next_node();
 			}
 
 			// eraseするnodeと入れ替えるnodeをセット
 			node_pointer alt_node;
 			if (erase_node->left_ == NULL && erase_node->right_ == NULL) {
 				alt_node = NULL;
-			} else if (erase_node->balance() >= 0) {
-				alt_node = erase_node->left_->max_node();
+			} else if (erase_node->get_scales() >= 0){
+				//weigh on right
+				alt_node = erase_node->left_->get_max_node();
 			} else {
-				alt_node = erase_node->right_->min_node();
+				alt_node = erase_node->right_->get_min_node();
 			}
 
 			node_pointer bottom_node;
 			if (alt_node == NULL) {
 				bottom_node = erase_node->parent_;
-			}else if (alt_node->parent_ == erase_node) {
-				/*  */
+			} else if (alt_node->parent_ == erase_node) {
 				bottom_node = alt_node;
 			} else {
-				/*  */
 				bottom_node = alt_node->parent_;
 			}
 
@@ -185,9 +171,9 @@ namespace ft {
 			}
 		}
 
-		void swap(avltree& other) {
+		void swap(avl_tree& other) {
 			std::swap(node_alloc_, other.node_alloc_);
-			std::swap(compare_, other.compare_);
+			std::swap(comp_, other.comp_);
 			std::swap(size_, other.size_);
 			std::swap(begin_, other.begin_);
 			std::swap(end_, other.end_);
@@ -259,11 +245,10 @@ namespace ft {
 
 		node_pointer create_node_at(const value_type& val, node_pointer parent_node) {
 			node_pointer new_node = create_node(val);
-			//root を作るときがparent_node は　end_になり、end_->leftがnew_node
-			bool is_left = (parent_node == end_ || compare_(val, parent_node->value_));
+
+			bool is_left = (parent_node == end_ || comp_(val, parent_node->value_));
 			new_node->connect_parent(parent_node, is_left);
 
-			//一番最初
 			if (is_left && parent_node == begin_) {
 				begin_ = new_node;
 			}
@@ -320,9 +305,9 @@ namespace ft {
 		node_pointer find_node(const key_type& k) const {
 			node_pointer node = root();
 			while (node) {
-				if (compare_(k, node->value_)) {
+				if (comp_(k, node->value_)) {
 					node = node->left_;
-				} else if (compare_(node->value_, k)) {
+				} else if (comp_(node->value_, k)) {
 					node = node->right_;
 				} else {
 					return node;
@@ -335,7 +320,7 @@ namespace ft {
 			node_pointer node = root();
 			node_pointer result = end_;
 			while (node) {
-				if (!compare_(node->value_, k)) {
+				if (!comp_(node->value_, k)) {
 					result = node;
 					node = node->left_;
 				} else {
@@ -349,7 +334,7 @@ namespace ft {
 			node_pointer node = root();
 			node_pointer result = end_;
 			while (node) {
-				if (compare_(k, node->value_)) {
+				if (comp_(k, node->value_)) {
 					result = node;
 					node = node->left_;
 				} else {
@@ -362,14 +347,14 @@ namespace ft {
 			node_pointer upper = end_;
 			node_pointer lower = root();
 			while (lower) {
-				if (compare_(k, lower->value_)) {
+				if (comp_(k, lower->value_)) {
 					upper = lower;
 					lower = lower->left_;
-				} else if (compare_(lower->value_, k)) {
+				} else if (comp_(lower->value_, k)) {
 					lower = lower->right_;
 				} else {
 					return ft::make_pair(lower,
-										 lower->right_ ? lower->right_->min_node() : upper);
+										 lower->right_ ? lower->right_->get_min_node() : upper);
 				}
 			}
 			return ft::make_pair(upper, upper);
@@ -404,14 +389,14 @@ namespace ft {
 
 			while (node != end_) {
 				parent_node = node->parent_;
-				difference_type balance = node->balance();
+				difference_type balance = node->get_scales();
 				if (balance == 2) {
-					if (node->left_->balance() == -1) {
+					if (node->left_->get_scales() == -1) {
 						rotate_left(node->left_);
 					}
 					rotate_right(node);
 				} else if (balance == -2) {
-					if (node->right_->balance() == 1) {
+					if (node->right_->get_scales() == 1) {
 						rotate_right(node->right_);
 					}
 					rotate_left(node);
@@ -423,20 +408,21 @@ namespace ft {
 			// verify_avl();
 		}
 
+	public:
 		// verify関数を入れる
 		void verify_avl() {
 			node_pointer node = begin_;
 			while (node != end_) {
-				difference_type bal = node->balance();
+				difference_type bal = node->get_scales();
 				if (bal > 1 || bal < -1) {
 					std::cerr << "avl is not verified" << std::endl;
 					throw "wrong tree!!!";
 				}
-				node = node->next_node();
+				node = node->get_next_node();
 			}
 		}
-
-
 	};
-}
+
+}  // namespace ft
+
 #endif

@@ -65,7 +65,7 @@ namespace ft {
 	private:
 		typedef map_value_compare<key_type, value_type, key_compare>
 				map_value_compare;
-		typedef avltree<key_type, value_type, map_value_compare, allocator_type>
+		typedef avl_tree<key_type, value_type, map_value_compare, allocator_type>
 				tree_type;
 
 		tree_type tree_;
@@ -116,7 +116,7 @@ namespace ft {
 		mapped_type& operator[](const key_type& k) {
 			return tree_.insert(value_type(k, mapped_type())).first->second;
 		}
-		std::pair<iterator, bool> insert(const value_type& val) {
+		ft::pair<iterator, bool> insert(const value_type& val) {
 			return tree_.insert(val);
 		}
 
@@ -147,10 +147,10 @@ namespace ft {
 		const_iterator upper_bound(const key_type& k) const {
 			return tree_.upper_bound(k);
 		}
-		std::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
+		ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
 			return tree_.equal_range(k);
 		}
-		std::pair<iterator, iterator> equal_range(const key_type& k) {
+		ft::pair<iterator, iterator> equal_range(const key_type& k) {
 			return tree_.equal_range(k);
 		}
 		allocator_type get_allocator() const { return allocator_type(); }
