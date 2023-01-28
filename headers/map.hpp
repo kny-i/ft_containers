@@ -38,22 +38,6 @@ namespace ft {
 		typedef T mapped_type;
 		typedef ft::pair<const key_type, mapped_type> value_type;
 		typedef Compare key_compare;
-
-		class value_compare {
-		protected:
-			Compare comp_;
-
-		public:
-			typedef bool result_type;
-			typedef value_type first_argument_type;
-			typedef value_type second_argument_type;
-
-			explicit value_compare(Compare c) : comp_(c) {}
-			bool operator()(const value_type& x, const value_type& y) const {
-				return comp_(x.first, y.first);
-			}
-		};
-
 		typedef Alloc allocator_type;
 		typedef typename allocator_type::reference reference;
 		typedef typename allocator_type::const_reference const_reference;
@@ -135,7 +119,7 @@ namespace ft {
 		void swap(map& x) { tree_.swap(x.tree_); }
 		void clear() { tree_.clear(); }
 		key_compare key_comp() const { return key_compare(); }
-		value_compare value_comp() const { return value_compare(key_compare()); }
+		map_value_compare value_comp() const { return map_value_compare(key_compare()); }
 		iterator find(const key_type& k) { return tree_.find(k); }
 		const_iterator find(const key_type& k) const { return tree_.find(k); }
 		size_type count(const key_type& k) const { return tree_.count(k); }
