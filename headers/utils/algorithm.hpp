@@ -22,6 +22,7 @@ namespace ft {
 		return true;
 	}
 
+	//check first elements that are not same
 
 	template <class InputIterator1, class InputIterator2>
 	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
