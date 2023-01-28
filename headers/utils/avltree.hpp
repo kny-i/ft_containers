@@ -113,6 +113,7 @@ namespace ft {
 		}
 
 		iterator insert(iterator position, const value_type& val) {
+			(void )position;
 			return insert(val);
 		}
 
@@ -134,10 +135,16 @@ namespace ft {
 			node_pointer alt_node;
 			if (erase_node->left_ == NULL && erase_node->right_ == NULL) {
 				alt_node = NULL;
-			} else if (erase_node->get_scales() >= 0){
-				//weigh on right
+			} else if (erase_node->get_scales() < 0){
+				//weigh on left
 				alt_node = erase_node->left_->get_max_node();
 			} else {
+				//weight on right
+				//          ( 9 )
+				//         /    \
+				//      ( 5  ) (  10 )
+				//                \
+				//             　　(  12 )
 				alt_node = erase_node->right_->get_min_node();
 			}
 

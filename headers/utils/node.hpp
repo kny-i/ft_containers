@@ -36,7 +36,7 @@ namespace ft {
 			} else {
 				right_height = 0;
 			}
-			return (left_height - right_height);
+			return (right_height - left_height);
 		}
 
 		void update_height() {
