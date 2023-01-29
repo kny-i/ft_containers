@@ -1,6 +1,5 @@
 #ifndef VECTOR
 #define VECTOR
-
 #include <iostream>
 #include <memory>
 #include <iterator.hpp>
