@@ -2,10 +2,9 @@
 #define MAP
 
 #include "pair.hpp"
-#include "avltree.hpp"
 #include "algorithm.hpp"
 #include "reverse_iterator.hpp"
-
+#include "avltree.hpp"
 #include <iostream>
 namespace ft {
 
@@ -49,7 +48,7 @@ namespace ft {
 	private:
 		typedef map_value_compare<key_type, value_type, key_compare>
 				map_value_compare;
-		typedef avl_tree<key_type, value_type, map_value_compare, allocator_type>
+		typedef AVLTree<key_type, value_type, map_value_compare, allocator_type>
 				tree_type;
 
 		tree_type tree_;
@@ -72,6 +71,7 @@ namespace ft {
 			insert(first, last);
 		}
 
+		map():tree_(){}
 		map(const map& other) : tree_(other.tree_) {}
 
 		~map() {}

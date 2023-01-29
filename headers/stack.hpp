@@ -22,7 +22,7 @@ namespace ft {
 		void push(const value_type &value) {c.push_back(value);}
 		void pop() {return c.popback();}
 
-		friend bool operator==(const stack<T, Container> &lhs, const stack<T, Container> const &rhs) {
+		friend bool operator==(const stack<T, Container> &lhs, const stack<T, Container>  &rhs) {
 			return lhs.c == rhs.c;
 		}
 		friend bool operator!=(const stack<T, Container> &lhs, const stack<T, Container> &rhs) {

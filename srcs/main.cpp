@@ -5,7 +5,7 @@
 #include <stack>
 #include <vector>
 #include <stdlib.h>
-
+#include <algorithm>
 #include "map.hpp"
 #include "stack.hpp"
 #include "vector.hpp"
@@ -20,8 +20,8 @@ void judge() {
 
 int	main()
 {
-	std::ostream fs1;
-	std::ostream fs2;
+//	std::ostream fs1;
+//	std::ostream fs2;
 	{
 //		vector_test(fs1, fs2);
 
@@ -225,9 +225,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		// set some initial content:
 		for (unsigned long i = 1; i < 10; i++) myvector.push_back(i);
 
-		myvector.resize(5);
 		myvector.resize(8, 100);
-		myvector.resize(12);
 
 		fs1 << "myvector contains:";
 		for (unsigned long i = 0; i < myvector.size(); i++)
@@ -239,9 +237,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		// set some initial content:
 		for (unsigned long i = 1; i < 10; i++) myvector_.push_back(i);
 
-		myvector_.resize(5);
 		myvector_.resize(8, 100);
-		myvector_.resize(12);
 
 		fs2 << "myvector contains:";
 		for (unsigned long i = 0; i < myvector_.size(); i++)
