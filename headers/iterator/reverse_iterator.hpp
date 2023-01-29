@@ -26,9 +26,10 @@ namespace ft {
 		typedef typename traits_type::reference reference;
 		/* member functions */
 		reverse_iterator() : current_() {}
-		reverse_iterator(iterator_type itr_type) : current_(itr_type) {};
+		explicit reverse_iterator(iterator_type itr_type) : current_(itr_type) {};
 		template<class U>
 		reverse_iterator(const reverse_iterator<U> &rhs) :current_(rhs.base()) {};
+
 		template<class U>
 		reverse_iterator &operator=(reverse_iterator<U> const &rhs) {
 			if (current_ != rhs) {

@@ -21,8 +21,8 @@ namespace ft {
 		typedef typename Allocator::reference reference;
 		typedef ft::random_access_iterator<value_type> iterator;
 		typedef ft::random_access_iterator<const value_type> const_iterator;
-		typedef ft::reverse_iterator<value_type> reverse_iterator;
-		typedef ft::reverse_iterator<const value_type> const_reverse_iterator;
+		typedef ft::reverse_iterator<iterator> reverse_iterator;
+		typedef ft::reverse_iterator<const iterator> const_reverse_iterator;
 		/* empty constructor */
 		vector() : first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(allocator_type()) {}
 
@@ -78,7 +78,7 @@ namespace ft {
 			if (count > capacity()) {
 				clear();
 				deallocate();
-				first_pointer_ = alloc_(count);
+				first_pointer_ = allocate(count);
 				last_pointer_ = first_pointer_;
 				storage_last_ = first_pointer_ + count;
 				for (size_type i = 0; i < count; ++i) {
@@ -101,7 +101,7 @@ namespace ft {
 			else {
 				clear();
 				for (size_type i = 0; i < count; i++) {
-					construct(last_pointer_++ = value);
+					construct(last_pointer_++,value);
 				}
 			}
 		}
@@ -113,7 +113,7 @@ namespace ft {
 			if (count > capacity()) {
 				clear();
 				deallocate();
-				first_pointer_ = alloc_(count);
+				first_pointer_ = allocate(count);
 				last_pointer_ = first_pointer_;
 				storage_last_ = first_pointer_ + count;
 				for (InputIt head = first; head != last; ++head) {
@@ -136,7 +136,7 @@ namespace ft {
 			else {
 				clear();
 				for (InputIt head = first; head != last; head++) {
-					construct(last_pointer_++ = *head);
+					construct(last_pointer_++, *head);
 				}
 			}
 		}
@@ -319,13 +319,20 @@ namespace ft {
 	}
 	allocator_type get_allocator() const { return alloc_;}
 
-	void resize(size_type value_size, const_reference value) {
-		if (value_size < size()) {
-			erase(begin() + value_size, end());
-		} else if (value_size > size()){
-			insert(end(), value_size - size(), value);
+
+		/* not correct proto type */
+		void resize(size_type count, T value = T()) {
+			if (count < size()) {
+				size_type diff = size() - count;
+				erase(begin() + diff, end());
+				last_pointer_ = first_pointer_ + count;
+			} else if (count > size()) {
+				reserve(recommend_size(count));
+				while (size() < count) {
+					construct(last_pointer_++, value);
+				}
+			}
 		}
-	}
 
 	void destroy(pointer ptr) {alloc_.destroy(ptr);}
 
