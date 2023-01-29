@@ -27,10 +27,7 @@ namespace ft {
 
 	public:
 		typedef node_type* node_pointer;
-
-		// わかりやすいサイト(https://in-neuro.hatenablog.com/entry/2018/08/01/114441)
-		typedef
-		typename Allocator::template rebind<node_type>::other node_allocator_type;
+		typedef typename Allocator::template rebind<node_type>::other node_allocator_type;
 
 		typedef tree_iterator<value_type, node_type> iterator;
 		typedef tree_iterator<const value_type, const node_type> const_iterator;
@@ -140,11 +137,12 @@ namespace ft {
 				alt_node = erase_node->left_->get_max_node();
 			} else {
 				//weight on right
-				//          ( 9 )
+				//          ( 1 )
 				//         /    \
-				//      ( 5  ) (  10 )
-				//                \
-				//             　　(  12 )
+				//      ( 5  ) (  11 )
+				//             /    \
+				//          ( 10 )　　(  12 )
+
 				alt_node = erase_node->right_->get_min_node();
 			}
 
@@ -152,8 +150,20 @@ namespace ft {
 			if (alt_node == NULL) {
 				bottom_node = erase_node->parent_;
 			} else if (alt_node->parent_ == erase_node) {
+
+				//11 is alternate
+				//          ( 1 )
+				//         /    \
+				//      ( 5  ) (  11 )
+				//                 \
+				//             　　(  12 )
 				bottom_node = alt_node;
 			} else {
+				//          ( 10 )
+				//         /    \
+				//      ( 5  ) (  11 )
+				//                 \
+				//              　　(  12 )
 				bottom_node = alt_node->parent_;
 			}
 
@@ -163,8 +173,8 @@ namespace ft {
 			rebalance_tree(bottom_node);
 		}
 
-		size_type erase(const key_type& k) {
-			iterator position = find(k);
+		size_type erase(const key_type& key) {
+			iterator position = find(key);
 			if (position == end()) {
 				return 0;
 			}
@@ -186,47 +196,47 @@ namespace ft {
 			std::swap(end_, other.end_);
 		}
 
-		iterator find(const key_type& k) {
-			node_pointer node = find_node(k);
+		iterator find(const key_type& key) {
+			node_pointer node = find_node(key);
 			return iterator(node);
 		}
 
-		const_iterator find(const key_type& k) const {
-			node_pointer node = find_node(k);
+		const_iterator find(const key_type& key) const {
+			node_pointer node = find_node(key);
 			return const_iterator(node);
 		}
 
 		// 重複は許されないので0か1のみ返す
-		size_type count(const key_type& k) const { return (find_node(k) != end_); }
+		size_type count(const key_type& key) const { return (find_node(key) != end_); }
 
-		iterator lower_bound(const key_type& k) {
-			node_pointer node = lower_bound_node(k);
+		iterator lower_bound(const key_type& key) {
+			node_pointer node = lower_bound_node(key);
 			return iterator(node);
 		}
 
-		const_iterator lower_bound(const key_type& k) const {
-			node_pointer node = lower_bound_node(k);
+		const_iterator lower_bound(const key_type& key) const {
+			node_pointer node = lower_bound_node(key);
 			return const_iterator(node);
 		}
 
-		iterator upper_bound(const key_type& k) {
-			node_pointer node = upper_bound_node(k);
+		iterator upper_bound(const key_type& key) {
+			node_pointer node = upper_bound_node(key);
 			return iterator(node);
 		}
 
-		const_iterator upper_bound(const key_type& k) const {
-			node_pointer node = upper_bound_node(k);
+		const_iterator upper_bound(const key_type& key) const {
+			node_pointer node = upper_bound_node(key);
 			return const_iterator(node);
 		}
 
-		pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
-			pair<node_pointer, node_pointer> pair = equal_range_node(k);
+		pair<const_iterator, const_iterator> equal_range(const key_type& key) const {
+			pair<node_pointer, node_pointer> pair = equal_range_node(key);
 			return ft::make_pair(const_iterator(pair.first),
 								 const_iterator(pair.second));
 		}
 
-		pair<iterator, iterator> equal_range(const key_type& k) {
-			pair<node_pointer, node_pointer> pair = equal_range_node(k);
+		pair<iterator, iterator> equal_range(const key_type& key) {
+			pair<node_pointer, node_pointer> pair = equal_range_node(key);
 			return ft::make_pair(iterator(pair.first), iterator(pair.second));
 		}
 
@@ -309,12 +319,12 @@ namespace ft {
 			}
 		}
 
-		node_pointer find_node(const key_type& k) const {
+		node_pointer find_node(const key_type& key) const {
 			node_pointer node = root();
 			while (node) {
-				if (comp_(k, node->value_)) {
+				if (comp_(key, node->value_)) {
 					node = node->left_;
-				} else if (comp_(node->value_, k)) {
+				} else if (comp_(node->value_, key)) {
 					node = node->right_;
 				} else {
 					return node;
@@ -323,11 +333,12 @@ namespace ft {
 			return end_;
 		}
 
-		node_pointer lower_bound_node(const key_type& k) const {
+		//全探索をして最も近い数かつ自分より大きい数を持つノードを探す
+		node_pointer lower_bound_node(const key_type& key) const {
 			node_pointer node = root();
 			node_pointer result = end_;
 			while (node) {
-				if (!comp_(node->value_, k)) {
+				if (!comp_(node->value_, key)) {
 					result = node;
 					node = node->left_;
 				} else {
@@ -336,12 +347,12 @@ namespace ft {
 			}
 			return result;
 		}
-
-		node_pointer upper_bound_node(const key_type& k) const {
+		//全探索をして最も近い数かつ自分より小さい数を持つノードを探す
+		node_pointer upper_bound_node(const key_type& key) const {
 			node_pointer node = root();
 			node_pointer result = end_;
 			while (node) {
-				if (comp_(k, node->value_)) {
+				if (comp_(key, node->value_)) {
 					result = node;
 					node = node->left_;
 				} else {
@@ -350,18 +361,18 @@ namespace ft {
 			}
 			return result;
 		}
-		pair<node_pointer, node_pointer> equal_range_node(const key_type& k) const {
+		pair<node_pointer, node_pointer> equal_range_node(const key_type& key) const {
 			node_pointer upper = end_;
-			node_pointer lower = root();
-			while (lower) {
-				if (comp_(k, lower->value_)) {
-					upper = lower;
-					lower = lower->left_;
-				} else if (comp_(lower->value_, k)) {
-					lower = lower->right_;
+			node_pointer node = root();
+			while (node) {
+				if (comp_(key, node->value_)) {
+					upper = node;
+					node = node->left_;
+				} else if (comp_(node->value_, key)) {
+					node = node->right_;
 				} else {
-					return ft::make_pair(lower,
-										 lower->right_ ? lower->right_->get_min_node() : upper);
+					return ft::make_pair(node,
+										 node->right_ ? node->right_->get_min_node() : upper);
 				}
 			}
 			return ft::make_pair(upper, upper);
