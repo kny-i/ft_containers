@@ -38,9 +38,10 @@ namespace ft {
 		typedef typename Allocator::template rebind<node_type>::other node_allocator_type;
 
 		typedef tree_iterator<value_type, node_type> iterator;
-		typedef tree_iterator<const value_type, const node_type> const_iterator;
+		typedef tree_iterator<value_type, node_type> const_iterator;
 
 	private:
+
 		value_compare comp_;
 		node_allocator_type node_alloc_;
 		size_type size_;
@@ -80,9 +81,15 @@ namespace ft {
 			return *this;
 		}
 		iterator begin() {
+			if (get_root() == NULL) {
+				return iterator(static_cast<node_pointer>(NULL));
+			}
 			return iterator(begin_);
 		}
 		const_iterator begin() const {
+			if (get_root() == NULL) {
+				return const_iterator(static_cast<node_pointer>(NULL));
+			}
 			return const_iterator(begin_);
 		}
 		iterator end() {

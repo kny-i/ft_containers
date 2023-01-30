@@ -91,8 +91,8 @@ void judge(std::string const &test_case) {
 
 void time_end(clock_t start, std::string const &msg) {
 	clock_t end = clock();
-	double duration = double(end - start) / CLOCKS_PER_SEC;
-	std::cout << msg <<": " << duration << " seconds" << std::endl;
+	double duration = double(end - start) / CLOCKS_PER_SEC * 1000;
+	std::cout << msg <<": " << duration << " k second" << std::endl;
 	std::cout << std::flush;
 }
 
@@ -120,7 +120,7 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			ft::map<int, std::string> b(a.begin(), a.end());
 			ft::map<int, std::string> c(b);
 
-			for (ft::map<int, std::string>::iterator it = c.begin(); it != c.end(); ++it) {
+			for (ft::map<int, std::string>::const_iterator it = c.begin(); it != c.end(); ++it) {
 				mine << it->second << ' ' << std::endl;
 			}
 			time_end(start, "mine[constructor]");
@@ -137,8 +137,44 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std::map<int, std::string> b(a.begin(), a.end());
 			std::map<int, std::string> c(b);
 
-			for (std::map<int, std::string>::iterator it = c.begin(); it != c.end(); ++it) {
+			for (std::map<int, std::string>::const_iterator it = c.begin(); it != c.end(); ++it) {
 				std << it->second << ' ' << std::endl;
+			}
+			time_end(start, "std[constructor]");
+		}
+		std::cout  << std::endl;
+	}
+	{
+		{
+			clock_t start = time_begin();
+			ft::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			ft::map<int, std::string> b(a.begin(), a.end());
+			ft::map<int, std::string> c(b);
+
+			for (ft::map<int, std::string>::reverse_iterator it = c.rbegin(); it != c.rend(); ++it) {
+				mine << it->second << ' ' << std::endl;
+			}
+			time_end(start, "mine[constructor]");
+		}
+
+		{
+			clock_t start = time_begin();
+			std::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			std::map<int, std::string> b(a.begin(), a.end());
+			std::map<int, std::string> c(b);
+
+			for (std::map<int, std::string>::reverse_iterator it = c.rbegin(); it != c.rend(); ++it) {
+		std << it->second << ' ' << std::endl;
 			}
 			time_end(start, "std[constructor]");
 		}

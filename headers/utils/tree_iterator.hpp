@@ -26,7 +26,7 @@ namespace ft {
 
 		tree_iterator(const tree_iterator<T, Node>& other) : node_(other.base()) {}
 
-		explicit tree_iterator(node_pointer node) : node_(node) {}
+		tree_iterator(node_pointer node) : node_(node) {}
 
 		tree_iterator& operator=(const tree_iterator& other) {
 			if (this != &other) {
