@@ -73,7 +73,7 @@ void judge(std::string const &test_case) {
 		std::cout << std::flush;
 
 	}else if (test_case == "map") {
-		if (system("diff output/stack_mine output/map_std") == 0)
+		if (system("diff output/map_mine output/map_std") == 0)
 			std::cout << "\033[32mmap[OK] \033[m\n";
 		else
 			std::cout << "\033[31mmap[KO] \033[m\n";
