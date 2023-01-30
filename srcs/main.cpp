@@ -50,6 +50,7 @@ int	main()
 	{
 		std::cout << "\n=== MAP ===" << std::endl;
 		map(map_1, map_2);
+
 	}
 
 
@@ -59,10 +60,15 @@ int	main()
 void map(std::ofstream &fs1, std::ofstream &fs2) {
 
 	ft::map<int, int> map1;
-	for(int i = 0; i != 100; i++) {
+	for(int i = 0; i < 100; i++) {
 		map1[i] = i;
 	}
 	ft::map<int, int> map_2(map1.begin(), map1.end());
+	for(ft::map<int , int >::iterator it = map_2.begin(); it != map_2.end(); it++) {
+		std::cout << it->second << std::endl;
+		std::cout << "piyo" << std::endl;
+	}
+
 
 }
 void vector(std::ofstream &fs1, std::ofstream &fs2) {
@@ -74,7 +80,9 @@ void vector(std::ofstream &fs1, std::ofstream &fs2) {
 	int ints[] = {10, 1, 9, 2};
 	ft::vector<int> ve_ints(ints, ints + sizeof(ints) / sizeof (int));
 
-
+	for (ft::vector<int>::iterator it = d.begin(); it != d.end(); it++) {
+		fs1 << *it << ' ';
+	}
 
 }
 

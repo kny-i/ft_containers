@@ -44,24 +44,24 @@ namespace ft {
 		pointer operator->() const { return (&(node_->value_)); }
 
 		tree_iterator& operator++() {
-			node_ = node_->next_node();
+			node_ = node_->get_next_node();
 			return *this;
 		}
 
 		tree_iterator operator++(int) {
 			tree_iterator tmp(*this);
-			node_ = node_->next_node();
+			node_ = node_->get_next_node();
 			return (tmp);
 		}
 
 		tree_iterator& operator--() {
-			node_ = node_->prev_node();
+			node_ = node_->get_prev_node()();
 			return (*this);
 		}
 
 		tree_iterator operator--(int) {
 			tree_iterator tmp(*this);
-			node_ = node_->prev_node();
+			node_ = node_->get_prev_node()();
 			return tmp;
 		}
 

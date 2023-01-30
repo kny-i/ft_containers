@@ -9,6 +9,9 @@
 #include "reverse_iterator.hpp"
 #include <utility>
 
+#include "pair.hpp"
+#include <utility>
+
 namespace ft {
 	template <class Key, class T, class Compare = std::less<Key>,
 			class Allocator = std::allocator<ft::pair<const Key, T> > >
@@ -22,7 +25,7 @@ namespace ft {
 		typedef size_t size_type;
 
 	private:
-		typedef node<T> node_type;
+		typedef Node<T> node_type;
 	public:
 		typedef node_type* node_pointer;
 		/*
@@ -128,7 +131,7 @@ namespace ft {
 		void erase(iterator position) {
 			node_pointer erase_node = position.base();
 			if (erase_node == begin_) {
-				begin_ = erase_node->get_next_node();
+				begin_ = erase_node->get_get_next_node();
 			}
 			node_pointer alternate;
 			if (!erase_node->left_ && !erase_node->right_) {
@@ -312,7 +315,7 @@ namespace ft {
 					alternate->left_->connect_parent(alternate->parent_, alternate->is_left_child());
 				} else {
 					alternate->right_->connect_parent(alternate->parent_,
-													  alternate->is_left_child());
+													 alternate->is_left_child());
 				}
 				alternate->connect_parent(erase_node->parent_, erase_node->is_left_child());
 				alternate->connect_left_child(erase_node->left_);
@@ -427,7 +430,7 @@ namespace ft {
 					is_ok = false;
 					std::cerr << "OH MY GOSH!" << std::endl;
 				}
-				node = node->get_next_node();
+				node = node->get_get_next_node();
 			}
 			return is_ok;
 		}
