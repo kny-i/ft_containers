@@ -1,5 +1,3 @@
-
-#include <cmath>
 #include <fstream>
 #include <iostream>
 #include <map>
@@ -19,7 +17,7 @@ clock_t time_begin();
 void time_end(clock_t start, std::string const &msg);
 void vector(std::ofstream &fs1, std::ofstream &fs2);
 void map(std::ofstream &fs1, std::ofstream &fs2);
-
+void stack(std::ofstream &fs1, std::ofstream &fs2);
 int	main()
 {
 	system("mkdir output");
@@ -31,7 +29,7 @@ int	main()
 		std::ofstream vec_std;
 		vec_mine.open("output/vec_mine");
 		vec_std.open("output/vec_std");
-		//vector(vec_mine, vec_std);
+		vector(vec_mine, vec_std);
 		vec_mine << std::flush;
 		vec_std << std::flush;
 		judge("vector");
@@ -54,7 +52,7 @@ int	main()
 		std::ofstream stack_std;
 		stack_mine.open("output/stack_mine");
 		stack_std.open("output/stack_std");
-		map(stack_mine, stack_std);
+		stack(stack_mine, stack_std);
 		stack_mine << std::flush;
 		stack_std << std::flush;
 		judge("stack");
@@ -95,6 +93,7 @@ void time_end(clock_t start, std::string const &msg) {
 	clock_t end = clock();
 	double duration = double(end - start) / CLOCKS_PER_SEC;
 	std::cout << "Time taken by " << msg <<": " << duration << " seconds" << std::endl;
+	std::cout << std::flush;
 }
 
 clock_t time_begin() {
@@ -102,6 +101,10 @@ clock_t time_begin() {
 	return start;
 }
 
+void stack(std::ofstream &fs1, std::ofstream &fs2) {
+
+
+}
 void map(std::ofstream &fs1, std::ofstream &fs2) {
 
 	{
@@ -113,16 +116,18 @@ void map(std::ofstream &fs1, std::ofstream &fs2) {
 }
 void vector(std::ofstream &fs1, std::ofstream &fs2) {
 
-	ft::vector<int> a;
-	ft::vector<int> b(3, 100);//3 elements with 100
-	ft::vector<int> c(b.begin(), b.end());
-	ft::vector<int> d(c);
-	int ints[] = {10, 1, 9, 2};
-	ft::vector<int> ve_ints(ints, ints + sizeof(ints) / sizeof (int));
-
-	for (ft::vector<int>::iterator it = d.begin(); it != d.end(); it++) {
-		fs1 << *it << ' ';
-	}
+//	ft::vector<int> a;
+//	ft::vector<int> b(3, 100);//3 elements with 100
+//	ft::vector<int> c(b.begin(), b.end());
+//	ft::vector<int> d(c);
+//	int ints[] = {10, 1, 9, 2};
+//	ft::vector<int> ve_ints(ints, ints + sizeof(ints) / sizeof (int));
+//
+//	for (ft::vector<int>::iterator it = d.begin(); it != d.end(); it++) {
+//		fs1 << *it << ' ';
+//	}
+	clock_t start  = time_begin();
+	time_end(start, "hoge");
 
 }
 
