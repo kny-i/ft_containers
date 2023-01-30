@@ -19,37 +19,49 @@ void judge(T test_num) {
 	std::cout << std::endl;
 	std::cout << "=======================================" << std::endl;
 	std::cout << "[TEST"<<test_num << "]"<< std::endl;
-	if (system("diff 1 2") == 0)
+	if (system("diff ft::vector std::vctor") == 0)
 		std::cout << "\033[32m[OK] \033[m";
 	else
 		std::cout << "\033[31m[KO] \033[m";
 	std::cout << std::flush;
 }
 
+clock_t time_begin() {
+	clock_t start = clock();
+	return start;
+}
+
+void time_end(clock_t start, std::string const &msg) {
+	clock_t end = clock();
+	double duration = double(end - start) / CLOCKS_PER_SEC;
+	std::cout << "Time taken by " << msg <<": " << duration << " seconds" << std::endl;
+}
 
 void vector(std::ofstream &fs1, std::ofstream &fs2);
 void vector_test(std::ofstream &fs1, std::ofstream &fs2);
 void map(std::ofstream &fs1, std::ofstream &fs2);
 int	main()
 {
-	std::ofstream vec_1;
-	std::ofstream vec_2;
+	std::ofstream ve;
+	std::ofstream vector_std;
 
-	vec_1.open("vec_1");
-	vec_2.open("vec_2");
+	ve.open("ve");
+	vector_std.open("vector_std");
 	{
 		std::cout << "\n=== VECTOR ===" << std::endl;
-		vector(vec_1, vec_2);
+		vector(ve, vector_std);
 //		vector_test(fs1, fs2);
 	}
 
-	std::ofstream map_1;
-	std::ofstream map_2;
-	map_1.open("map_1");
-	map_2.open("map_2");
+	std::ofstream map_mine;
+	std::ofstream map_std;
+	map_mine.open("map_mine");
+	map_std.open("map_std");
 	{
+		clock_t start = time_begin();
 		std::cout << "\n=== MAP ===" << std::endl;
-		map(map_1, map_2);
+		map(map_mine, map_std);
+		time_end(start, "map");
 
 	}
 
@@ -59,16 +71,11 @@ int	main()
 
 void map(std::ofstream &fs1, std::ofstream &fs2) {
 
-	ft::map<int, int> map1;
-	for(int i = 0; i < 100; i++) {
-		map1[i] = i;
-	}
-	ft::map<int, int> map_2(map1.begin(), map1.end());
-	for(ft::map<int , int >::iterator it = map_2.begin(); it != map_2.end(); it++) {
-		std::cout << it->second << std::endl;
-		std::cout << "piyo" << std::endl;
-	}
+	{
+		std::cout << "[test Constructors]" << std::endl;
+		ft::map<int, int > a;
 
+	}
 
 }
 void vector(std::ofstream &fs1, std::ofstream &fs2) {

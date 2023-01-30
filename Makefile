@@ -7,7 +7,7 @@ CXX         = c++
 headers = ./headers
 iterator_headers = ./headers/iterator
 utils = ./headers/utils
-CXXFLAGS    = -std=c++98  -MMD -MP -I$(headers) -I$(iterator_headers) -I$(utils)
+CXXFLAGS    = -std=c++98  -MMD -MP -I$(headers) -I$(iterator_headers) -I$(utils) -fsanitize=address
 .PHONY: all
 all: $(NAME)
 
@@ -30,3 +30,6 @@ re: fclean all
 .PHONY: debug
 debug: CXXFLAGS += -g -fsanitize=integer -fsanitize=address -fsanitize=leak
 debug: re
+
+run: all
+	@./ft_conatiner
