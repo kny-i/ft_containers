@@ -71,7 +71,6 @@ namespace ft {
 			insert(first, last);
 		}
 
-		map():tree_(){}
 		map(const map& other) : tree_(other.tree_) {}
 
 		~map() {}

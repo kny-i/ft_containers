@@ -269,6 +269,7 @@ namespace ft {
 		}
 		pointer new_last = last_pointer_ + value_size;
 			construct_range(last_pointer_, new_last);
+			//memoveの話
 			std::copy_backward(pos, end(), new_last);
 			std::fill(pos, pos + value_size, value);
 			last_pointer_ = new_last;

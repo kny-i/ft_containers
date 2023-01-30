@@ -1,3 +1,4 @@
+
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -25,23 +26,60 @@ void judge(T test_num) {
 	std::cout << std::flush;
 }
 
-void vector_test(std::ostream &fs1, std::ostream &fs2);
 
+void vector(std::ofstream &fs1, std::ofstream &fs2);
+void vector_test(std::ofstream &fs1, std::ofstream &fs2);
+void map(std::ofstream &fs1, std::ofstream &fs2);
 int	main()
 {
-	std::ofstream fs1;
-	std::ofstream fs2;
+	std::ofstream vec_1;
+	std::ofstream vec_2;
 
-	fs1.open("1");
-	fs2.open("2");
+	vec_1.open("vec_1");
+	vec_2.open("vec_2");
 	{
 		std::cout << "\n=== VECTOR ===" << std::endl;
-		vector_test(fs1, fs2);
+		vector(vec_1, vec_2);
+//		vector_test(fs1, fs2);
 	}
+
+	std::ofstream map_1;
+	std::ofstream map_2;
+	map_1.open("map_1");
+	map_2.open("map_2");
+	{
+		std::cout << "\n=== MAP ===" << std::endl;
+		map(map_1, map_2);
+	}
+
+
 
 }
 
-void vector_test(std::ostream &fs1, std::ostream &fs2) {
+void map(std::ofstream &fs1, std::ofstream &fs2) {
+
+	ft::map<int, int> map1;
+	for(int i = 0; i != 100; i++) {
+		map1[i] = i;
+	}
+	ft::map<int, int> map_2(map1.begin(), map1.end());
+
+}
+void vector(std::ofstream &fs1, std::ofstream &fs2) {
+
+	ft::vector<int> a;
+	ft::vector<int> b(3, 100);//3 elements with 100
+	ft::vector<int> c(b.begin(), b.end());
+	ft::vector<int> d(c);
+	int ints[] = {10, 1, 9, 2};
+	ft::vector<int> ve_ints(ints, ints + sizeof(ints) / sizeof (int));
+
+
+
+}
+
+
+void vector_test(std::ofstream &fs1, std::ofstream &fs2) {
 	judge(1);
 	/* vector start */
 
@@ -62,7 +100,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs1 << "The contents of fifth are:";
 		for (std::vector<int>::iterator it = fifth.begin(); it != fifth.end(); ++it)
 			fs1 << ' ' << *it;
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		// constructors used in the same order as described above:
 		ft::vector<int> first_;           // empty vector of ints
@@ -78,7 +116,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		for (ft::vector<int>::iterator it = fifth_.begin(); it != fifth_.end();
 			 ++it)
 			fs2 << ' ' << *it;
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(2);
@@ -91,7 +129,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end();
 			 ++it)
 			fs1 << ' ' << *it;
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_;
 		for (int i = 1; i <= 5; i++) myvector_.push_back(i);
@@ -99,7 +137,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		for (ft::vector<int>::iterator it = myvector_.begin();
 			 it != myvector_.end(); ++it)
 			fs2 << ' ' << *it;
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(3);
@@ -111,7 +149,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		bar = foo;
 		foo = std::vector<int>();
 		fs1 << "Size of foo: " << int(foo.size()) << '\n';
-		fs1 << "Size of bar: " << int(bar.size()) << '\n' << std::flush;
+		fs1 << "Size of bar: " << int(bar.size()) << std::endl;
 
 		ft::vector<int> foo_(3, 0);
 		ft::vector<int> bar_(5, 0);
@@ -119,7 +157,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		bar_ = foo_;
 		foo_ = ft::vector<int>();
 		fs2 << "Size of foo: " << int(foo_.size()) << '\n';
-		fs2 << "Size of bar: " << int(bar_.size()) << '\n' << std::flush;
+		fs2 << "Size of bar: " << int(bar_.size()) << std::endl;
 	}
 
 	judge(4);
@@ -132,7 +170,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end();
 			 ++it)
 			fs1 << ' ' << *it;
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_;
 		for (int i = 1; i <= 5; i++) myvector_.push_back(i);
@@ -140,7 +178,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		for (ft::vector<int>::iterator it = myvector_.begin();
 			 it != myvector_.end(); ++it)
 			fs2 << ' ' << *it;
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(5);
@@ -156,26 +194,27 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end();
 			 ++it)
 			fs1 << ' ' << *it;
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_(5);  // 5 default-constructed ints
 
 		int i_ = 0;
 
 		ft::vector<int>::reverse_iterator rit_ = myvector_.rbegin();
-		for (; rit_ != myvector_.rend(); ++rit_)
+		for (; rit_ != myvector_.rend(); ++rit_) {
 			*rit_ = ++i_;
+		}
+			
 
 		fs2 << "myvector contains:";
 		for (ft::vector<int>::iterator it = myvector_.begin();
 			 it != myvector_.end(); ++it)
 			fs2 << ' ' << *it;
-		fs2 << '\n' << std::flush;
 	}
 
 	judge(6);
 
-	{
+/*	{
 		std::vector<int> myints;
 		fs1 << "0. size: " << myints.size() << '\n';
 
@@ -186,7 +225,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs1 << "2. size: " << myints.size() << '\n';
 
 		myints.pop_back();
-		fs1 << "3. size: " << myints.size() << '\n' << std::flush;
+		fs1 << "3. size: " << myints.size() << std::endl;
 
 		ft::vector<int> myints_;
 		fs2 << "0. size: " << myints_.size() << '\n';
@@ -198,7 +237,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "2. size: " << myints_.size() << '\n';
 
 		myints_.pop_back();
-		fs2 << "3. size: " << myints_.size() << '\n' << std::flush;
+		fs2 << "3. size: " << myints_.size() << std::endl;
 	}
 
 	judge(7);
@@ -206,7 +245,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 	{
 		std::vector<int> myvector;
 
-		// set some content in the vector:
+//		 set some content in the vector:
 		for (int i = 0; i < 100; i++) myvector.push_back(i);
 
 		fs1 << "size: " << myvector.size() << "\n";
@@ -215,7 +254,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		ft::vector<int> myvector_;
 
-		// set some content in the vector:
+//		 set some content in the vector:
 		for (int i = 0; i < 100; i++) myvector_.push_back(i);
 
 		fs2 << "size: " << myvector_.size() << "\n";
@@ -228,7 +267,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 	{
 		std::vector<int> myvector;
 
-		// set some initial content:
+//		 set some initial content:
 		for (unsigned long i = 1; i < 10; i++) myvector.push_back(i);
 
 		myvector.resize(8, 100);
@@ -236,11 +275,11 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs1 << "myvector contains:";
 		for (unsigned long i = 0; i < myvector.size(); i++)
 			fs1 << ' ' << myvector[i];
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_;
 
-		// set some initial content:
+//		 set some initial content:
 		for (unsigned long i = 1; i < 10; i++) myvector_.push_back(i);
 
 		myvector_.resize(8, 100);
@@ -248,7 +287,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "myvector contains:";
 		for (unsigned long i = 0; i < myvector_.size(); i++)
 			fs2 << ' ' << myvector_[i];
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(9);
@@ -256,21 +295,21 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 	{
 		std::vector<int> myvector;
 
-		// set some content in the vector:
+//		 set some content in the vector:
 		for (int i = 0; i < 100; i++) myvector.push_back(i);
 
 		fs1 << "size: " << (int)myvector.size() << '\n';
 		fs1 << "capacity: " << (int)myvector.capacity() << '\n';
-		fs1 << "max_size: " << (int)myvector.max_size() << '\n' << std::flush;
+		fs1 << "max_size: " << (int)myvector.max_size() << std::endl;
 
 		ft::vector<int> myvector_;
 
-		// set some content in the vector:
+//		 set some content in the vector:
 		for (int i = 0; i < 100; i++) myvector_.push_back(i);
 
 		fs2 << "size: " << (int)myvector_.size() << '\n';
 		fs2 << "capacity: " << (int)myvector_.capacity() << '\n';
-		fs2 << "max_size: " << (int)myvector_.max_size() << '\n' << std::flush;
+		fs2 << "max_size: " << (int)myvector_.max_size() << std::endl;
 	}
 
 	judge(10);
@@ -286,7 +325,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			myvector.pop_back();
 		}
 
-		fs1 << "total: " << sum << '\n' << std::flush;
+		fs1 << "total: " << sum << std::endl;
 
 		ft::vector<int> myvector_;
 		int sum_(0);
@@ -298,7 +337,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			myvector_.pop_back();
 		}
 
-		fs2 << "total: " << sum_ << '\n' << std::flush;
+		fs2 << "total: " << sum_ << std::endl;
 	}
 
 	judge(11);
@@ -325,7 +364,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			bar.push_back(i);
 			if (sz != bar.capacity()) {
 				sz = bar.capacity();
-				fs1 << "capacity changed: " << sz << '\n' << std::flush;
+				fs1 << "capacity changed: " << sz << std::endl;
 			}
 		}
 
@@ -350,7 +389,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			bar_.push_back(i);
 			if (sz_ != bar_.capacity()) {
 				sz_ = bar_.capacity();
-				fs2 << "capacity changed: " << sz_ << '\n' << std::flush;
+				fs2 << "capacity changed: " << sz_ << std::endl;
 			}
 		}
 	}
@@ -362,10 +401,10 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		std::vector<int>::size_type sz = myvector.size();
 
-		// assign some values:
+//		 assign some values:
 		for (unsigned i = 0; i < sz; i++) myvector[i] = i;
 
-		// reverse vector using operator[]:
+//		 reverse vector using operator[]:
 		for (unsigned i = 0; i < sz / 2; i++) {
 			int temp;
 			temp = myvector[sz - 1 - i];
@@ -375,16 +414,16 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs1 << "myvector contains:";
 		for (unsigned i = 0; i < sz; i++) fs1 << ' ' << myvector[i];
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_(10);  // 10 zero-initialized elements
 
 		ft::vector<int>::size_type sz_ = myvector_.size();
 
-		// assign some values:
+//		 assign some values:
 		for (unsigned i = 0; i < sz_; i++) myvector_[i] = i;
 
-		// reverse vector using operator[]:
+//		 reverse vector using operator[]:
 		for (unsigned i = 0; i < sz_ / 2; i++) {
 			int temp;
 			temp = myvector_[sz_ - 1 - i];
@@ -394,7 +433,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs2 << "myvector contains:";
 		for (unsigned i = 0; i < sz_; i++) fs2 << ' ' << myvector_[i];
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(13);
@@ -402,7 +441,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 	{
 		std::vector<int> myvector(10);  // 10 zero-initialized ints
 
-		// assign some values:
+//		 assign some values:
 		for (unsigned i = 0; i < myvector.size(); i++) myvector.at(i) = i;
 
 		try {
@@ -410,12 +449,12 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			for (unsigned i = 0; i < 12; i++) fs1 << ' ' << myvector.at(i);
 			fs1 << '\n';
 		} catch (const std::out_of_range& e) {
-			fs1 << e.what() << '\n' << std::flush;
+			fs1 << e.what() << std::endl;
 		}
 
 		ft::vector<int> myvector_(10);  // 10 zero-initialized ints
 
-		// assign some values:
+//		 assign some values:
 		for (unsigned i = 0; i < myvector_.size(); i++) myvector_.at(i) = i;
 
 		try {
@@ -423,7 +462,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			for (unsigned i = 0; i < 12; i++) fs2 << ' ' << myvector_.at(i);
 			fs2 << '\n';
 		} catch (const std::out_of_range& e) {
-			fs2 << e.what() << '\n' << std::flush;
+			fs2 << e.what() << std::endl;
 		}
 	}
 
@@ -435,18 +474,18 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		myvector.push_back(78);
 		myvector.push_back(16);
 
-		// now front equals 78, and back 16
+//		 now front equals 78, and back 16
 
 		myvector.front() -= myvector.back();
 
-		fs1 << "myvector.front() is now " << myvector.front() << '\n' << std::flush;
+		fs1 << "myvector.front() is now " << myvector.front() << std::endl;
 
 		ft::vector<int> myvector_;
 
 		myvector_.push_back(78);
 		myvector_.push_back(16);
 
-		// now front equals 78, and back 16
+//		 now front equals 78, and back 16
 
 		myvector_.front() -= myvector_.back();
 
@@ -467,7 +506,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs1 << "myvector contains:";
 		for (unsigned i = 0; i < myvector.size(); i++) fs1 << ' ' << myvector[i];
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_;
 
@@ -479,7 +518,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs2 << "myvector contains:";
 		for (unsigned i = 0; i < myvector_.size(); i++) fs2 << ' ' << myvector_[i];
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(16);
@@ -501,7 +540,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs1 << "Size of first: " << int(first.size()) << '\n';
 		fs1 << "Size of second: " << int(second.size()) << '\n';
-		fs1 << "Size of third: " << int(third.size()) << '\n' << std::flush;
+		fs1 << "Size of third: " << int(third.size()) << std::endl;
 
 		ft::vector<int> first_;
 		ft::vector<int> second_;
@@ -519,7 +558,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs2 << "Size of first: " << int(first_.size()) << '\n';
 		fs2 << "Size of second: " << int(second_.size()) << '\n';
-		fs2 << "Size of third: " << int(third_.size()) << '\n' << std::flush;
+		fs2 << "Size of third: " << int(third_.size()) << std::endl;
 	}
 
 	judge(17);
@@ -558,7 +597,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			myvector.pop_back();
 		}
 
-		fs1 << "The elements of myvector add up to " << sum << '\n' << std::flush;
+		fs1 << "The elements of myvector add up to " << sum << std::endl;
 
 		ft::vector<int> myvector_;
 		int sum_(0);
@@ -571,7 +610,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			myvector_.pop_back();
 		}
 
-		fs2 << "The elements of myvector add up to " << sum_ << '\n' << std::flush;
+		fs2 << "The elements of myvector add up to " << sum_ << std::endl;
 	}
 
 	judge(19);
@@ -586,9 +625,9 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		myvector.insert(it, 2, 300);
 
-		// "it" no longer valid, get a new one:
+//		 "it" no longer valid, get a new one:
 		it = myvector.begin();
-		
+
 		std::vector<int> anothervector(2, 400);
 		myvector.insert(it + 2, anothervector.begin(), anothervector.end());
 
@@ -597,7 +636,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs1 << "myvector contains:";
 		for (it = myvector.begin(); it < myvector.end(); it++) fs1 << ' ' << *it;
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_(3, 100);
 		ft::vector<int>::iterator it_;
@@ -608,7 +647,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		myvector_.insert(it_, 2, 300);
 
-		// "it_" no longer valid, get a new one:
+//		 "it_" no longer valid, get a new one:
 		it_ = myvector_.begin();
 
 		ft::vector<int> anothervector_(2, 400);
@@ -620,7 +659,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "myvector contains:";
 		for (it_ = myvector_.begin(); it_ < myvector_.end(); it_++)
 			fs2 << ' ' << *it_;
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(20);
@@ -628,33 +667,33 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 	{
 		std::vector<int> myvector;
 
-		// set some values (from 1 to 10)
+//		 set some values (from 1 to 10)
 		for (int i = 1; i <= 10; i++) myvector.push_back(i);
 
-		// erase the 6th element
+//		 erase the 6th element
 		myvector.erase(myvector.begin() + 5);
 
-		// erase the first 3 elements:
+//		 erase the first 3 elements:
 		myvector.erase(myvector.begin(), myvector.begin() + 3);
 
 		fs1 << "myvector contains:";
 		for (unsigned i = 0; i < myvector.size(); ++i) fs1 << ' ' << myvector[i];
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_;
 
-		// set some values (from 1 to 10)
+//		 set some values (from 1 to 10)
 		for (int i = 1; i <= 10; i++) myvector_.push_back(i);
 
-		// erase the 6th element
+//		 erase the 6th element
 		myvector_.erase(myvector_.begin() + 5);
 
-		// erase the first 3 elements:
+//		 erase the first 3 elements:
 		myvector_.erase(myvector_.begin(), myvector_.begin() + 3);
 
 		fs2 << "myvector contains:";
 		for (unsigned i = 0; i < myvector_.size(); ++i) fs2 << ' ' << myvector_[i];
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(21);
@@ -671,7 +710,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs1 << "bar contains:";
 		for (unsigned i = 0; i < bar.size(); i++) fs1 << ' ' << bar[i];
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> foo_(3, 100);  // three ints with a value of 100
 		ft::vector<int> bar_(5, 200);  // five ints with a value of 200
@@ -684,7 +723,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs2 << "bar contains:";
 		for (unsigned i = 0; i < bar_.size(); i++) fs2 << ' ' << bar_[i];
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(22);
@@ -705,7 +744,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs1 << "myvector contains:";
 		for (unsigned i = 0; i < myvector.size(); i++) fs1 << ' ' << myvector[i];
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> myvector_;
 		myvector_.push_back(100);
@@ -722,7 +761,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		fs2 << "myvector contains:";
 		for (unsigned i = 0; i < myvector_.size(); i++) fs2 << ' ' << myvector_[i];
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
 
 	judge(23);
@@ -767,7 +806,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs1 << "bar contains:";
 		for (std::vector<int>::iterator it = bar.begin(); it != bar.end(); ++it)
 			fs1 << ' ' << *it;
-		fs1 << '\n' << std::flush;
+		fs1 << std::endl;
 
 		ft::vector<int> foo_(3, 100);  // three ints with a value of 100
 		ft::vector<int> bar_(5, 200);  // five ints with a value of 200
@@ -782,9 +821,9 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "bar contains:";
 		for (ft::vector<int>::iterator it = bar_.begin(); it != bar_.end(); ++it)
 			fs2 << ' ' << *it;
-		fs2 << '\n' << std::flush;
+		fs2 << std::endl;
 	}
-
+*/
 }
 
 

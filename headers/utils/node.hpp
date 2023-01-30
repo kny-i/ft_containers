@@ -23,7 +23,7 @@ namespace ft {
 
 		node(const node& other): parent_(other.parent_), left_(other.left_), right_(other.right_), value_(other.value_), height(other.height) {}
 
-		diffrence_type get_scales() const {
+		diffrence_type get_scale() const {
 			size_type left_height;
 			size_type right_height;
 			if (left_) {
@@ -56,26 +56,26 @@ namespace ft {
 			height = 1 + std::max(left_height, right_height);
 
 		}
-		bool is_left() const { return (this == parent_->left_); }
-		bool is_right() const { return (this == parent_->right_); }
+		bool is_left_child() const { return (this == parent_->left_); }
+		bool is_right_child() const { return (this == parent_->right_); }
 
-		void connect_left(node_ptr new_left_node) {
+		void connect_left_child(node_ptr new_left_node) {
 			left_ = new_left_node;
 			if (new_left_node) {
 				new_left_node->parent_ = this;
 			}
 		}
 
-		void connect_right(node_ptr new_right_node) {
+		void connect_right_child(node_ptr new_right_node) {
 			right_ = new_right_node;
 			if (new_right_node) {
 				new_right_node->parent_ = this;
 			}
 		}
 
-		void connect_parent(node_ptr new_parent_node, bool is_left) {
+		void connect_parent(node_ptr new_parent_node, bool is_left_child) {
 			parent_ = new_parent_node;
-			if (is_left) {
+			if (is_left_child) {
 				new_parent_node->left_ = this;
 			} else {
 				new_parent_node->right_ = this;
@@ -83,7 +83,7 @@ namespace ft {
 		}
 
 		void disconnect_parent() {
-			if (is_left()) {
+			if (is_left_child()) {
 				parent_->left_ = NULL;
 			} else {
 				parent_->right_ = NULL;
@@ -112,7 +112,7 @@ namespace ft {
 				return (right_->min_node());
 			} else {
 				node_ptr node = this;
-				while (node->is_right()) {
+				while (node->is_left_child()) {
 					node = node->parent_;
 				}
 				return node->parent_;
@@ -124,7 +124,7 @@ namespace ft {
 				return (right_->min_node());
 			else {
 				const node* node = this;
-				while (node->is_right()) node = node->parent_;
+				while (node->is_left_child()) node = node->parent_;
 				return (node->parent_);
 			}
 		}
@@ -134,7 +134,7 @@ namespace ft {
 				return (left_->max_node());
 			} else {
 				node_ptr node = this;
-				while (node->is_left()) {
+				while (node->is_left_child()) {
 					node = node->parent_;
 				}
 				return node->parent_;
@@ -146,7 +146,7 @@ namespace ft {
 				return (left_->max_node());
 			else {
 				const node* node = this;
-				while (node->is_left()) node = node->parent_;
+				while (node->is_left_child()) node = node->parent_;
 				return (node->parent_);
 			}
 		}

@@ -3,7 +3,7 @@ SRCDIR      = ./srcs
 SRCS        = $(shell find $(SRCDIR) -name "*.cpp" -type f | xargs)
 OBJS        = $(SRCS:.cpp=.o)
 DEPENDS     = $(OBJS:.o=.d)
-CXX         = g++
+CXX         = c++
 headers = ./headers
 iterator_headers = ./headers/iterator
 utils = ./headers/utils
