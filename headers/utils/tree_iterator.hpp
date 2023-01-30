@@ -12,7 +12,7 @@ namespace ft {
 
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type value_type;
-		typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type difference_type;
+		typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type differenceType;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::pointer pointer;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::reference reference;
 
@@ -55,13 +55,13 @@ namespace ft {
 		}
 
 		tree_iterator& operator--() {
-			node_ = node_->get_prev_node()();
+			node_ = node_->get_prev_node();
 			return (*this);
 		}
 
 		tree_iterator operator--(int) {
 			tree_iterator tmp(*this);
-			node_ = node_->get_prev_node()();
+			node_ = node_->get_prev_node();
 			return tmp;
 		}
 

@@ -15,9 +15,9 @@
 void judge(std::string const &test_case);
 clock_t time_begin();
 void time_end(clock_t start, std::string const &msg);
-void vector(std::ofstream &fs1, std::ofstream &fs2);
-void map(std::ofstream &fs1, std::ofstream &fs2);
-void stack(std::ofstream &fs1, std::ofstream &fs2);
+void vector(std::ofstream &mine, std::ofstream &std);
+void map(std::ofstream &mine, std::ofstream &std);
+void stack(std::ofstream &mine, std::ofstream &std);
 int	main()
 {
 	system("mkdir output");
@@ -92,7 +92,7 @@ void judge(std::string const &test_case) {
 void time_end(clock_t start, std::string const &msg) {
 	clock_t end = clock();
 	double duration = double(end - start) / CLOCKS_PER_SEC;
-	std::cout << "Time taken by " << msg <<": " << duration << " seconds" << std::endl;
+	std::cout << msg <<": " << duration << " seconds" << std::endl;
 	std::cout << std::flush;
 }
 
@@ -101,20 +101,89 @@ clock_t time_begin() {
 	return start;
 }
 
-void stack(std::ofstream &fs1, std::ofstream &fs2) {
+void stack(std::ofstream &mine, std::ofstream &std) {
 
 
 }
-void map(std::ofstream &fs1, std::ofstream &fs2) {
+void map(std::ofstream &mine, std::ofstream &std) {
+
 
 	{
-		std::cout << "[test Constructors]" << std::endl;
-		ft::map<int, int > a;
+		{
+			clock_t start = time_begin();
+			ft::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
 
+			ft::map<int, std::string> b(a.begin(), a.end());
+			ft::map<int, std::string> c(b);
+
+			for (ft::map<int, std::string>::iterator it = c.begin(); it != c.end(); ++it) {
+				mine << it->second << ' ' << std::endl;
+			}
+			time_end(start, "mine[constructor]");
+		}
+
+		{
+			clock_t start = time_begin();
+			std::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			std::map<int, std::string> b(a.begin(), a.end());
+			std::map<int, std::string> c(b);
+
+			for (std::map<int, std::string>::iterator it = c.begin(); it != c.end(); ++it) {
+				std << it->second << ' ' << std::endl;
+			}
+			time_end(start, "std[constructor]");
+		}
+		std::cout  << std::endl;
+	}
+	{
+		{
+			clock_t start = time_begin();
+			ft::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			ft::map<int, std::string> b(a.begin(), a.end());
+			ft::map<int, std::string> c(b);
+
+			for (ft::map<int, std::string>::reverse_iterator it = c.rbegin(); it != c.rend(); ++it) {
+				mine << it->second << ' ' << std::endl;
+			}
+			time_end(start, "mine[constructor]");
+		}
+
+		{
+			clock_t start = time_begin();
+			std::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			std::map<int, std::string> b(a.begin(), a.end());
+			std::map<int, std::string> c(b);
+
+			for (std::map<int, std::string>::reverse_iterator it = c.rbegin(); it != c.rend(); ++it) {
+				std << it->second << ' ' << std::endl;
+			}
+			time_end(start, "std[constructor]");
+		}
+		std::cout  << std::endl;
 	}
 
 }
-void vector(std::ofstream &fs1, std::ofstream &fs2) {
+
+void vector(std::ofstream &mine, std::ofstream &std) {
 
 //	ft::vector<int> a;
 //	ft::vector<int> b(3, 100);//3 elements with 100
@@ -124,10 +193,10 @@ void vector(std::ofstream &fs1, std::ofstream &fs2) {
 //	ft::vector<int> ve_ints(ints, ints + sizeof(ints) / sizeof (int));
 //
 //	for (ft::vector<int>::iterator it = d.begin(); it != d.end(); it++) {
-//		fs1 << *it << ' ';
+//		mine << *it << ' ';
 //	}
-	clock_t start  = time_begin();
-	time_end(start, "hoge");
+	//clock_t start  = time_begin();
+	//time_end(start, "test");
 
 }
 
