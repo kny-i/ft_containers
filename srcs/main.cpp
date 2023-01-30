@@ -4,13 +4,20 @@
 #include <map>
 #include <stack>
 #include <vector>
-#include <stdlib.h>
 #include <algorithm>
 #include "map.hpp"
 #include "stack.hpp"
 #include "vector.hpp"
+#include <stdlib.h>
+#include "map.hpp"
+#include "stack.hpp"
+#include "vector.hpp"
 
-void judge() {
+template<class T>
+void judge(T test_num) {
+	std::cout << std::endl;
+	std::cout << "=======================================" << std::endl;
+	std::cout << "[TEST"<<test_num << "]"<< std::endl;
 	if (system("diff 1 2") == 0)
 		std::cout << "\033[32m[OK] \033[m";
 	else
@@ -18,21 +25,26 @@ void judge() {
 	std::cout << std::flush;
 }
 
+void vector_test(std::ostream &fs1, std::ostream &fs2);
+
 int	main()
 {
-//	std::ostream fs1;
-//	std::ostream fs2;
-	{
-//		vector_test(fs1, fs2);
+	std::ofstream fs1;
+	std::ofstream fs2;
 
+	fs1.open("1");
+	fs2.open("2");
+	{
+		std::cout << "\n=== VECTOR ===" << std::endl;
+		vector_test(fs1, fs2);
 	}
 
 }
 
 void vector_test(std::ostream &fs1, std::ostream &fs2) {
-	judge();
+	judge(1);
 	/* vector start */
-	std::cout << "\n=== VECTOR ===" << std::endl;
+
 	fs1 << "\n=== VECTOR ===" << std::endl;
 	fs2 << "\n=== VECTOR ===" << std::endl;
 	{
@@ -62,7 +74,6 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		// the iterator constructor can also be used to construct from arrays:
 		int myints_[] = {16, 2, 77, 29};
 		ft::vector<int> fifth_(myints_, myints_ + sizeof(myints_) / sizeof(int));
-
 		fs2 << "The contents of fifth are:";
 		for (ft::vector<int>::iterator it = fifth_.begin(); it != fifth_.end();
 			 ++it)
@@ -70,7 +81,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(2);
 
 	{
 		std::vector<int> myvector;
@@ -84,7 +95,6 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		ft::vector<int> myvector_;
 		for (int i = 1; i <= 5; i++) myvector_.push_back(i);
-
 		fs2 << "myvector contains:";
 		for (ft::vector<int>::iterator it = myvector_.begin();
 			 it != myvector_.end(); ++it)
@@ -92,7 +102,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(3);
 
 	{
 		std::vector<int> foo(3, 0);
@@ -100,7 +110,6 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		bar = foo;
 		foo = std::vector<int>();
-
 		fs1 << "Size of foo: " << int(foo.size()) << '\n';
 		fs1 << "Size of bar: " << int(bar.size()) << '\n' << std::flush;
 
@@ -109,12 +118,11 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		bar_ = foo_;
 		foo_ = ft::vector<int>();
-
 		fs2 << "Size of foo: " << int(foo_.size()) << '\n';
 		fs2 << "Size of bar: " << int(bar_.size()) << '\n' << std::flush;
 	}
 
-	judge();
+	judge(4);
 
 	{
 		std::vector<int> myvector;
@@ -128,7 +136,6 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		ft::vector<int> myvector_;
 		for (int i = 1; i <= 5; i++) myvector_.push_back(i);
-
 		fs2 << "myvector contains:";
 		for (ft::vector<int>::iterator it = myvector_.begin();
 			 it != myvector_.end(); ++it)
@@ -136,7 +143,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(5);
 
 	{
 		std::vector<int> myvector(5);  // 5 default-constructed ints
@@ -145,7 +152,6 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		std::vector<int>::reverse_iterator rit = myvector.rbegin();
 		for (; rit != myvector.rend(); ++rit) *rit = ++i;
-
 		fs1 << "myvector contains:";
 		for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end();
 			 ++it)
@@ -167,7 +173,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(6);
 
 	{
 		std::vector<int> myints;
@@ -195,7 +201,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "3. size: " << myints_.size() << '\n' << std::flush;
 	}
 
-	judge();
+	judge(7);
 
 	{
 		std::vector<int> myvector;
@@ -217,7 +223,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "max_size: " << myvector_.max_size() << "\n" << std::flush;
 	}
 
-	judge();
+	judge(8);
 
 	{
 		std::vector<int> myvector;
@@ -245,7 +251,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(9);
 
 	{
 		std::vector<int> myvector;
@@ -267,7 +273,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "max_size: " << (int)myvector_.max_size() << '\n' << std::flush;
 	}
 
-	judge();
+	judge(10);
 
 	{
 		std::vector<int> myvector;
@@ -295,7 +301,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "total: " << sum_ << '\n' << std::flush;
 	}
 
-	judge();
+	judge(11);
 
 	{
 		std::vector<int>::size_type sz;
@@ -349,7 +355,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		}
 	}
 
-	judge();
+	judge(12);
 
 	{
 		std::vector<int> myvector(10);  // 10 zero-initialized elements
@@ -391,7 +397,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(13);
 
 	{
 		std::vector<int> myvector(10);  // 10 zero-initialized ints
@@ -421,7 +427,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		}
 	}
 
-	judge();
+	judge(14);
 
 	{
 		std::vector<int> myvector;
@@ -448,7 +454,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			<< std::flush;
 	}
 
-	judge();
+	judge(15);
 
 	{
 		std::vector<int> myvector;
@@ -476,7 +482,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(16);
 
 	{
 		std::vector<int> first;
@@ -516,7 +522,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "Size of third: " << int(third_.size()) << '\n' << std::flush;
 	}
 
-	judge();
+	judge(17);
 
 	{
 		std::vector<int> myvector;
@@ -538,7 +544,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			<< std::flush;
 	}
 
-	judge();
+	judge(18);
 
 	{
 		std::vector<int> myvector;
@@ -568,7 +574,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << "The elements of myvector add up to " << sum_ << '\n' << std::flush;
 	}
 
-	judge();
+	judge(19);
 
 	{
 		std::vector<int> myvector(3, 100);
@@ -582,7 +588,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 
 		// "it" no longer valid, get a new one:
 		it = myvector.begin();
-
+		
 		std::vector<int> anothervector(2, 400);
 		myvector.insert(it + 2, anothervector.begin(), anothervector.end());
 
@@ -617,7 +623,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(20);
 
 	{
 		std::vector<int> myvector;
@@ -651,7 +657,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(21);
 
 	{
 		std::vector<int> foo(3, 100);  // three ints with a value of 100
@@ -681,7 +687,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(22);
 
 	{
 		std::vector<int> myvector;
@@ -719,7 +725,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 		fs2 << '\n' << std::flush;
 	}
 
-	judge();
+	judge(23);
 
 	{
 		std::vector<int> foo(3, 100);  // three ints with a value of 100
@@ -745,7 +751,7 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 			fs2 << "foo is greater than or equal to bar\n" << std::flush;
 	}
 
-	judge();
+	judge(24);
 
 	{
 		std::vector<int> foo(3, 100);  // three ints with a value of 100
@@ -780,4 +786,5 @@ void vector_test(std::ostream &fs1, std::ostream &fs2) {
 	}
 
 }
+
 

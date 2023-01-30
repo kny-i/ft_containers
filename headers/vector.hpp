@@ -143,12 +143,12 @@ namespace ft {
 
 	reference at(size_type i) {
 			if (i >= size())
-				throw std::out_of_range("vector no such a index");
+				throw std::out_of_range("vector");
 			return first_pointer_[i];
 		}
 	const_reference at(size_type i) const {
 		if (i >= size())
-			throw std::out_of_range("vector no such a index");
+			throw std::out_of_range("vector");
 		return first_pointer_[i];
 	}
 
