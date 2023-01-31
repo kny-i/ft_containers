@@ -1083,9 +1083,46 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 	}
 	{
-
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+		for (int i = 0; i < 100; ++i) {
+			mine << b[i] << std::endl;
+		}
+		for (int i = 0; i < 100; ++i) {
+			mine << e[i] << std::endl;
+		}
+		for (int i = 0; i < 1000; ++i) {
+			mine << b[i] << std::endl;
+		}
+		time_end(start, "mine[]");
 	}
 	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+		for (int i = 0; i < 100; ++i) {
+			std << b[i] << std::endl;
+		}
+		for (int i = 0; i < 100; ++i) {
+			std << e[i] << std::endl;
+		}
+		for (int i = 0; i < 1000; ++i) {
+			std << b[i] << std::endl;
+		}
+		time_end(start, "mine[]");
 
 	}
 
