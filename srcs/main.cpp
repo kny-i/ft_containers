@@ -626,9 +626,25 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std << it->second << ' ';
 		}
 
+		time_end(start, "std[clear]");
+	}
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		ft::map<int, std::string >::key_compare map_value_compare = a.key_comp();
+
+		ft::map<int, std::string, ft::map<int, std::string >::key_compare> b;
+		for(ft::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
+			mine << it->second << ' ';
+		}
+		mine << map_value_compare(1, 42);
 		time_end(start, "mine[clear]");
 	}
-
 
 }
 
