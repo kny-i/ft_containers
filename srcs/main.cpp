@@ -363,6 +363,63 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		}
 		std::cout  << std::endl;
 	}
+	{
+		{
+			clock_t start = time_begin();
+			ft::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			ft::map<int, std::string> b(a.begin(), a.end());
+			ft::map<int, std::string> c(b);
+
+			ft::pair<int, std::string> pair(1, "PIYO");
+			b.insert(ft::make_pair(1, "TEST"));
+			c.insert(c.begin(), c.end());
+			a.insert(a.begin(), pair);
+			for (ft::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
+				mine << it->second << ' ';
+			}
+			for (ft::map<int, std::string>::const_iterator it = c.begin(); it != c.end(); ++it) {
+				mine << it->second << ' ';
+			}
+			for (ft::map<int, std::string>::const_iterator it = a.begin(); it != a.end(); ++it) {
+				mine << it->second << ' ';
+			}
+
+			time_end(start, "mine[insert]");
+		}
+
+		{
+			clock_t start = time_begin();
+			std::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			std::map<int, std::string> b(a.begin(), a.end());
+			std::map<int, std::string> c(b);
+			std::pair<int, std::string> pair(1, "PIYO");
+			b.insert(std::make_pair(1, "TEST"));
+			c.insert(c.begin(), c.end());
+			a.insert(a.begin(), pair);
+			for (std::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
+				std << it->second << ' ';
+			}
+			for (std::map<int, std::string>::const_iterator it = c.begin(); it != c.end(); ++it) {
+				std << it->second << ' ';
+			}
+			for (std::map<int, std::string>::const_iterator it = a.begin(); it != a.end(); ++it) {
+				std << it->second << ' ';
+			}
+
+			time_end(start, "std[insert]");
+		}
+		std::cout  << std::endl;
+	}
 
 }
 

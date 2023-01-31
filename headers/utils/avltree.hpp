@@ -127,7 +127,8 @@ namespace ft {
 		}
 		iterator insert(iterator position, const value_type& val) {
 			(void)position;
-			return insert(val);
+			ft::pair<iterator, bool> ret = insert(val);
+			return ret.first;
 		}
 		template <class InputIterator>
 		void insert(InputIterator first, InputIterator last) {

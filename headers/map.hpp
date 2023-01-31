@@ -103,7 +103,7 @@ namespace ft {
 			return tree_.insert(val);
 		}
 
-		iterator insert(iterator hint,const value_type& value) {
+		iterator insert(const_iterator hint,const value_type& value) {
 			return tree_.insert(hint, value);
 		}
 
