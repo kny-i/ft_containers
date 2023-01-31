@@ -483,8 +483,76 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			time_end(start, "std[erase]");
 		}
 		std::cout  << std::endl;
-
 	}
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		ft::map<int, std::string> b(a.begin(), a.end());
+		ft::map<int, std::string> c(b);
+
+		ft::pair<int, std::string> pair(1, "PIYO");
+		b.insert(ft::make_pair(1, "TEST"));
+		b.erase(b.begin());
+		//erase にend()が入ってきたらsegv
+		c.insert(c.begin(), c.end());
+		c.erase(c.begin(), --c.end() );
+		a.erase(1);
+		a.erase(3);
+		a.swap(b);
+		b.swap(c);
+		c.swap(a);
+		for (ft::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
+			mine << it->second << ' ';
+		}
+		for (ft::map<int, std::string>::const_iterator it = c.begin(); it != c.end(); ++it) {
+			mine << it->second << ' ';
+		}
+		for (ft::map<int, std::string>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			mine << it->second << ' ';
+		}
+
+		time_end(start, "mine[swap]");
+	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std::map<int, std::string> b(a.begin(), a.end());
+		std::map<int, std::string> c(b);
+
+		std::pair<int, std::string> pair(1, "PIYO");
+		b.insert(std::make_pair(1, "TEST"));
+		b.erase(b.begin());
+		//erase にend()が入ってきたらsegv
+		c.insert(c.begin(), c.end());
+		c.erase(c.begin(), --c.end() );
+		a.erase(1);
+		a.erase(3);
+		a.swap(b);
+		b.swap(c);
+		c.swap(a);
+		for (std::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
+			std << it->second << ' ';
+		}
+		for (std::map<int, std::string>::const_iterator it = c.begin(); it != c.end(); ++it) {
+			std << it->second << ' ';
+		}
+		for (std::map<int, std::string>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			std << it->second << ' ';
+		}
+
+		time_end(start, "mine[swap]");
+	}
+	std::cout  << std::endl;
 
 }
 
