@@ -92,7 +92,7 @@ void judge(std::string const &test_case) {
 void time_end(clock_t start, std::string const &msg) {
 	clock_t end = clock();
 	double duration = double(end - start) / CLOCKS_PER_SEC * 1000;
-	std::cout << msg <<": " << duration << " k second" << std::endl;
+	std::cout << msg <<": " << duration << "m seconds" << std::endl;
 	std::cout << std::flush;
 }
 
@@ -628,6 +628,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 
 		time_end(start, "std[clear]");
 	}
+	std::cout << std::endl;
+
 	{
 		clock_t start = time_begin();
 		ft::map<int, std::string > a;
@@ -637,14 +639,176 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		a[4] = "four";
 
 		ft::map<int, std::string >::key_compare map_value_compare = a.key_comp();
-
 		ft::map<int, std::string, ft::map<int, std::string >::key_compare> b;
 		for(ft::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
 			mine << it->second << ' ';
 		}
-		mine << map_value_compare(1, 42);
-		time_end(start, "mine[clear]");
+		mine << "test" << std::endl;
+		time_end(start, "mine[key_compare]");
 	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std::map<int, std::string >::key_compare map_value_compare = a.key_comp();
+		std::map<int, std::string, std::map<int, std::string >::key_compare> b;
+		for(std::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
+			std << it->second << ' ';
+		}
+		std << "test" << std::endl;
+		time_end(start, "std[key_compare]");
+	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		ft::map<int, std::string> b(a.begin(), a.end());
+		ft::map<int, std::string> c(b);
+
+		ft::pair<int, std::string> pair(1, "PIYO");
+		b.insert(ft::make_pair(1, "TEST"));
+		b.erase(b.begin());
+		c.insert(c.begin(), c.end());
+		c.erase(c.begin(), --c.end() );
+		a.erase(1);
+		a.erase(3);
+		a.swap(b);
+		b.swap(c);
+		c.swap(a);
+		mine << ft::map<int, std::string>::const_iterator(a.find(2))->second << std::endl;
+		mine << ft::map<int, std::string>::iterator(a.find(2))->second << std::endl;
+		mine << ft::map<int, std::string>::const_iterator (b.find(2))->second << std::endl;
+		mine << ft::map<int, std::string>::iterator(b.find(2))->second << std::endl;
+
+		time_end(start, "mine[find]");
+	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std::map<int, std::string> b(a.begin(), a.end());
+		std::map<int, std::string> c(b);
+
+		std::pair<int, std::string> pair(1, "PIYO");
+		b.insert(std::make_pair(1, "TEST"));
+		b.erase(b.begin());
+		c.insert(c.begin(), c.end());
+		c.erase(c.begin(), --c.end() );
+		a.erase(1);
+		a.erase(3);
+		a.swap(b);
+		b.swap(c);
+		c.swap(a);
+		std << std::map<int, std::string>::const_iterator(a.find(2))->second << std::endl;
+		std << std::map<int, std::string>::iterator(a.find(2))->second << std::endl;
+		std << std::map<int, std::string>::const_iterator (b.find(2))->second << std::endl;
+		std << std::map<int, std::string>::iterator(b.find(2))->second << std::endl;
+		time_end(start, "std[find]");
+	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		ft::map<int, std::string> b(a.begin(), a.end());
+		ft::map<int, std::string> c(b);
+
+		ft::pair<int, std::string> pair(1, "PIYO");
+		b.insert(ft::make_pair(1, "TEST"));
+		b.erase(b.begin());
+		c.insert(c.begin(), c.end());
+		c.erase(c.begin(), --c.end() );
+		a.erase(1);
+		a.erase(3);
+		a.swap(b);
+		b.swap(c);
+		c.swap(a);
+		mine << a.count(2) << std::endl;
+		mine << a.count(2) << std::endl;
+		mine << b.count(2) << std::endl;
+		mine << b.count(2) << std::endl;
+
+		time_end(start, "mine[count]");
+	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std::map<int, std::string> b(a.begin(), a.end());
+		std::map<int, std::string> c(b);
+
+		std::pair<int, std::string> pair(1, "PIYO");
+		b.insert(std::make_pair(1, "TEST"));
+		b.erase(b.begin());
+		c.insert(c.begin(), c.end());
+		c.erase(c.begin(), --c.end() );
+		a.erase(1);
+		a.erase(3);
+		a.swap(b);
+		b.swap(c);
+		c.swap(a);
+		std << a.count(2) << std::endl;
+		std << a.count(2) << std::endl;
+		std << b.count(2) << std::endl;
+		std << b.count(2) << std::endl;
+
+		time_end(start, "std[count]");
+	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		mine << ft::map<int, std::string>::iterator(a.lower_bound(3))->second << std::endl;
+		mine << ft::map<int, std::string>::const_iterator (a.lower_bound(3))->second << std::endl;
+		mine << ft::map<int, std::string>::iterator(a.upper_bound(3))->second << std::endl;
+		mine << ft::map<int, std::string>::const_iterator (a.upper_bound(3))->second << std::endl;
+		mine << ft::pair<ft::map<int, std::string>::const_iterator, ft::map<int, std::string>::const_iterator>(a.equal_range(3)).second->second << std::endl;
+		mine << ft::pair<ft::map<int, std::string>::iterator , ft::map<int, std::string>::iterator >(a.equal_range(3)).second->second << std::endl;
+		time_end(start, "mine[bound]");
+	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std << std::map<int, std::string>::iterator(a.lower_bound(3))->second << std::endl;
+		std << std::map<int, std::string>::const_iterator (a.lower_bound(3))->second << std::endl;
+		std << std::map<int, std::string>::iterator(a.upper_bound(3))->second << std::endl;
+		std << std::map<int, std::string>::const_iterator (a.upper_bound(3))->second << std::endl;
+		std << std::pair<std::map<int, std::string>::const_iterator, std::map<int, std::string>::const_iterator>(a.equal_range(3)).second->second << std::endl;
+		std << std::pair<std::map<int, std::string>::iterator , std::map<int, std::string>::iterator >(a.equal_range(3)).second->second << std::endl;
+		time_end(start, "std[bound]");
+	}
+
 
 }
 
