@@ -20,7 +20,7 @@ namespace ft {
 		value_type value_;
 		size_type height_;
 
-		Node() {}
+		Node():parent_(NULL), left_(NULL), right_(NULL), value_(), height_()  {}
 
 		explicit Node(const value_type& value)
 				: parent_(NULL),
@@ -115,7 +115,7 @@ namespace ft {
 			return node;
 		}
 
-		node_pointer get_get_next_node() {
+		node_pointer get_next_node() {
 			if (right_) {
 				return right_->get_min_node();
 			} else {

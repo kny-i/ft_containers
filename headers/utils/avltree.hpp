@@ -41,7 +41,6 @@ namespace ft {
 		typedef tree_iterator<value_type, node_type> const_iterator;
 
 	private:
-
 		value_compare comp_;
 		node_allocator_type node_alloc_;
 		size_type size_;
@@ -81,15 +80,9 @@ namespace ft {
 			return *this;
 		}
 		iterator begin() {
-			if (get_root() == NULL) {
-				return iterator(static_cast<node_pointer>(NULL));
-			}
 			return iterator(begin_);
 		}
 		const_iterator begin() const {
-			if (get_root() == NULL) {
-				return const_iterator(static_cast<node_pointer>(NULL));
-			}
 			return const_iterator(begin_);
 		}
 		iterator end() {
@@ -139,7 +132,7 @@ namespace ft {
 		void erase(iterator position) {
 			node_pointer erase_node = position.base();
 			if (erase_node == begin_) {
-				begin_ = erase_node->get_get_next_node();
+				begin_ = erase_node->get_next_node();
 			}
 			node_pointer alternate;
 			if (!erase_node->left_ && !erase_node->right_) {
@@ -344,7 +337,6 @@ namespace ft {
 			}
 			return end_;
 		}
-
 		/*
 		 * 全探索をして、(最も近い)かつ(自分よりも大きい)nodeを見つける
 		 */
@@ -438,7 +430,7 @@ namespace ft {
 					is_ok = false;
 					std::cerr << "OH MY GOSH!" << std::endl;
 				}
-				node = node->get_get_next_node();
+				node = node->get_next_node();
 			}
 			return is_ok;
 		}
