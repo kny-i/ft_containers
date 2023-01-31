@@ -60,14 +60,13 @@ int	main()
 }
 
 void judge(std::string const &test_case) {
-	std::cout << std::endl;
 
 	if (test_case == "vector") {
 		if (system("diff output/vec_mine output/vec_std") == 0)
 			std::cout << "\033[32mvector[OK] \033[m\n";
 		else
 			std::cout << "\033[31mvector[KO] \033[m\n";
-		std::cout << "=======================================" << std::endl;
+		std::cout << "============[VECTOR DONE !!]============" << std::endl;
 		std::cout << std::flush;
 
 	}else if (test_case == "map") {
@@ -75,7 +74,7 @@ void judge(std::string const &test_case) {
 			std::cout << "\033[32mmap[OK] \033[m\n";
 		else
 			std::cout << "\033[31mmap[KO] \033[m\n";
-		std::cout << "=======================================" << std::endl;
+		std::cout << "=============[MAP DONE !!]=============" << std::endl;
 		std::cout << std::flush;
 
 	} else if (test_case == "stack") {
@@ -83,7 +82,7 @@ void judge(std::string const &test_case) {
 			std::cout << "\033[32mstack[OK] \033[m\n";
 		else
 			std::cout << "\033[31mstack[KO] \033[m\n";
-		std::cout << "=======================================" << std::endl;
+		std::cout << "============[STACK DONE !!]============" << std::endl;
 		std::cout << std::flush;
 	}
 
@@ -105,8 +104,8 @@ void stack(std::ofstream &mine, std::ofstream &std) {
 
 
 }
-void map(std::ofstream &mine, std::ofstream &std) {
 
+void map(std::ofstream &mine, std::ofstream &std) {
 
 	{
 		{
@@ -808,24 +807,122 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		std << std::pair<std::map<int, std::string>::iterator , std::map<int, std::string>::iterator >(a.equal_range(3)).second->second << std::endl;
 		time_end(start, "std[bound]");
 	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
 
+		ft::map<int, std::string>::allocator_type alloc = a.get_allocator();
+		mine << alloc.max_size() << std::endl;
+		time_end(start, "mine[alloc]");
+	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std::map<int, std::string>::allocator_type alloc = a.get_allocator();
+		std << alloc.max_size() << std::endl;
+		time_end(start, "std[alloc]");
+	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		ft::map<int, std::string > b;
+		b[1] = "one";
+		b[2] = "two";
+		b[3] = "three";
+		b[4] = "four";
+
+		ft::map<int, std::string > c;
+		b[1] = "one";
+		b[100] = "two";
+		b[3] = "three";
+		b[4] = "four";
+
+		mine << (a == b) << std::endl;
+		mine << (a != b) << std::endl;
+		mine << (a < b) << std::endl;
+		mine << (a <= b) << std::endl;
+		mine << (a > b) << std::endl;
+		mine << (a >= b) << std::endl;
+		mine << (c == b) << std::endl;
+		mine << (c != b) << std::endl;
+		mine << (c < b) << std::endl;
+		mine << (c <= b) << std::endl;
+		mine << (c > b) << std::endl;
+		mine << (c >= b) << std::endl;
+		mine << (c == a) << std::endl;
+		mine << (c != a) << std::endl;
+		mine << (c < a) << std::endl;
+		mine << (c <= a) << std::endl;
+		mine << (c > a) << std::endl;
+		mine << (c >= a) << std::endl;
+		time_end(start, "mine[operator]");
+	}
+	{
+		clock_t start = time_begin();
+		std::map<int, std::string > a;
+		a[1] = "one";
+		a[2] = "two";
+		a[3] = "three";
+		a[4] = "four";
+
+		std::map<int, std::string > b;
+		b[1] = "one";
+		b[2] = "two";
+		b[3] = "three";
+		b[4] = "four";
+
+		std::map<int, std::string > c;
+		b[1] = "one";
+		b[100] = "two";
+		b[3] = "three";
+		b[4] = "four";
+
+		std << (a == b) << std::endl;
+		std << (a != b) << std::endl;
+		std << (a < b) << std::endl;
+		std << (a <= b) << std::endl;
+		std << (a > b) << std::endl;
+		std << (a >= b) << std::endl;
+		std << (c == b) << std::endl;
+		std << (c != b) << std::endl;
+		std << (c < b) << std::endl;
+		std << (c <= b) << std::endl;
+		std << (c > b) << std::endl;
+		std << (c >= b) << std::endl;
+		std << (c == a) << std::endl;
+		std << (c != a) << std::endl;
+		std << (c < a) << std::endl;
+		std << (c <= a) << std::endl;
+		std << (c > a) << std::endl;
+		std << (c >= a) << std::endl;
+		time_end(start, "mine[operator]");
+	}
+	std::cout << std::endl;
 
 }
 
 void vector(std::ofstream &mine, std::ofstream &std) {
 
-//	ft::vector<int> a;
-//	ft::vector<int> b(3, 100);//3 elements with 100
-//	ft::vector<int> c(b.begin(), b.end());
-//	ft::vector<int> d(c);
-//	int ints[] = {10, 1, 9, 2};
-//	ft::vector<int> ve_ints(ints, ints + sizeof(ints) / sizeof (int));
-//
-//	for (ft::vector<int>::iterator it = d.begin(); it != d.end(); it++) {
-//		mine << *it << ' ';
-//	}
-	//clock_t start  = time_begin();
-	//time_end(start, "test");
+	{
+		ft::vector<int> a(100, 50);
+
+	}
 
 }
 
