@@ -983,10 +983,112 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	}
 	std::cout << std::endl;
 	{
-		{
+		clock_t start = time_begin();
+		ft::vector<int> a(10, 50);
+		a.assign(50, 20);
+		for (ft::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << ' ';
+		}
+		a.assign(50, 20);
+		for (ft::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << ' ';
+		}
+		a.assign(10, 20);
+		for (ft::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << ' ';
+		}
 
+		ft::vector<int> b;
+		b.assign(a.begin(), a.end());
+		for (ft::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << ' ';
+		}
+		time_end(start, "mine[assign]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a(10, 50);
+		a.assign(50, 20);
+		for (std::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << ' ';
+		}
+		a.assign(50, 20);
+		for (std::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << ' ';
+		}
+		a.assign(10, 20);
+		for (std::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << ' ';
+		}
+
+		std::vector<int> b;
+		b.assign(a.begin(), a.end());
+		for (std::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << ' ';
+		}
+		time_end(start, "std[assign]");
+	}
+	std::cout << std::endl;
+	{
+		try{
+
+			clock_t start = time_begin();
+			ft::vector<int> a;
+			std::allocator<int> alloc;
+			ft::vector<int> c(alloc);
+			ft::vector<int> b(100, 50);
+			ft::vector<int> d(10, 50, alloc);
+			ft::vector<int> e(b.begin(), b.end());
+			ft::vector<int> f(e);
+			a = b;
+			for (int i = 0; i < 100; ++i) {
+				mine << b.at(i) << std::endl;
+			}
+			for (int i = 0; i < 100; ++i) {
+				mine << e.at(i) << std::endl;
+			}
+			for (int i = 0; i < 100; ++i) {
+				mine << b.at(i) << std::endl;
+			}
+			time_end(start, "mine[at]");
+
+		} catch (const std::exception& e) {
+			mine << e.what() << std::endl;
 		}
 	}
+	{
+		try{
+			clock_t start = time_begin();
+			std::vector<int> a;
+			std::allocator<int> alloc;
+			std::vector<int> c(alloc);
+			std::vector<int> b(100, 50);
+			std::vector<int> d(10, 50, alloc);
+			std::vector<int> e(b.begin(), b.end());
+			std::vector<int> f(e);
+			a = b;
+			for (int i = 0; i < 100; ++i) {
+				std << b.at(i) << std::endl;
+			}
+			for (int i = 0; i < 100; ++i) {
+				std << e.at(i) << std::endl;
+			}
+			for (int i = 0; i < 100; ++i) {
+				std << b.at(i) << std::endl;
+			}
+			time_end(start, "std[at]");
+
+		} catch (const std::exception& e) {
+			std << e.what() << std::endl;
+		}
+	}
+	{
+
+	}
+	{
+
+	}
+
 }
 
 
