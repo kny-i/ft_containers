@@ -294,8 +294,6 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			time_end(start, "std[empty]");
 		}
 		std::cout  << std::endl;
-
-
 	}
 
 }
