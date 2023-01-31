@@ -73,7 +73,9 @@ namespace ft {
 
 		map(const map& other) : tree_(other.tree_) {}
 
-		~map() {}
+		~map() {
+
+		}
 
 		map& operator=(const map& other) {
 			tree_ = other.tree_;

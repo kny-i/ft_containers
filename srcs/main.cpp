@@ -911,7 +911,7 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		std << (c <= a) << std::endl;
 		std << (c > a) << std::endl;
 		std << (c >= a) << std::endl;
-		time_end(start, "mine[operator]");
+		time_end(start, "std[operator]");
 	}
 	std::cout << std::endl;
 
@@ -920,10 +920,73 @@ void map(std::ofstream &mine, std::ofstream &std) {
 void vector(std::ofstream &mine, std::ofstream &std) {
 
 	{
-		ft::vector<int> a(100, 50);
-
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+		for (ft::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::const_iterator it = b.begin(); it != b.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::const_iterator it = c.begin(); it != c.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::const_iterator it = d.begin(); it != d.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::const_iterator it = e.begin(); it != e.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::const_iterator it = f.begin(); it != f.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		time_end(start, "mine[constructor]");
 	}
+	{
+		{
+			clock_t start = time_begin();
+			std::vector<int> a;
+			std::allocator<int> alloc;
+			std::vector<int> c(alloc);
+			std::vector<int> b(100, 50);
+			std::vector<int> d(10, 50, alloc);
+			std::vector<int> e(b.begin(), b.end());
+			std::vector<int> f(e);
+			a = b;
+			for (std::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
+				std << *it << std::endl;
+			}
+			for (std::vector<int>::const_iterator it = b.begin(); it != b.end(); ++it) {
+				std << *it << std::endl;
+			}
+			for (std::vector<int>::const_iterator it = c.begin(); it != c.end(); ++it) {
+				std << *it << std::endl;
+			}
+			for (std::vector<int>::const_iterator it = d.begin(); it != d.end(); ++it) {
+				std << *it << std::endl;
+			}
+			for (std::vector<int>::const_iterator it = e.begin(); it != e.end(); ++it) {
+				std << *it << std::endl;
+			}
+			for (std::vector<int>::const_iterator it = f.begin(); it != f.end(); ++it) {
+				std << *it << std::endl;
+			}
+			time_end(start, "std[constructor]");
+		}
+	}
+	std::cout << std::endl;
+	{
+		{
 
+		}
+	}
 }
 
 
