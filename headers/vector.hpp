@@ -276,9 +276,7 @@ namespace ft {
 	}
 
 	template<class InputIt>
-	void insert(iterator pos, InputIt first, InputIt last,
-				typename std::enable_if<!std::is_integral<InputIt>::value,
-						InputIt>::type* = NULL){
+	void insert(iterator pos, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt> first, InputIt last) {
 		size_type n = std::distance(first_pointer_, last_pointer_);
 		difference_type pos_dist = std::distance(begin(), pos);
 		size_type new_size = size() + n;
