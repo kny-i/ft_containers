@@ -328,7 +328,40 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			time_end(start, "std[size]");
 		}
 		std::cout  << std::endl;
+	}
+	{
+		{
+			clock_t start = time_begin();
+			ft::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
 
+			ft::map<int, std::string> b(a.begin(), a.end());
+			ft::map<int, std::string> c(b);
+			mine << a.max_size() << std::endl;
+			mine << b.max_size() << std::endl;
+			mine << c.max_size() << std::endl;
+			time_end(start, "mine[max_size]");
+		}
+
+		{
+			clock_t start = time_begin();
+			std::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			std::map<int, std::string> b(a.begin(), a.end());
+			std::map<int, std::string> c(b);
+			std << a.max_size() << std::endl;
+			std << b.max_size() << std::endl;
+			std << c.max_size() << std::endl;
+			time_end(start, "std[max_size]");
+		}
+		std::cout  << std::endl;
 	}
 
 }
