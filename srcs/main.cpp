@@ -1164,6 +1164,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	std::cout << std::endl;
 	{
 
+
 	}
 
 }
