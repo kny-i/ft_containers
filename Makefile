@@ -33,7 +33,7 @@ debug: CXXFLAGS += -fsanitize=address -g3
 debug: re
 
 .PHONY: run
-run: re
+run: all
 	 @./ft_conatiner
 
 .PHONY: leaks

@@ -1126,28 +1126,39 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	}
 	{
 		clock_t start = time_begin();
-		ft::vector<int> a;
-		std::allocator<int> alloc;
-		ft::vector<int> c(alloc);
-		ft::vector<int> b(100, 50);
-		ft::vector<int> d(10, 50, alloc);
-		ft::vector<int> e(b.begin(), b.end());
-		ft::vector<int> f(e);
-		a = b;
+		ft::vector<int> a(100, 50);
 		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
 			mine << *it << std::endl;
 		}
 		for (ft::vector<int>::const_iterator  it = a.begin(); it != a.end(); ++it) {
 			mine << *it << std::endl;
 		}
+
+
 		for (ft::vector<int>::reverse_iterator it = a.rbegin(); it != a.rend(); ++it) {
 			mine << *it << std::endl;
 		}
 		for (ft::vector<int>::const_reverse_iterator it = a.rbegin(); it != a.rend(); ++it) {
 			mine << *it << std::endl;
 		}
-
-		time_end(start, "mine[]");
+		time_end(start, "mine[iterator]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a(100, 50);
+		for (std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << std::endl;
+		}
+		for (std::vector<int>::const_iterator  it = a.begin(); it != a.end(); ++it) {
+			std << *it << std::endl;
+		}
+		for (std::vector<int>::reverse_iterator it = a.rbegin(); it != a.rend(); ++it) {
+			std << *it << std::endl;
+		}
+		for (std::vector<int>::const_reverse_iterator it = a.rbegin(); it != a.rend(); ++it) {
+			std << *it << std::endl;
+		}
+		time_end(start, "std[iterator]");
 	}
 
 }

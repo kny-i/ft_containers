@@ -167,8 +167,8 @@ namespace ft {
 	const_iterator end() const { return const_iterator(last_pointer_);}
 	reverse_iterator rbegin()  {return reverse_iterator(last_pointer_);}
 	reverse_iterator rbegin() const {return reverse_iterator(last_pointer_);}
-	reverse_iterator rend()  {return reverse_iterator(last_pointer_);}
-	reverse_iterator rend() const {return reverse_iterator(last_pointer_);}
+	reverse_iterator rend()  {return reverse_iterator(first_pointer_);}
+	reverse_iterator rend() const {return reverse_iterator(first_pointer_);}
 
 	size_type size() const {return end() - begin();}
 	bool empty() const {return begin() == end();}
