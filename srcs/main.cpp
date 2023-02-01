@@ -10,7 +10,6 @@
 #include <stdlib.h>
 #include "map.hpp"
 
-
 void judge(std::string const &test_case);
 clock_t time_begin();
 void time_end(clock_t start, std::string const &msg);
@@ -1029,7 +1028,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	}
 	std::cout << std::endl;
 	{
-		try{
+		try {
 
 			clock_t start = time_begin();
 			ft::vector<int> a;
@@ -1051,12 +1050,12 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			}
 			time_end(start, "mine[at]");
 
-		} catch (const std::exception& e) {
+		} catch (const std::exception &e) {
 			mine << e.what() << std::endl;
 		}
 	}
 	{
-		try{
+		try {
 			clock_t start = time_begin();
 			std::vector<int> a;
 			std::allocator<int> alloc;
@@ -1077,7 +1076,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			}
 			time_end(start, "std[at]");
 
-		} catch (const std::exception& e) {
+		} catch (const std::exception &e) {
 			std << e.what() << std::endl;
 		}
 	}
@@ -1131,7 +1130,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
 			mine << *it << std::endl;
 		}
-		for (ft::vector<int>::const_iterator  it = a.begin(); it != a.end(); ++it) {
+		for (ft::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
 			mine << *it << std::endl;
 		}
 
@@ -1149,7 +1148,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
 			std << *it << std::endl;
 		}
-		for (std::vector<int>::const_iterator  it = a.begin(); it != a.end(); ++it) {
+		for (std::vector<int>::const_iterator it = a.begin(); it != a.end(); ++it) {
 			std << *it << std::endl;
 		}
 		for (std::vector<int>::reverse_iterator it = a.rbegin(); it != a.rend(); ++it) {
@@ -1181,7 +1180,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		time_end(start, "std[back, front, data]");
 	}
 	std::cout << std::endl;
-		{
+	{
 		clock_t start = time_begin();
 		ft::vector<int> a;
 		std::allocator<int> alloc;
@@ -1307,7 +1306,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = -100; i < 0; ++i) {
 			c.push_back(i);
 		}
-		for (int i = 1000; i <  2000; ++i) {
+		for (int i = 1000; i < 2000; ++i) {
 			e.push_back(i);
 		}
 		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
@@ -1344,7 +1343,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = -100; i < 0; ++i) {
 			c.push_back(i);
 		}
-		for (int i = 1000; i <  2000; ++i) {
+		for (int i = 1000; i < 2000; ++i) {
 			e.push_back(i);
 		}
 		for (std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
@@ -1382,7 +1381,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = -100; i < 0; ++i) {
 			c.push_back(i);
 		}
-		for (int i = 1000; i <  2000; ++i) {
+		for (int i = 1000; i < 2000; ++i) {
 			e.push_back(i);
 		}
 		a.pop_back();
@@ -1423,7 +1422,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = -100; i < 0; ++i) {
 			c.push_back(i);
 		}
-		for (int i = 1000; i <  2000; ++i) {
+		for (int i = 1000; i < 2000; ++i) {
 			e.push_back(i);
 		}
 		a.pop_back();
@@ -1464,11 +1463,11 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = -100; i < 0; ++i) {
 			c.push_back(i);
 		}
-		for (int i = 1000; i <  2000; ++i) {
+		for (int i = 1000; i < 2000; ++i) {
 			e.push_back(i);
 		}
 		a.erase(a.begin());
-		for(ft::vector<int>::iterator it = a.begin();it != a.end();  ++it) {
+		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
 			a.erase(it);
 		}
 		b.erase(b.begin(), b.end() - 1);
@@ -1506,11 +1505,11 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = -100; i < 0; ++i) {
 			c.push_back(i);
 		}
-		for (int i = 1000; i <  2000; ++i) {
+		for (int i = 1000; i < 2000; ++i) {
 			e.push_back(i);
 		}
 		a.erase(a.begin());
-		for(ft::vector<int>::iterator it = a.begin();it != a.end();  ++it) {
+		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
 			a.erase(it);
 		}
 		b.erase(b.begin(), b.end() - 1);
@@ -1527,5 +1526,12 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			mine << *it << std::endl;
 		}
 		time_end(start, "std[erase]");
+	}
+	{
+
+
+	}
+	{
+
 	}
 }

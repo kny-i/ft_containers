@@ -197,6 +197,7 @@ namespace ft {
 	}
 
 	void deallocate() { alloc_.deallocate(first_pointer_, capacity());}
+
 	pointer allocate(size_type value_type) {
 			if (value_type > max_size()) {
 				throw std::length_error("vector allocate no more size");

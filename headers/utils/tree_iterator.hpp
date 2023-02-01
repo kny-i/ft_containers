@@ -9,7 +9,6 @@ namespace ft {
 	template <class T, class Node>
 	class tree_iterator : public ft::iterator<std::bidirectional_iterator_tag, T> {
 	public:
-
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::iterator_category iterator_category;
 		typedef typename ft::iterator<std::bidirectional_iterator_tag, T>::value_type value_type;
 		typename ft::iterator<std::bidirectional_iterator_tag, T>::difference_type differenceType;
@@ -23,9 +22,7 @@ namespace ft {
 
 	public:
 		tree_iterator() : node_(NULL) {}
-
 		tree_iterator(const tree_iterator<T, Node>& other) : node_(other.base()) {}
-
 		tree_iterator(node_pointer node) : node_(node) {}
 		tree_iterator& operator=(const tree_iterator& other) {
 			if (this != &other) {
