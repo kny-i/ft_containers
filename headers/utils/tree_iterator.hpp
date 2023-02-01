@@ -27,7 +27,6 @@ namespace ft {
 		tree_iterator(const tree_iterator<T, Node>& other) : node_(other.base()) {}
 
 		tree_iterator(node_pointer node) : node_(node) {}
-
 		tree_iterator& operator=(const tree_iterator& other) {
 			if (this != &other) {
 				node_ = other.node_;
@@ -38,8 +37,6 @@ namespace ft {
 		virtual ~tree_iterator() {}
 
 		reference operator*() const { return node_->value_; }
-
-
 		//iterator a.operator->()
 		pointer operator->() const { return (&(node_->value_)); }
 

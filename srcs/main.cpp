@@ -9,8 +9,7 @@
 #include "vector.hpp"
 #include <stdlib.h>
 #include "map.hpp"
-#include "stack.hpp"
-#include "vector.hpp"
+
 
 void judge(std::string const &test_case);
 clock_t time_begin();
@@ -22,7 +21,7 @@ int	main()
 {
 	system("mkdir output");
 	std::cout << "=======================================" << std::endl;
-	//vector test
+//	vector test
 	{
 		/* === VECTOR === */
 		std::ofstream vec_mine;
@@ -35,7 +34,7 @@ int	main()
 		judge("vector");
 	}
 
-	//map test
+//	map test
 	{
 		std::ofstream map_mine;
 		std::ofstream map_std;
@@ -46,7 +45,7 @@ int	main()
 		map_std << std::flush;
 		judge("map");
 	}
-	//stack test
+//	stack test
 	{
 		std::ofstream stack_mine;
 		std::ofstream stack_std;
@@ -1446,8 +1445,87 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		time_end(start, "std[pop_back]");
 	}
 	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
 
+		for (int i = 0; i < 1000; ++i) {
+			a.push_back(i);
+		}
+		for (int i = 0; i < 200; ++i) {
+			b.push_back(i);
+		}
+		for (int i = -100; i < 0; ++i) {
+			c.push_back(i);
+		}
+		for (int i = 1000; i <  2000; ++i) {
+			e.push_back(i);
+		}
+		a.erase(a.begin());
+		for(ft::vector<int>::iterator it = a.begin();it != a.end();  ++it) {
+			a.erase(it);
+		}
+		b.erase(b.begin(), b.end() - 1);
+		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::iterator it = d.begin(); it != d.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		time_end(start, "mine[erase]");
+	}
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push_back(i);
+		}
+		for (int i = 0; i < 200; ++i) {
+			b.push_back(i);
+		}
+		for (int i = -100; i < 0; ++i) {
+			c.push_back(i);
+		}
+		for (int i = 1000; i <  2000; ++i) {
+			e.push_back(i);
+		}
+		a.erase(a.begin());
+		for(ft::vector<int>::iterator it = a.begin();it != a.end();  ++it) {
+			a.erase(it);
+		}
+		b.erase(b.begin(), b.end() - 1);
+		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		for (ft::vector<int>::iterator it = d.begin(); it != d.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		time_end(start, "std[erase]");
 	}
 }
-
-
