@@ -1180,8 +1180,114 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		std << *a.data() << std::endl;
 		std << *a.data() << std::endl;
 		time_end(start, "std[back, front, data]");
-
 	}
+	std::cout << std::endl;
+		{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		mine << a.size() << std::endl;
+		mine << a.empty() << std::endl;
+		mine << b.size() << std::endl;
+		mine << b.empty() << std::endl;
+		mine << e.size() << std::endl;
+		mine << e.empty() << std::endl;
+		mine << b.size() << std::endl;
+		mine << b.empty() << std::endl;
+		time_end(start, "mine[size, empty]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		std << a.size() << std::endl;
+		std << a.empty() << std::endl;
+		std << b.size() << std::endl;
+		std << b.empty() << std::endl;
+		std << e.size() << std::endl;
+		std << e.empty() << std::endl;
+		std << b.size() << std::endl;
+		std << b.empty() << std::endl;
+		time_end(start, "std[size, empty]");
+	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		a.clear();
+		b.clear();
+		c.clear();
+		d.clear();
+		e.clear();
+		f.clear();
+		mine << a.size() << std::endl;
+		mine << a.empty() << std::endl;
+		mine << b.size() << std::endl;
+		mine << b.empty() << std::endl;
+		mine << e.size() << std::endl;
+		mine << e.empty() << std::endl;
+		mine << b.size() << std::endl;
+		mine << b.empty() << std::endl;
+		mine << e.size() << std::endl;
+		mine << e.empty() << std::endl;
+		mine << f.size() << std::endl;
+		mine << f.empty() << std::endl;
+		time_end(start, "std[size, empty]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		a.clear();
+		b.clear();
+		c.clear();
+		d.clear();
+		e.clear();
+		f.clear();
+		std << a.size() << std::endl;
+		std << a.empty() << std::endl;
+		std << b.size() << std::endl;
+		std << b.empty() << std::endl;
+		std << e.size() << std::endl;
+		std << e.empty() << std::endl;
+		std << b.size() << std::endl;
+		std << b.empty() << std::endl;
+		std << e.size() << std::endl;
+		std << e.empty() << std::endl;
+		std << f.size() << std::endl;
+		std << f.empty() << std::endl;
+		time_end(start, "std[size, empty]");
+	}
+	std::cout << std::endl;
 
 }
 
