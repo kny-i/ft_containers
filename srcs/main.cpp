@@ -1163,7 +1163,23 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	}
 	std::cout << std::endl;
 	{
+		clock_t start = time_begin();
+		ft::vector<int> a(100, 50);
+		mine << a.front() << std::endl;
+		mine << a.back() << std::endl;
+		mine << *a.data() << std::endl;
+		mine << *a.data() << std::endl;
+		time_end(start, "mine[back, front, data]");
 
+	}
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a(100, 50);
+		std << a.front() << std::endl;
+		std << a.back() << std::endl;
+		std << *a.data() << std::endl;
+		std << *a.data() << std::endl;
+		time_end(start, "std[back, front, data]");
 
 	}
 
