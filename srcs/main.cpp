@@ -1082,6 +1082,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			std << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		ft::vector<int> a;
@@ -1122,8 +1123,9 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = 0; i < 1000; ++i) {
 			std << b[i] << std::endl;
 		}
-		time_end(start, "mine[]");
+		time_end(start, "std[]");
 	}
+	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		ft::vector<int> a(100, 50);
@@ -1133,7 +1135,6 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (ft::vector<int>::const_iterator  it = a.begin(); it != a.end(); ++it) {
 			mine << *it << std::endl;
 		}
-
 
 		for (ft::vector<int>::reverse_iterator it = a.rbegin(); it != a.rend(); ++it) {
 			mine << *it << std::endl;
@@ -1159,6 +1160,10 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			std << *it << std::endl;
 		}
 		time_end(start, "std[iterator]");
+	}
+	std::cout << std::endl;
+	{
+
 	}
 
 }
