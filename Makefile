@@ -1,6 +1,6 @@
 NAME        = ft_conatiners
 SRCDIR      = ./srcs
-SRCS        = $(shell find $(SRCDIR) -name "std.cpp" -type f | xargs)
+SRCS        = $(shell find $(SRCDIR) -name "main.cpp" -type f | xargs)
 OBJS        = $(SRCS:.cpp=.o)
 DEPENDS     = $(OBJS:.o=.d)
 CXX         = c++
@@ -26,6 +26,7 @@ fclean: clean
 	rm -f $(NAME)
 	rm -fr output
 
+
 .PHONY: re
 re: fclean all
 
@@ -41,3 +42,27 @@ run: all
 .PHONY: leaks
 leaks:  all
 	leaks -q --atExit -- ./$(NAME)
+
+.PHONY: test
+test:
+	$(CXX) $(CXXFLAGS) srcs/ft.cpp -o srcs/ft
+	$(CXX)$(CXXFLAGS) srcs/std.cpp -o srcs/std
+	./srcs/ft
+	./srcs/std
+	diff output/vec_mine output/vec_std
+	diff output/map_mine output/map_std
+	diff output/stack_mine output/stack_std
+
+.PHONY: test_clean
+test_clean:
+	rm -rf ./srcs/ft.d
+	rm -rf ./srcs/std.d
+	rm -rf ./srcs/ft.o
+	rm -rf ./srcs/std.o
+
+.PHONY: test_fclean
+test_fclean:
+	rm -rf ./srcs/ft
+	rm -rf ./srcs/std
+	rm -rf ./output
+
