@@ -32,7 +32,8 @@ re: fclean all
 
 .PHONY: debug
 debug: CXXFLAGS += -fsanitize=address -g3
-debug: re
+debug: all
+	./$(NAME)
 
 .PHONY: run
 run: all
