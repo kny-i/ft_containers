@@ -869,7 +869,7 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		mine << (c <= a) << std::endl;
 		mine << (c > a) << std::endl;
 		mine << (c >= a) << std::endl;
-		time_end(start, "mine[operator]");
+		time_end(start, "mine[operators]");
 	}
 	{
 		clock_t start = time_begin();
