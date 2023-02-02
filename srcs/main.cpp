@@ -100,6 +100,12 @@ clock_t time_begin() {
 
 void stack(std::ofstream &mine, std::ofstream &std) {
 
+	{
+
+	}
+	{
+
+	}
 
 }
 
@@ -1907,5 +1913,5 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		std << (b != e) << std::endl;
 		time_end(start, "std[operators]");
 	}
-
 }
+
