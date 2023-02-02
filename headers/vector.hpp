@@ -39,10 +39,11 @@ namespace ft {
 		/* range constructor */
 		//enable if はきく
 		template <typename InputIt>
-		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),typename ft::enable_if<!ft::is_integral<InputIt>::value,InputIt>::type* = NULL): first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
-			reserve(ft::distance(first, last));
-			for (InputIt i = first; i != last; ++i) {
-				push_back(*i);
+		vector(typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type first, InputIt last, const Allocator& alloc = Allocator())
+				: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
+			reserve(recommend_size(last - first));
+			for (InputIt it = first;it != last; ++it) {
+				push_back(*it);
 			}
 		}
 		/* copy constructor */
