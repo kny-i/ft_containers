@@ -7,7 +7,7 @@ CXX         = c++
 headers = ./headers
 iterator_headers = ./headers/iterator
 utils = ./headers/utils
-CXXFLAGS    = -std=c++98  -MMD -MP -I$(headers) -I$(iterator_headers) -I$(utils) -Wall -Wextra -Werror
+CXXFLAGS    = -std=c++98  -MMD -MP -I$(headers) -I$(iterator_headers) -I$(utils) -Wall -Wextra -Werror -pedantic
 
 .PHONY: all
 all: $(NAME)

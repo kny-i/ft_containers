@@ -32,9 +32,6 @@ namespace ft {
 	struct is_integral_base <long int>
 			: is_integral_type<true> {};
 	template <>
-	struct is_integral_base <long long int>
-			: is_integral_type<true> {};
-	template <>
 	struct is_integral_base <unsigned char>
 			: is_integral_type<true> {};
 	template <>
@@ -42,12 +39,6 @@ namespace ft {
 			: is_integral_type<true> {};
 	template <>
 	struct is_integral_base <unsigned int>
-			: is_integral_type<true> {};
-	template <>
-	struct is_integral_base <unsigned long int>
-			: is_integral_type<true> {};
-	template <>
-	struct is_integral_base <unsigned long long int>
 			: is_integral_type<true> {};
 	template <>
 	struct is_integral_base <const bool>
@@ -71,22 +62,13 @@ namespace ft {
 	struct is_integral_base <const long int>
 			: is_integral_type<true> {};
 	template <>
-	struct is_integral_base <const long long int>
-			: is_integral_type<true> {};
-	template <>
 	struct is_integral_base <const unsigned char>
-			: is_integral_type<true> {};
-	template <>
-	struct is_integral_base <const unsigned short int>
 			: is_integral_type<true> {};
 	template <>
 	struct is_integral_base <const unsigned int>
 			: is_integral_type<true> {};
 	template <>
 	struct is_integral_base <const unsigned long int>
-			: is_integral_type<true> {};
-	template <>
-	struct is_integral_base <const unsigned long long int>
 			: is_integral_type<true> {};
 
 	template <class T>

@@ -124,5 +124,4 @@ namespace ft {
 	}
 }
 
-
 #endif

@@ -2149,3 +2149,4 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	}
 }
 
+
