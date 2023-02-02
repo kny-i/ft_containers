@@ -43,10 +43,11 @@ run: all
 leaks:  all
 	leaks -q --atExit -- ./$(NAME)
 
+
 .PHONY: test
-test:
+test: ./srcs/ft.cpp ./srcs/std.cpp
 	$(CXX) $(CXXFLAGS) srcs/ft.cpp -o srcs/ft
-	$(CXX)$(CXXFLAGS) srcs/std.cpp -o srcs/std
+	$(CXX) $(CXXFLAGS) srcs/std.cpp -o srcs/std
 	./srcs/ft
 	./srcs/std
 	diff output/vec_mine output/vec_std
