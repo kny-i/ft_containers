@@ -1552,74 +1552,79 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[erase]");
 	}
-//	{
-//		try {
-//			clock_t start = time_begin();
-//			ft::vector<int> a;
-//			std::allocator<int> alloc;
-//			ft::vector<int> c(alloc);
-//			ft::vector<int> b(100, 50);
-//			ft::vector<int> d(10, 50, alloc);
-//			ft::vector<int> e(b.begin(), b.end());
-//			ft::vector<int> f(e);
-//			a = b;
-//
-//			for (int i = 0; i < 1000; ++i) {
-//				a.push_back(i);
-//			}
-//			for (int i = 0; i < 200; ++i) {
-//				b.push_back(i);
-//			}
-//			for (int i = -100; i < 0; ++i) {
-//				c.push_back(i);
-//			}
-//			for (int i = 1000; i < 2000; ++i) {
-//				e.push_back(i);
-//			}
-//
-//			a.reserve(100);
-//			b.reserve(50);
-//			c.reserve(0);
-//			d.reserve(d.max_size());
-//			time_end(start, "std[reserve]");
-//
-//		}catch (const std::exception &e){
-//			mine << e.what() << std::endl;
-//		}
-//	}
-//	{
-//		try {
-//			clock_t start = time_begin();
-//			std::vector<int> a;
-//			std::allocator<int> alloc;
-//			std::vector<int> c(alloc);
-//			std::vector<int> b(100, 50);
-//			std::vector<int> d(10, 50, alloc);
-//			std::vector<int> e(b.begin(), b.end());
-//			std::vector<int> f(e);
-//			a = b;
-//
-//			for (int i = 0; i < 1000; ++i) {
-//				a.push_back(i);
-//			}
-//			for (int i = 0; i < 200; ++i) {
-//				b.push_back(i);
-//			}
-//			for (int i = -100; i < 0; ++i) {
-//				c.push_back(i);
-//			}
-//			for (int i = 1000; i < 2000; ++i) {
-//				e.push_back(i);
-//			}
-//
-//			a.reserve(100);
-//			b.reserve(50);
-//			c.reserve(0);
-//			d.reserve(d.max_size());
-//			time_end(start, "std[reserve]");
-//
-//		}catch (const std::exception &e){
-//			std << e.what() << std::endl;
-//		}
-//	}
+	{
+		try {
+			clock_t start = time_begin();
+			ft::vector<int> a;
+			std::allocator<int> alloc;
+			ft::vector<int> c(alloc);
+			ft::vector<int> b(100, 50);
+			ft::vector<int> d(10, 50, alloc);
+			ft::vector<int> e(b.begin(), b.end());
+			ft::vector<int> f(e);
+			a = b;
+
+			for (int i = 0; i < 1000; ++i) {
+				a.push_back(i);
+			}
+			for (int i = 0; i < 200; ++i) {
+				b.push_back(i);
+			}
+			for (int i = -100; i < 0; ++i) {
+				c.push_back(i);
+			}
+			for (int i = 1000; i < 2000; ++i) {
+				e.push_back(i);
+			}
+
+			a.reserve(100);
+			b.reserve(50);
+			c.reserve(0);
+			d.reserve(d.max_size());
+
+			time_end(start, "std[reserve]");
+
+
+		}catch (const std::exception &e){
+			//bad alloc
+			mine << e.what() << std::endl;
+		}
+	}
+	{
+		try {
+			clock_t start = time_begin();
+			std::vector<int> a;
+			std::allocator<int> alloc;
+			std::vector<int> c(alloc);
+			std::vector<int> b(100, 50);
+			std::vector<int> d(10, 50, alloc);
+			std::vector<int> e(b.begin(), b.end());
+			std::vector<int> f(e);
+			a = b;
+
+			for (int i = 0; i < 1000; ++i) {
+				a.push_back(i);
+			}
+			for (int i = 0; i < 200; ++i) {
+				b.push_back(i);
+			}
+			for (int i = -100; i < 0; ++i) {
+				c.push_back(i);
+			}
+			for (int i = 1000; i < 2000; ++i) {
+				e.push_back(i);
+			}
+
+			a.reserve(100);
+			b.reserve(50);
+			c.reserve(0);
+			d.reserve(d.max_size());
+			time_end(start, "std[reserve]");
+
+
+		}catch (const std::exception &e){
+			//bad alloc
+			std << e.what() << std::endl;
+		}
+	}
 }
