@@ -1,4 +1,4 @@
-NAME        = ft_conatiner
+NAME        = ft_conatiners
 SRCDIR      = ./srcs
 SRCS        = $(shell find $(SRCDIR) -name "main.cpp" -type f | xargs)
 OBJS        = $(SRCS:.cpp=.o)
