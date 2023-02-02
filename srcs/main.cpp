@@ -1627,4 +1627,42 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			std << e.what() << std::endl;
 		}
 	}
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		mine << a.capacity();
+		mine << b.capacity();
+		mine << c.capacity();
+		mine << d.capacity();
+		mine << e.capacity();
+		mine << f.capacity();
+		time_end(start, "std[capacity]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		std << a.capacity();
+		std << b.capacity();
+		std << c.capacity();
+		std << d.capacity();
+		std << e.capacity();
+		std << f.capacity();
+		time_end(start, "std[capacity]");
+	}
 }
