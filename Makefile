@@ -19,7 +19,7 @@ $(NAME): $(OBJS)
 
 .PHONY: clean
 clean:
-	rm $(OBJS) $(DEPENDS)
+	rm -rf $(OBJS) $(DEPENDS)
 
 .PHONY: fclean
 fclean: clean
