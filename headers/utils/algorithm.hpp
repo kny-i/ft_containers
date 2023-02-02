@@ -2,39 +2,41 @@
 #define ALGORITHM_HPP
 
 namespace ft {
-
-	template<class Inputiterator1, class Inputiterator2>
-	bool eqall(Inputiterator1 first, Inputiterator1 last, Inputiterator2 inputiterator2) {
-		for (; first != last; ++first) {
-			if (*first != *inputiterator2)
+	template<class InputIterator1, class InputIterator2>
+	bool equal(InputIterator1 first1, InputIterator1 last1, InputIterator2 first2) {
+		while (first1 != last1) {
+			if (*first1 != *first2)
 				return false;
-
+			++first1;
+			++first2;
 		}
 		return true;
 	}
 
-	template<class Inputiterator1, class Inputiterator2, class BinaryPredicate>
-	bool eqall(Inputiterator1 first, Inputiterator1 last, Inputiterator2 inputiterator2, BinaryPredicate predicate) {
-		for (; first != last; ++first) {
-			if (*first != *inputiterator2)
+	template <class InputIt1, class InputIt2, class BinaryPredicate>
+	bool equal(InputIt1 first1, InputIt1 last2, InputIt2 first2, BinaryPredicate p) {
+		for (; first1 != last2; ++first1, ++first2) {
+			if (!p(*first1, *first2)) {
 				return false;
+			}
 		}
 		return true;
 	}
 
-	//check first elements that are not same
-
-	template <class InputIterator1, class InputIterator2>
+	template<class InputIterator1, class InputIterator2>
 	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
 								 InputIterator2 first2, InputIterator2 last2) {
-		for (; first1 != last1 && first2 != last2; ++first1, ++first2) {
-			if (*first1 < *first2)
-				return true;
-			if (*first2 < *first1)
+		while (first1 != last1) {
+			if (first2 == last2 || *first2 < *first1)
 				return false;
+			else if (*first1 < *first2)
+				return true;
+			++first1;
+			++first2;
 		}
-		return first1 == last1 && first2 != last2;
+		return first2 != last2;
 	}
+
 
 	template <class InputIterator1, class InputIterator2, class Compare>
 	bool lexicographical_compare(InputIterator1 first1, InputIterator1 last1,
@@ -46,8 +48,7 @@ namespace ft {
 			if (comp(*first2, *first1))
 				return false;
 		}
-		return first1 == last1 && first2 != last2;
+		return first2 != last2;
 	}
-
 };
 #endif
