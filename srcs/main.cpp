@@ -1692,6 +1692,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[insert]");
 	}
+	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		std::vector<int> a;
@@ -1717,5 +1718,105 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[insert]");
 	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
 
+		a.swap(b);
+		for(ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		b.swap(c);
+		for(ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		c.swap(a);
+		for(ft::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		time_end(start, "mine[swap]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		a.swap(b);
+		for(std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << std::endl;
+		}
+		b.swap(c);
+		for(std::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			std << *it << std::endl;
+		}
+		c.swap(a);
+		for(std::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			std << *it << std::endl;
+		}
+		time_end(start, "std[swap]");
+	}
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		a.resize(10, 10);
+		for(ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		b.resize(100, 50);
+		for(ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		c.resize(42, 42);
+		for(ft::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		time_end(start, "mine[resize]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		a.resize(10, 10);
+		for(std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << std::endl;
+		}
+		b.resize(100, 50);
+		for(std::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			std << *it << std::endl;
+		}
+		c.resize(42, 42);
+		for(std::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			std << *it << std::endl;
+		}
+		time_end(start, "mine[resize]");
+	}
 }
