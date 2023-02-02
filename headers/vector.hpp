@@ -344,8 +344,7 @@ namespace ft {
 			alloc_.destroy(&*(p));
 		}
 	}
-
-
+	//iterator の無効果の話
 	private:
 		pointer first_pointer_;
 		pointer last_pointer_;

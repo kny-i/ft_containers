@@ -37,5 +37,5 @@ run: all
 	 @./ft_conatiner
 
 .PHONY: leaks
-leaks: re
+leaks:  all
 	leaks -q --atExit -- ./ft_conatiner
