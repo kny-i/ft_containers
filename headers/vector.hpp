@@ -40,7 +40,7 @@ namespace ft {
 		/* range constructor */
 		//enable if はきく
 		template <typename InputIt>
-		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),typename std::enable_if<!std::is_integral<InputIt>::value,InputIt>::type* = NULL): first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
+		vector(InputIt first, InputIt last, const Allocator& alloc = Allocator(),typename ft::enable_if<!ft::is_integral<InputIt>::value,InputIt>::type* = NULL): first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(alloc) {
 			reserve(ft::distance(first, last));
 			for (InputIt i = first; i != last; ++i) {
 				push_back(*i);
@@ -109,7 +109,7 @@ namespace ft {
 		}
 
 		template<class InputIt>
-		void assign(InputIt first, InputIt last, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt>::type* = NULL){
+		void assign(InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL){
 			size_type count = std::distance(first, last);
 			/* reallocate */
 			if (count > capacity()) {
