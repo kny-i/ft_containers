@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include "map.hpp"
 #include <stack>
+
 void judge(std::string const &test_case);
 clock_t time_begin();
 void time_end(clock_t start, std::string const &msg);
@@ -32,7 +33,7 @@ int	main()
 		vec_std << std::flush;
 		judge("vector");
 	}
-
+	std::cout << "============[VECTOR DONE !!]============" << std::endl;
 //	map test
 	{
 		std::ofstream map_mine;
@@ -44,6 +45,7 @@ int	main()
 		map_std << std::flush;
 		judge("map");
 	}
+	std::cout << "=============[MAP DONE !!]=============" << std::endl;
 //	stack test
 	{
 		std::ofstream stack_mine;
@@ -55,6 +57,7 @@ int	main()
 		stack_std << std::flush;
 		judge("stack");
 	}
+	std::cout << "============[STACK DONE !!]============" << std::endl;
 }
 
 void judge(std::string const &test_case) {
@@ -64,7 +67,6 @@ void judge(std::string const &test_case) {
 			std::cout << "\033[32mvector[OK] \033[m\n";
 		else
 			std::cout << "\033[31mvector[KO] \033[m\n";
-		std::cout << "============[VECTOR DONE !!]============" << std::endl;
 		std::cout << std::flush;
 
 	}else if (test_case == "map") {
@@ -72,7 +74,7 @@ void judge(std::string const &test_case) {
 			std::cout << "\033[32mmap[OK] \033[m\n";
 		else
 			std::cout << "\033[31mmap[KO] \033[m\n";
-		std::cout << "=============[MAP DONE !!]=============" << std::endl;
+
 		std::cout << std::flush;
 
 	} else if (test_case == "stack") {
@@ -80,7 +82,6 @@ void judge(std::string const &test_case) {
 			std::cout << "\033[32mstack[OK] \033[m\n";
 		else
 			std::cout << "\033[31mstack[KO] \033[m\n";
-		std::cout << "============[STACK DONE !!]============" << std::endl;
 		std::cout << std::flush;
 	}
 
@@ -239,6 +240,103 @@ void stack(std::ofstream &mine, std::ofstream &std) {
 		std << e.size() << std::endl;
 
 		time_end(start, "std[pop, push, top, size, empty]");
+	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::stack<int> a;
+		ft::stack<int, ft::vector<int> > b;
+		ft::vector<int> c(50, 100);
+		ft::stack<int> d(c);
+		ft::stack<int, std::deque<int> > e;
+
+
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			b.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			d.push(i);
+		}
+		mine << (a == b) << std::endl;
+		mine << (a != b) << std::endl;
+		mine << (a <= b) << std::endl;
+		mine << (a >= b) << std::endl;
+		mine << (a < b) << std::endl;
+		mine << (a > b) << std::endl;
+		mine << (a == b) << std::endl;
+		mine << (d == b) << std::endl;
+		mine << (d != b) << std::endl;
+		mine << (d <= b) << std::endl;
+		mine << (d >= b) << std::endl;
+		mine << (d < b) << std::endl;
+		mine << (d > b) << std::endl;
+		mine << (d == b) << std::endl;
+		mine << (a == d) << std::endl;
+		mine << (a != d) << std::endl;
+		mine << (a <= d) << std::endl;
+		mine << (a >= d) << std::endl;
+		mine << (a < d) << std::endl;
+		mine << (a > d) << std::endl;
+		mine << (d == b) << std::endl;
+		mine << (a == a) << std::endl;
+		mine << (a != a) << std::endl;
+		mine << (a <= a) << std::endl;
+		mine << (a >= a) << std::endl;
+		mine << (a < a) << std::endl;
+		mine << (a > a) << std::endl;
+		time_end(start, "mine[operators]");
+	}
+	{
+		clock_t start = time_begin();
+		std::stack<int> a;
+		std::stack<int, std::deque<int> > b;
+		std::deque<int> c(50, 100);
+		std::stack<int> d(c);
+		std::stack<int, std::deque<int> > e;
+
+
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			b.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			d.push(i);
+		}
+		std << (a == b) << std::endl;
+		std << (a != b) << std::endl;
+		std << (a <= b) << std::endl;
+		std << (a >= b) << std::endl;
+		std << (a < b) << std::endl;
+		std << (a > b) << std::endl;
+		std << (a == b) << std::endl;
+		std << (d == b) << std::endl;
+		std << (d != b) << std::endl;
+		std << (d <= b) << std::endl;
+		std << (d >= b) << std::endl;
+		std << (d < b) << std::endl;
+		std << (d > b) << std::endl;
+		std << (d == b) << std::endl;
+		std << (a == d) << std::endl;
+		std << (a != d) << std::endl;
+		std << (a <= d) << std::endl;
+		std << (a >= d) << std::endl;
+		std << (a < d) << std::endl;
+		std << (a > d) << std::endl;
+		std << (d == b) << std::endl;
+		std << (a == a) << std::endl;
+		std << (a != a) << std::endl;
+		std << (a <= a) << std::endl;
+		std << (a >= a) << std::endl;
+		std << (a < a) << std::endl;
+		std << (a > a) << std::endl;
+		time_end(start, "std[operators]");
 	}
 
 }
