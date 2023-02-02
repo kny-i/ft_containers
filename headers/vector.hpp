@@ -6,6 +6,8 @@
 #include <reverse_iterator.hpp>
 #include <random_access_iterator.hpp>
 #include <algorithm.hpp>
+#include <enableif.hpp>
+#include <is_integral.hpp>
 
 namespace ft {
 	template<class T, class Allocator = std::allocator<T> >
@@ -277,8 +279,9 @@ namespace ft {
 			last_pointer_ = new_last;
 	}
 
-	template<class InputIt>
-	void insert(iterator pos, typename std::enable_if<!std::is_integral<InputIt>::value, InputIt> first, InputIt last) {
+		template <class InputIterator>
+		typename ft::enable_if<!ft::is_integral<InputIterator>::value, void>::type
+		insert(iterator pos, InputIterator first, InputIterator last) {
 		size_type n = std::distance(first_pointer_, last_pointer_);
 		difference_type pos_dist = std::distance(begin(), pos);
 		size_type new_size = size() + n;

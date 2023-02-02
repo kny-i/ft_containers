@@ -1627,6 +1627,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			std << e.what() << std::endl;
 		}
 	}
+	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		ft::vector<int> a;
@@ -1665,4 +1666,56 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		std << f.capacity();
 		time_end(start, "std[capacity]");
 	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		a.insert(a.begin() + 1, b.begin(), b.end());
+		for(ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		b.insert(b.begin(), 10);
+		for(ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		c.insert(c.end(), 100, 100);
+		for(ft::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			mine << *it << std::endl;
+		}
+		time_end(start, "std[insert]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		a.insert(a.begin() + 1, b.begin(), b.end());
+		for(std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << std::endl;
+		}
+		b.insert(b.begin(), 10);
+		for(std::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			std << *it << std::endl;
+		}
+		c.insert(c.end(), 100, 100);
+		for(std::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			std << *it << std::endl;
+		}
+		time_end(start, "std[insert]");
+	}
+
 }
