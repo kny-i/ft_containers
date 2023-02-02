@@ -1,27 +1,13 @@
-template < typename T, typename Allocator = std::allocator<T> >
-
-template < typename T, typename Allocator = std::allocator<T> >
-
-class vector
+#include <vector>
+#include <map>
+#include <iostream>
+int	main()
 {
-private :
-	// データメンバー
-public :
-	// value_typeなどネストされた型名
-	using value_type = T ;
-	// コンストラクター
-	vector( std::size_t n = 0, Allocator a = Allocator() ) ;
-	// デストラクター
-	~vector() ;
-	// コピー
-	vector( const vector & x ) ;
-	vector & operator =( const vector & x ) ;
+	std::map<int, std::string> a;
 
-	// 要素アクセス
-	void push_back( const T & x ) ;
-	T & operator []( std::size_t i ) noexcept ;
+	a[1] = "hoge";
+	std::map<int, std::string>::const_iterator it = a.begin();
+	it->second = "hoge";
+	it->first = 3;
 
-	// イテレーターアクセス
-	iterator begin() noexcept ;
-	iterator end() noexcept ;
-} ;
+}

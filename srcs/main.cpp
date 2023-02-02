@@ -1097,7 +1097,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = 0; i < 100; ++i) {
 			mine << e[i] << std::endl;
 		}
-		for (int i = 0; i < 1000; ++i) {
+		for (int i = 0; i < 100; ++i) {
 			mine << b[i] << std::endl;
 		}
 		time_end(start, "mine[]");
@@ -1118,7 +1118,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = 0; i < 100; ++i) {
 			std << e[i] << std::endl;
 		}
-		for (int i = 0; i < 1000; ++i) {
+		for (int i = 0; i < 100; ++i) {
 			std << b[i] << std::endl;
 		}
 		time_end(start, "std[]");
@@ -1242,17 +1242,29 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		f.clear();
 		mine << a.size() << std::endl;
 		mine << a.empty() << std::endl;
+		mine << a.max_size() << std::endl;
+		mine << a.capacity() << std::endl;
 		mine << b.size() << std::endl;
 		mine << b.empty() << std::endl;
+		mine << b.max_size() << std::endl;
+		mine << b.capacity() << std::endl;
 		mine << e.size() << std::endl;
 		mine << e.empty() << std::endl;
+		mine << e.max_size() << std::endl;
+		mine << e.capacity() << std::endl;
 		mine << b.size() << std::endl;
 		mine << b.empty() << std::endl;
+		mine << b.max_size() << std::endl;
+		mine << b.capacity() << std::endl;
 		mine << e.size() << std::endl;
 		mine << e.empty() << std::endl;
+		mine << e.max_size() << std::endl;
+		mine << e.capacity() << std::endl;
 		mine << f.size() << std::endl;
 		mine << f.empty() << std::endl;
-		time_end(start, "std[size, empty]");
+		mine << f.max_size() << std::endl;
+		mine << f.capacity() << std::endl;
+		time_end(start, "mine[size, empty, max_size, capacity]");
 	}
 	{
 		clock_t start = time_begin();
@@ -1273,17 +1285,29 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		f.clear();
 		std << a.size() << std::endl;
 		std << a.empty() << std::endl;
+		std << a.max_size() << std::endl;
+		std << a.capacity() << std::endl;
 		std << b.size() << std::endl;
 		std << b.empty() << std::endl;
+		std << b.max_size() << std::endl;
+		std << b.capacity() << std::endl;
 		std << e.size() << std::endl;
 		std << e.empty() << std::endl;
+		std << e.max_size() << std::endl;
+		std << e.capacity() << std::endl;
 		std << b.size() << std::endl;
 		std << b.empty() << std::endl;
+		std << b.max_size() << std::endl;
+		std << b.capacity() << std::endl;
 		std << e.size() << std::endl;
 		std << e.empty() << std::endl;
+		std << e.max_size() << std::endl;
+		std << e.capacity() << std::endl;
 		std << f.size() << std::endl;
 		std << f.empty() << std::endl;
-		time_end(start, "std[size, empty]");
+		std << f.max_size() << std::endl;
+		std << f.capacity() << std::endl;
+		time_end(start, "std[size, empty, max_size, capacity]");
 	}
 	std::cout << std::endl;
 	{
@@ -1443,6 +1467,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[pop_back]");
 	}
+	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		ft::vector<int> a;
@@ -1467,13 +1492,13 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			e.push_back(i);
 		}
 		a.erase(a.begin());
-		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+		for (ft::vector<int>::iterator it = a.begin(); !a.empty();) {
 			a.erase(it);
 		}
-		b.erase(b.begin(), b.end() - 1);
 		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
 			mine << *it << std::endl;
 		}
+		b.erase(b.begin(), b.end() - 1);
 		for (ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
 			mine << *it << std::endl;
 		}
@@ -1487,13 +1512,13 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 	}
 	{
 		clock_t start = time_begin();
-		ft::vector<int> a;
+		std::vector<int> a;
 		std::allocator<int> alloc;
-		ft::vector<int> c(alloc);
-		ft::vector<int> b(100, 50);
-		ft::vector<int> d(10, 50, alloc);
-		ft::vector<int> e(b.begin(), b.end());
-		ft::vector<int> f(e);
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
 		a = b;
 
 		for (int i = 0; i < 1000; ++i) {
@@ -1509,29 +1534,92 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			e.push_back(i);
 		}
 		a.erase(a.begin());
-		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+		for (std::vector<int>::iterator it = a.begin(); !a.empty();) {
 			a.erase(it);
 		}
+		for (std::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
+			std << *it << std::endl;
+		}
 		b.erase(b.begin(), b.end() - 1);
-		for (ft::vector<int>::iterator it = a.begin(); it != a.end(); ++it) {
-			mine << *it << std::endl;
+		for (std::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
+			std << *it << std::endl;
 		}
-		for (ft::vector<int>::iterator it = b.begin(); it != b.end(); ++it) {
-			mine << *it << std::endl;
+		for (std::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
+			std << *it << std::endl;
 		}
-		for (ft::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
-			mine << *it << std::endl;
-		}
-		for (ft::vector<int>::iterator it = d.begin(); it != d.end(); ++it) {
-			mine << *it << std::endl;
+		for (std::vector<int>::iterator it = d.begin(); it != d.end(); ++it) {
+			std << *it << std::endl;
 		}
 		time_end(start, "std[erase]");
 	}
-	{
-
-
-	}
-	{
-
-	}
+//	{
+//		try {
+//			clock_t start = time_begin();
+//			ft::vector<int> a;
+//			std::allocator<int> alloc;
+//			ft::vector<int> c(alloc);
+//			ft::vector<int> b(100, 50);
+//			ft::vector<int> d(10, 50, alloc);
+//			ft::vector<int> e(b.begin(), b.end());
+//			ft::vector<int> f(e);
+//			a = b;
+//
+//			for (int i = 0; i < 1000; ++i) {
+//				a.push_back(i);
+//			}
+//			for (int i = 0; i < 200; ++i) {
+//				b.push_back(i);
+//			}
+//			for (int i = -100; i < 0; ++i) {
+//				c.push_back(i);
+//			}
+//			for (int i = 1000; i < 2000; ++i) {
+//				e.push_back(i);
+//			}
+//
+//			a.reserve(100);
+//			b.reserve(50);
+//			c.reserve(0);
+//			d.reserve(d.max_size());
+//			time_end(start, "std[reserve]");
+//
+//		}catch (const std::exception &e){
+//			mine << e.what() << std::endl;
+//		}
+//	}
+//	{
+//		try {
+//			clock_t start = time_begin();
+//			std::vector<int> a;
+//			std::allocator<int> alloc;
+//			std::vector<int> c(alloc);
+//			std::vector<int> b(100, 50);
+//			std::vector<int> d(10, 50, alloc);
+//			std::vector<int> e(b.begin(), b.end());
+//			std::vector<int> f(e);
+//			a = b;
+//
+//			for (int i = 0; i < 1000; ++i) {
+//				a.push_back(i);
+//			}
+//			for (int i = 0; i < 200; ++i) {
+//				b.push_back(i);
+//			}
+//			for (int i = -100; i < 0; ++i) {
+//				c.push_back(i);
+//			}
+//			for (int i = 1000; i < 2000; ++i) {
+//				e.push_back(i);
+//			}
+//
+//			a.reserve(100);
+//			b.reserve(50);
+//			c.reserve(0);
+//			d.reserve(d.max_size());
+//			time_end(start, "std[reserve]");
+//
+//		}catch (const std::exception &e){
+//			std << e.what() << std::endl;
+//		}
+//	}
 }

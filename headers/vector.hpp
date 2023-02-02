@@ -207,6 +207,7 @@ namespace ft {
 	size_type max_size() const {
 			return alloc_.max_size();
 	}
+
 	void reserve(size_type value_size) {
 			if (value_size <= capacity()) {
 				return;
