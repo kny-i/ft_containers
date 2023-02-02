@@ -1769,6 +1769,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[swap]");
 	}
+	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		ft::vector<int> a;
@@ -1819,4 +1820,92 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "mine[resize]");
 	}
+	std::cout << std::endl;
+	{
+		clock_t start = time_begin();
+		ft::vector<int> a;
+		std::allocator<int> alloc;
+		ft::vector<int> c(alloc);
+		ft::vector<int> b(100, 50);
+		ft::vector<int> d(10, 50, alloc);
+		ft::vector<int> e(b.begin(), b.end());
+		ft::vector<int> f(e);
+		a = b;
+
+		mine << (a == c) << std::endl;
+		mine << (a <= c) << std::endl;
+		mine << (a >= c) << std::endl;
+		mine << (a < c) << std::endl;
+		mine << (a > c) << std::endl;
+		mine << (a != c) << std::endl;
+		mine << (b == c) << std::endl;
+		mine << (b <= c) << std::endl;
+		mine << (b >= c) << std::endl;
+		mine << (b < c) << std::endl;
+		mine << (b > c) << std::endl;
+		mine << (b != c) << std::endl;
+		mine << (d == c) << std::endl;
+		mine << (d <= c) << std::endl;
+		mine << (d >= c) << std::endl;
+		mine << (d < c) << std::endl;
+		mine << (d > c) << std::endl;
+		mine << (d != c) << std::endl;
+		mine << (a == c) << std::endl;
+		mine << (a <= c) << std::endl;
+		mine << (a >= c) << std::endl;
+		mine << (a < c) << std::endl;
+		mine << (a > c) << std::endl;
+		mine << (a != e) << std::endl;
+		mine << (b == e) << std::endl;
+		mine << (b <= e) << std::endl;
+		mine << (b >= e) << std::endl;
+		mine << (b < e) << std::endl;
+		mine << (b > e) << std::endl;
+		mine << (b != e) << std::endl;
+		time_end(start, "mine[operators]");
+	}
+	{
+		clock_t start = time_begin();
+		std::vector<int> a;
+		std::allocator<int> alloc;
+		std::vector<int> c(alloc);
+		std::vector<int> b(100, 50);
+		std::vector<int> d(10, 50, alloc);
+		std::vector<int> e(b.begin(), b.end());
+		std::vector<int> f(e);
+		a = b;
+
+		std << (a == c) << std::endl;
+		std << (a <= c) << std::endl;
+		std << (a >= c) << std::endl;
+		std << (a < c) << std::endl;
+		std << (a > c) << std::endl;
+		std << (a != c) << std::endl;
+		std << (b == c) << std::endl;
+		std << (b <= c) << std::endl;
+		std << (b >= c) << std::endl;
+		std << (b < c) << std::endl;
+		std << (b > c) << std::endl;
+		std << (b != c) << std::endl;
+		std << (d == c) << std::endl;
+		std << (d <= c) << std::endl;
+		std << (d >= c) << std::endl;
+		std << (d < c) << std::endl;
+		std << (d > c) << std::endl;
+		std << (d != c) << std::endl;
+		std << (a == c) << std::endl;
+		std << (a <= c) << std::endl;
+		std << (a >= c) << std::endl;
+		std << (a < c) << std::endl;
+		std << (a > c) << std::endl;
+		std << (a != e) << std::endl;
+		std << (b == e) << std::endl;
+		std << (b <= e) << std::endl;
+		std << (b >= e) << std::endl;
+		std << (b < e) << std::endl;
+		std << (b > e) << std::endl;
+		std << (b != e) << std::endl;
+		time_end(start, "std[operators]");
+	}
+
 }
