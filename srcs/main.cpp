@@ -9,7 +9,7 @@
 #include "vector.hpp"
 #include <stdlib.h>
 #include "map.hpp"
-
+#include <stack>
 void judge(std::string const &test_case);
 clock_t time_begin();
 void time_end(clock_t start, std::string const &msg);
@@ -101,7 +101,43 @@ clock_t time_begin() {
 void stack(std::ofstream &mine, std::ofstream &std) {
 
 	{
+		clock_t start = time_begin();
+		ft::stack<int> a;
+		ft::stack<int, ft::vector<int> > b;
+		ft::vector <int> c(50, 100);
+		ft::stack<int> d(c);
+		ft::stack<int, std::deque<int> > e;
 
+
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push(i);
+		}
+		mine << a.empty();
+		mine << b.empty();
+		mine << c.empty();
+		mine << d.empty();
+		mine << e.empty();
+		time_end(start, "mine[constructor, empty]");
+	}
+	{
+		clock_t start = time_begin();
+		std::stack<int> a;
+		std::stack<int, std::vector<int> > b;
+		std::deque<int> c(50, 100);
+		std::stack<int> d(c);
+		std::stack<int, std::deque<int> > e;
+
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push(i);
+		}
+		std << a.empty();
+		std << b.empty();
+		std << c.empty();
+		std << d.empty();
+		std << e.empty();
+		time_end(start, "std[constructor, empty]");
 	}
 	{
 
