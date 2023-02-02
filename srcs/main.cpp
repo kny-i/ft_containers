@@ -241,6 +241,7 @@ void stack(std::ofstream &mine, std::ofstream &std) {
 
 		time_end(start, "std[pop, push, top, size, empty]");
 	}
+
 	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
