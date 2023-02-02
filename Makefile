@@ -1,6 +1,6 @@
 NAME        = ft_conatiners
 SRCDIR      = ./srcs
-SRCS        = $(shell find $(SRCDIR) -name "haru.cpp" -type f | xargs)
+SRCS        = $(shell find $(SRCDIR) -name "main.cpp" -type f | xargs)
 OBJS        = $(SRCS:.cpp=.o)
 DEPENDS     = $(OBJS:.o=.d)
 CXX         = c++
