@@ -874,6 +874,7 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		a[4] = "four";
 
 		ft::map<int, std::string >::key_compare map_value_compare = a.key_comp();
+		(void)map_value_compare;
 		ft::map<int, std::string, ft::map<int, std::string >::key_compare> b;
 		for(ft::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
 			mine << it->second << ' ';
@@ -890,6 +891,7 @@ void map(std::ofstream &mine, std::ofstream &std) {
 		a[4] = "four";
 
 		std::map<int, std::string >::key_compare map_value_compare = a.key_comp();
+		(void)map_value_compare;
 		std::map<int, std::string, std::map<int, std::string >::key_compare> b;
 		for(std::map<int, std::string>::const_iterator it = b.begin(); it != b.end(); ++it) {
 			std << it->second << ' ';
