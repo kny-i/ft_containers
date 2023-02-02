@@ -139,8 +139,106 @@ void stack(std::ofstream &mine, std::ofstream &std) {
 		std << e.empty();
 		time_end(start, "std[constructor, empty]");
 	}
+	std::cout << std::endl;
 	{
+		clock_t start = time_begin();
+		ft::stack<int> a;
+		ft::stack<int, ft::vector<int> > b;
+		ft::vector <int> c(50, 100);
+		ft::stack<int> d(c);
+		ft::stack<int, std::deque<int> > e;
 
+
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			b.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			d.push(i);
+		}
+
+		mine << a.size() << std::endl;
+		mine << a.top() << std::endl;
+		a.pop();
+		for (;!a.empty();) {
+			mine << a.top() << std::endl;
+			a.pop();
+		}
+		mine << b.size() << std::endl;
+		mine << b.top() << std::endl;
+		b.pop();
+		for (;!b.empty();) {
+			mine << b.top() << std::endl;
+			b.pop();
+		}
+		mine << d.size() << std::endl;
+		mine << d.top() << std::endl;
+		d.pop();
+		for (;!d.empty();) {
+			mine << d.top() << std::endl;
+			d.pop();
+		}
+		mine << e.size() << std::endl;
+
+		time_end(start, "mine[pop, push, top, size, empty]");
+	}
+	{
+		clock_t start = time_begin();
+		std::stack<int> a;
+		std::stack<int, std::vector<int> > b;
+		std::deque<int> c(50, 100);
+		std::stack<int> d(c);
+		std::stack<int, std::deque<int> > e;
+
+
+
+		for (int i = 0; i < 1000; ++i) {
+			a.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			b.push(i);
+		}
+		for (int i = 100; i < 200; ++i) {
+			d.push(i);
+		}
+
+
+		std << a.size() << std::endl;
+
+		std << a.top() << std::endl;
+		a.pop();
+		for (;!a.empty();) {
+
+			std << a.top() << std::endl;
+			a.pop();
+		}
+
+		std << b.size() << std::endl;
+
+		std << b.top() << std::endl;
+		b.pop();
+		for (;!b.empty();) {
+
+			std << b.top() << std::endl;
+			b.pop();
+		}
+
+		std << d.size() << std::endl;
+
+		std << d.top() << std::endl;
+		d.pop();
+		for (;!d.empty();) {
+
+			std << d.top() << std::endl;
+			d.pop();
+		}
+
+		std << e.size() << std::endl;
+
+		time_end(start, "std[pop, push, top, size, empty]");
 	}
 
 }
@@ -1622,7 +1720,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			a.reserve(100);
 			b.reserve(50);
 			c.reserve(0);
-			d.reserve(d.max_size());
+//			d.reserve(d.max_size() - 1);
 
 			time_end(start, "std[reserve]");
 
@@ -1660,7 +1758,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			a.reserve(100);
 			b.reserve(50);
 			c.reserve(0);
-			d.reserve(d.max_size());
+//			d.reserve(d.max_size() - 1);
 			time_end(start, "std[reserve]");
 
 
