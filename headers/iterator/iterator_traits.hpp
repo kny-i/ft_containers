@@ -3,6 +3,9 @@
 #include <cstddef>
 #include <iterator>
 
+
+//random access iterator などのクラスから情報を取り出し、それらをreverse iterator などのメンバに格納する。一時的な貯蔵庫としてのiterator クラス
+
 namespace ft {
 	template <class Iterator>
 	struct iterator_traits {

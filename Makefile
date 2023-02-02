@@ -37,6 +37,7 @@ debug: re
 run: all
 	 @./$(NAME)
 
+
 .PHONY: leaks
 leaks:  all
 	leaks -q --atExit -- ./$(NAME)
