@@ -50,9 +50,14 @@ test: ./srcs/ft.cpp ./srcs/std.cpp
 	$(CXX) $(CXXFLAGS) srcs/std.cpp -o srcs/std
 	./srcs/ft
 	./srcs/std
+	echo "\n"
 	diff output/vec_mine output/vec_std
+	@echo $$?
 	diff output/map_mine output/map_std
+	@echo $$?
 	diff output/stack_mine output/stack_std
+	@echo $$?
+	@echo "->If there are there 0, Test has done Without problem."
 
 .PHONY: test_clean
 test_clean:
@@ -62,7 +67,7 @@ test_clean:
 	rm -rf ./srcs/std.o
 
 .PHONY: test_fclean
-test_fclean:
+test_fclean: test_clean
 	rm -rf ./srcs/ft
 	rm -rf ./srcs/std
 	rm -rf ./output
