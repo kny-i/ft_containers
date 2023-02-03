@@ -312,18 +312,30 @@ namespace ft {
 		}
 
 		void replace_node(node_pointer erase_node, node_pointer alternate) {
-			//eraseが末端だった場合
 			if (alternate == NULL) {
+			//eraseが末端だった場合
 				erase_node->disconnect_parent();
 			} else {
 				if (alternate->left_ == NULL && alternate->right_ == NULL) {
+					//入れ替えるものが末端にある時
 					alternate->disconnect_parent();
 				} else if (alternate->left_) {
 					alternate->left_->connect_parent(alternate->parent_, alternate->is_left_child());
 				} else {
+
 					alternate->right_->connect_parent(alternate->parent_,
 													 alternate->is_left_child());
 				}
+				//上のelseのケース
+				//erase == 7
+				//alt == 9
+				//          ( 7 )                          ( 9 )
+				//         /    \                         /    \
+                //      ( 5 ) ( 11 )                   ( 5 )   (11)
+				//              /  \           ->              /  \
+                //           ( 9 )( 12 )                  ( 10 )   ( 12 )
+				//           /   \
+				//      (NULL)  (  10  )
 				alternate->connect_parent(erase_node->parent_, erase_node->is_left_child());
 				alternate->connect_left_child(erase_node->left_);
 				alternate->connect_right_child(erase_node->right_);
