@@ -159,6 +159,7 @@ namespace ft {
 				//場所に変化のあったnodeで最もbottomにあるものがerase_nodeのペアレントになる
 				bottom_node = erase_node->parent_;
 			} else if (alternate->parent_ == erase_node) {
+				//上のケースとは違うケース
 				//          ( 9 )                     (11)
 				//          /   \                    /    \
                 //      ( 5 ) ( 11 )      ->     (5)       (12)
@@ -311,6 +312,7 @@ namespace ft {
 		}
 
 		void replace_node(node_pointer erase_node, node_pointer alternate) {
+			//eraseが末端だった場合
 			if (alternate == NULL) {
 				erase_node->disconnect_parent();
 			} else {
