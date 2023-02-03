@@ -9,14 +9,14 @@
 namespace ft {
 
 	template <class Key, class T, class Compare>
-	class map_value_compare {
+	class value_compare {
 	private:
 		typedef Compare key_compare;
 		key_compare comp_;
 
 	public:
-		map_value_compare() : comp_() {}
-		explicit map_value_compare(key_compare c) : comp_(c) {}
+		value_compare() : comp_() {}
+		explicit value_compare(key_compare c) : comp_(c) {}
 
 		bool operator()(const T& x, const T& y) const {
 			return comp_(x.first, y.first);
@@ -36,19 +36,19 @@ namespace ft {
 		typedef Key key_type;
 		typedef T mapped_type;
 		typedef ft::pair<const key_type, mapped_type> value_type;
+		typedef size_t size_type;
+		typedef ptrdiff_t difference_type;
 		typedef Compare key_compare;
 		typedef Alloc allocator_type;
 		typedef typename allocator_type::reference reference;
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::reference pointer;
 		typedef typename allocator_type::const_reference const_pointer;
-		typedef ptrdiff_t difference_type;
-		typedef size_t size_type;
 
 	private:
-		typedef map_value_compare<key_type, value_type, key_compare>
-				map_value_compare;
-		typedef AVLTree<key_type, value_type, map_value_compare, allocator_type>
+		typedef value_compare<key_type, value_type, key_compare>
+				value_compare;
+		typedef AVLTree<key_type, value_type, value_compare, allocator_type>
 				tree_type;
 
 		tree_type tree_;
@@ -61,13 +61,13 @@ namespace ft {
 
 		explicit map(const key_compare& comp = key_compare(),
 					 const allocator_type& alloc = allocator_type())
-				: tree_(map_value_compare(comp), alloc) {}
+				: tree_(value_compare(comp), alloc) {}
 
 		template <class InputIterator>
 		map(InputIterator first, InputIterator last,
 			const key_compare& comp = key_compare(),
 			const allocator_type& alloc = allocator_type())
-				: tree_(map_value_compare(comp), alloc) {
+				: tree_(value_compare(comp), alloc) {
 			insert(first, last);
 		}
 
@@ -120,7 +120,7 @@ namespace ft {
 		void swap(map& x) { tree_.swap(x.tree_); }
 		void clear() { tree_.clear(); }
 		key_compare key_comp() const { return key_compare(); }
-		map_value_compare value_comp() const { return map_value_compare(key_compare()); }
+		value_compare value_comp() const { return value_compare(key_compare()); }
 		iterator find(const key_type& k) { return tree_.find(k); }
 		const_iterator find(const key_type& k) const { return tree_.find(k); }
 		size_type count(const key_type& k) const { return tree_.count(k); }
