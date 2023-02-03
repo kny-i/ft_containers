@@ -8,14 +8,12 @@
 #include <iostream>
 namespace ft {
 
+	//mapのkeyであるfirst同士を比較したかたい
 	template <class Key, class T, class Compare>
 	class value_compare {
 	private:
 		typedef Compare key_compare;
 		key_compare comp_;
-
-		//mapのkeyであるfirst同士を比較したかったから
-
 	public:
 		value_compare() : comp_() {}
 		explicit value_compare(key_compare c) : comp_(c) {}
