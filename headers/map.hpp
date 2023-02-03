@@ -14,6 +14,8 @@ namespace ft {
 		typedef Compare key_compare;
 		key_compare comp_;
 
+		//mapのkeyであるfirst同士を比較したかったから
+
 	public:
 		value_compare() : comp_() {}
 		explicit value_compare(key_compare c) : comp_(c) {}
