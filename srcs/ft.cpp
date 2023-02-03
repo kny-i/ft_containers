@@ -503,7 +503,6 @@ void map(std::ofstream &mine) {
 		c.swap(a);
 		mine << ft::map<int, std::string>::const_iterator(a.find(2))->second << std::endl;
 		mine << ft::map<int, std::string>::iterator(a.find(2))->second << std::endl;
-		mine << ft::map<int, std::string>::iterator(b.find(2))->second << std::endl;
 
 		time_end(start, "mine[find]");
 	}
