@@ -181,11 +181,14 @@ namespace ft {
 	void pop_back() { destroy(--last_pointer_);}
 
 	iterator erase(iterator position) { return erase(position, position + 1);}
+
 	iterator erase(iterator first, iterator last) {
 			size_type erase_size = std::distance(first, last);
 			pointer new_last = last_pointer_ - erase_size;
+			//copy がiteratorに対応してないためbaseを渡している
+			//last.baseからlast_pointer_までfirst.baseからコピーする
 			std::copy(last.base(), last_pointer_, first.base());
-			destroy_range(new_last, last);
+			destroy_range(new_last, last_pointer_);
 			last_pointer_ = new_last;
 			return first;
 	}
@@ -233,19 +236,26 @@ namespace ft {
 
 	size_type capacity() const { return storage_last_ - first_pointer_ ;}
 
+	private:
 	size_type recommend_size(size_type new_size)
 	{
 			size_type maxsize = max_size();
 			if (maxsize < new_size) {
 				throw std::length_error ("vector recommend size error");
 			}
+			//すでにある容量の倍を確保していく
 			size_type cap = capacity();
-			if (maxsize / 2 <= cap) {
+			if (maxsize <= cap * 2) {
+				//2倍確保できない時
 				return (maxsize);
 			}
+			//capの2倍以上は獲得したい
+			//https://uquest.tktk.co.jp/embedded/learning/lecture17.html#:~:text=%E3%83%A1%E3%83%A2%E3%83%AA%E3%81%AE%E3%83%95%E3%83%A9%E3%82%B0%E3%83%A1%E3%83%B3%E3%83%86%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3%E3%81%A8%E3%81%AF,%E3%81%97%E3%81%BE%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8%E3%82%92%E6%8C%87%E3%81%99%E3%80%82
+			//本家は2倍から
 			return (std::max<size_type>(new_size, cap * 2));
 	}
 
+	public:
 		/* insert a value into specdfic pos */
 	iterator insert(iterator pos, const value_type &value) {
 			size_type diss = pos - begin();
@@ -253,21 +263,28 @@ namespace ft {
 			return begin() + diss;
 		}
 
-	void insert(iterator pos, size_type value_size, const value_type &value)
+	void insert(iterator new_pos, size_type value_size, const value_type &value)
 	{
 		if (value_size == 0)
 			return;
-		difference_type pos_dist = std::distance(begin(), pos);
+		difference_type pos_dist = std::distance(begin(), new_pos);
 		size_type new_size = size() + value_size;
 		if (capacity() < new_size) {
 			reserve(recommend_size(new_size));
-			pos = begin() + pos_dist;
+			//rserveを通るとpointerの更新が必要になる可能性がある
+			new_pos = begin() + pos_dist;
 		}
+		//[][][]|[][]|
 		pointer new_last = last_pointer_ + value_size;
 			construct_range(last_pointer_, new_last);
-			//memoveの話
-			std::copy_backward(pos, end(), new_last);
-			std::fill(pos, pos + value_size, value);
+		//↓がbを3つ挿入したいケース
+		//    ↓
+		//[a][x][x][x][ ][ ][ ] : constructでメモリを確保
+		//[a][x][x][x][x][x][x] : 上で作った領域にvalue_size個分後ろからコピー
+		//[a][b][b][b][x][x][x] : その上で、入れたかった場所に欲しいものを入れる
+		//copy_backwardはfirstからlastまでの要素をnew_lastから、後ろからコピーしてる
+			std::copy_backward(new_pos, end(), new_last);
+			std::fill(new_pos, new_pos + value_size, value);
 			last_pointer_ = new_last;
 	}
 
@@ -318,19 +335,18 @@ namespace ft {
 	allocator_type get_allocator() const { return alloc_;}
 
 
-		/* not correct proto type */
-		void resize(size_type count, T value = T()) {
-			if (count < size()) {
-				size_type diff = size() - count;
-				erase(begin() + diff, end());
-				last_pointer_ = first_pointer_ + count;
-			} else if (count > size()) {
-				reserve(recommend_size(count));
-				while (size() < count) {
-					construct(last_pointer_++, value);
-				}
+	void resize(size_type count, T value = T()) {
+		if (count < size()) {
+			size_type diff = size() - count;
+			erase(begin() + diff, end());
+			last_pointer_ = first_pointer_ + count;
+		} else if (count > size()) {
+			reserve(recommend_size(count));
+			while (size() < count) {
+				construct(last_pointer_++, value);
 			}
 		}
+	}
 
 	private:
 	void destroy(pointer ptr) {alloc_.destroy(ptr);}
