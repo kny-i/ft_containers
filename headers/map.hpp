@@ -41,10 +41,10 @@ namespace ft {
 		typedef ptrdiff_t difference_type;
 		typedef Compare key_compare;
 		typedef Alloc allocator_type;
-		typedef typename allocator_type::reference reference;
-		typedef typename allocator_type::const_reference const_reference;
-		typedef typename allocator_type::reference pointer;
-		typedef typename allocator_type::const_reference const_pointer;
+		typedef value_type& reference;
+		typedef const value_type& const_reference;
+		typedef typename allocator_type::pointer pointer;
+		typedef typename allocator_type::const_pointer const_pointer;
 
 
 	private:
@@ -52,10 +52,10 @@ namespace ft {
 				value_compare;
 		typedef AVLTree<key_type, value_type, value_compare, allocator_type>
 				tree_type;
-
 		tree_type tree_;
 
 	public:
+		//tree_type is bidirectional iterator
 		typedef typename tree_type::iterator iterator;
 		typedef typename tree_type::const_iterator const_iterator;
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
