@@ -83,6 +83,7 @@ namespace ft {
 			}
 		}
 
+		allocator_type get_allocator() const { return allocator_type(); }
 		const_iterator begin() const { return tree_.begin(); }
 		iterator begin() { return tree_.begin(); }
 		iterator end() { return tree_.end(); }
@@ -129,31 +130,24 @@ namespace ft {
 			tree_.insert(first, last);
 		}
 
+		/* modifiers */
 		void erase(iterator position) { tree_.erase(position); }
 		size_type erase(const key_type& k) { return tree_.erase(k); }
 		void erase(iterator first, iterator last) { tree_.erase(first, last); }
 		void swap(map& x) { tree_.swap(x.tree_); }
 		void clear() { tree_.clear(); }
+
 		key_compare key_comp() const { return key_compare(); }
 		value_compare value_comp() const { return value_compare(key_compare()); }
 		iterator find(const key_type& k) { return tree_.find(k); }
 		const_iterator find(const key_type& k) const { return tree_.find(k); }
 		size_type count(const key_type& k) const { return tree_.count(k); }
 		iterator lower_bound(const key_type& k) { return tree_.lower_bound(k); }
-		const_iterator lower_bound(const key_type& k) const {
-			return tree_.lower_bound(k);
-		}
+		const_iterator lower_bound(const key_type& k) const { return tree_.lower_bound(k); }
 		iterator upper_bound(const key_type& k) { return (tree_.upper_bound(k)); }
-		const_iterator upper_bound(const key_type& k) const {
-			return tree_.upper_bound(k);
-		}
-		ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const {
-			return tree_.equal_range(k);
-		}
-		ft::pair<iterator, iterator> equal_range(const key_type& k) {
-			return tree_.equal_range(k);
-		}
-		allocator_type get_allocator() const { return allocator_type(); }
+		const_iterator upper_bound(const key_type& k) const { return tree_.upper_bound(k); }
+		ft::pair<const_iterator, const_iterator> equal_range(const key_type& k) const { return tree_.equal_range(k); }
+		ft::pair<iterator, iterator> equal_range(const key_type& k) { return tree_.equal_range(k); }
 	};
 
 	template <class Key, class T, class Compare, class Alloc>
