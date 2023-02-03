@@ -494,8 +494,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			}
 			time_end(start, "std[iterator]");
 		}
-		std::cout  << std::endl;
 	}
+		std::cout  << std::endl;
 	{
 		{
 			clock_t start = time_begin();
@@ -528,8 +528,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std << c.empty() << std::endl;
 			time_end(start, "std[empty]");
 		}
-		std::cout  << std::endl;
 	}
+		std::cout  << std::endl;
 	{
 		{
 			clock_t start = time_begin();
@@ -562,8 +562,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std << c.size() << std::endl;
 			time_end(start, "std[size]");
 		}
-		std::cout  << std::endl;
 	}
+		std::cout  << std::endl;
 	{
 		{
 			clock_t start = time_begin();
@@ -596,8 +596,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std << c.max_size() << std::endl;
 			time_end(start, "std[max_size]");
 		}
-		std::cout  << std::endl;
 	}
+		std::cout  << std::endl;
 	{
 		{
 			clock_t start = time_begin();
@@ -653,7 +653,59 @@ void map(std::ofstream &mine, std::ofstream &std) {
 
 			time_end(start, "std[insert]");
 		}
+	}
 		std::cout  << std::endl;
+	{
+		try {
+			clock_t start = time_begin();
+			ft::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			ft::map<int, std::string> b(a.begin(), a.end());
+			ft::map<int, std::string> c(b);
+			ft::pair<int, std::string> pair(1, "PIYO");
+			b.insert(ft::make_pair(1, "TEST"));
+			c.insert(c.begin(), c.end());
+			a.insert(a.begin(), pair);
+
+			mine << a.at(0) << std::endl;
+			mine << b.at(2) << std::endl;
+			mine << c.at(4) << std::endl;
+			mine << a.at(1) << std::endl;
+			time_end(start, "ft[at]");
+		}
+		catch (std::exception const &e) {
+			mine << e.what() << std::endl;
+		}
+	}
+	{
+		try {
+			clock_t start = time_begin();
+			std::map<int, std::string > a;
+			a[1] = "one";
+			a[2] = "two";
+			a[3] = "three";
+			a[4] = "four";
+
+			std::map<int, std::string> b(a.begin(), a.end());
+			std::map<int, std::string> c(b);
+			std::pair<int, std::string> pair(1, "PIYO");
+			b.insert(std::make_pair(1, "TEST"));
+			c.insert(c.begin(), c.end());
+			a.insert(a.begin(), pair);
+
+			std << a.at(0) << std::endl;
+			std << b.at(2) << std::endl;
+			std << c.at(4) << std::endl;
+			std << a.at(1) << std::endl;
+			time_end(start, "std[at]");
+		}
+		catch (std::exception const &e) {
+			std << e.what() << std::endl;
+		}
 	}
 	{
 		{

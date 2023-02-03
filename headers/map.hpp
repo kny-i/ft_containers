@@ -32,6 +32,7 @@ namespace ft {
 			class Alloc = std::allocator<ft::pair<const Key, T> > >
 
 	class map {
+
 	public:
 		typedef Key key_type;
 		typedef T mapped_type;
@@ -44,6 +45,7 @@ namespace ft {
 		typedef typename allocator_type::const_reference const_reference;
 		typedef typename allocator_type::reference pointer;
 		typedef typename allocator_type::const_reference const_pointer;
+
 
 	private:
 		typedef value_compare<key_type, value_type, key_compare>
@@ -85,6 +87,7 @@ namespace ft {
 			}
 		}
 
+
 		const_iterator begin() const { return tree_.begin(); }
 		iterator begin() { return tree_.begin(); }
 		iterator end() { return tree_.end(); }
@@ -101,6 +104,20 @@ namespace ft {
 		bool empty() const { return tree_.size() == 0; }
 		size_type size() const { return tree_.size(); }
 		size_type max_size() const { return tree_.max_size(); }
+		mapped_type& at(const key_type& key) {
+			iterator ret = find(key);
+			if (ret == end()) {
+				throw std::out_of_range("map::at:  key not found");
+			}
+			return (ret->second);
+		}
+		const mapped_type& at(const key_type& key) const{
+			iterator ret = find(key);
+			if (ret == end()) {
+				throw std::out_of_range("map::at:  key not found");
+			}
+			return (ret->second);
+		}
 		mapped_type& operator[](const key_type& k) {
 			return tree_.insert(value_type(k, mapped_type())).first->second;
 		}

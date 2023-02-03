@@ -336,6 +336,7 @@ namespace ft {
 
 
 	void resize(size_type count, T value = T()) {
+		//sizeが10でcount が2なら後ろから3つ削除する
 		if (count < size()) {
 			size_type diff = size() - count;
 			erase(begin() + diff, end());

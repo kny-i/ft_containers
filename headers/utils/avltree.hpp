@@ -100,6 +100,7 @@ namespace ft {
 			return node_alloc_.max_size();
 		}
 
+
 		ft::pair<iterator, bool> insert(const value_type& val) {
 			node_pointer parent_node = end_;
 			node_pointer node = get_root();
