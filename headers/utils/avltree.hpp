@@ -391,6 +391,7 @@ namespace ft {
 			return ft::make_pair(lower_bound_node(content), upper_bound_node(content));
 		}
 
+		//https://daeudaeu.com/avl_tree/
 		void rotate_left(node_pointer node) {
 			node_pointer right_node = node->right_;
 
@@ -401,7 +402,6 @@ namespace ft {
 			node->update_height();
 			right_node->update_height();
 		}
-
 		void rotate_right(node_pointer node) {
 			node_pointer left_node = node->left_;
 
@@ -454,6 +454,6 @@ namespace ft {
 		}
 	};
 
-}  // namespace ft
+}
 
 #endif
