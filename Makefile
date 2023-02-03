@@ -51,7 +51,6 @@ test: ./srcs/ft.cpp ./srcs/std.cpp
 	$(CXX) $(CXXFLAGS) srcs/std.cpp -o srcs/std
 	./srcs/ft
 	./srcs/std
-	echo "\n"
 	diff output/vec_mine output/vec_std
 	@echo $$?
 	diff output/map_mine output/map_std
