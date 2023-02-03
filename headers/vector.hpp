@@ -48,24 +48,15 @@ namespace ft {
 		}
 		/* copy constructor */
 		vector(vector const& other)
-		: first_pointer_(NULL), last_pointer_(NULL), storage_last_(NULL), alloc_(other.alloc_) {
-			reserve(other.size());
-			pointer dest = first_pointer_;
-			for (const_iterator src = other.begin(), last = other.end(); src != last;
-				 ++dest, ++src) {
-				construct(dest, *src);
-			}
-			last_pointer_ = first_pointer_ + other.size();
+		: first_pointer_(), last_pointer_(), storage_last_(), alloc_(other.alloc_) {
+			*this = other;
 		}
 
 		/* operator overload */
 		vector &operator=(const vector &other) {
 			if (this != &other) {
 				clear();
-				resize(other.size());
-				for (size_type i = 0; i < other.size(); i++) {
-					first_pointer_[i] = other[i];
-				}
+				assign(other.begin(), other.end());
 			}
 			return *this;
 		}
@@ -108,8 +99,9 @@ namespace ft {
 			}
 		}
 
+
 		template<class InputIt>
-		void assign(InputIt first, InputIt last, typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type* = NULL){
+		void assign(typename ft::enable_if<!ft::is_integral<InputIt>::value, InputIt>::type first, InputIt last){
 			size_type count = std::distance(first, last);
 			/* reallocate */
 			if (count > capacity()) {
@@ -198,6 +190,7 @@ namespace ft {
 			return first;
 	}
 
+	private:
 	void deallocate() { alloc_.deallocate(first_pointer_, capacity());}
 
 	pointer allocate(size_type value_type) {
@@ -206,6 +199,7 @@ namespace ft {
 			}
 			return alloc_.allocate(value_type);
 	}
+	public:
 	size_type max_size() const {
 			return alloc_.max_size();
 	}
@@ -225,14 +219,12 @@ namespace ft {
 			size_type old_capacity = capacity();
 
 			first_pointer_ = ptr;
-		/* why */
 			last_pointer_ = first_pointer_;
 			storage_last_ = first_pointer_ + value_size;
 			for (pointer old_iter = old_first; old_iter != old_last; ++old_iter, ++last_pointer_) {
 				construct(last_pointer_, *old_iter);
 			}
 			for (iterator riter = old_last,  rend = old_first; riter != rend; --riter) {
-				/* why */
 				destroy(&*riter);
 			}
 			alloc_.deallocate(old_first, old_capacity);
@@ -309,7 +301,7 @@ namespace ft {
 			storage_last_ = tmp_storage_last;
 		}
 
-
+	private:
 	void construct(pointer ptr) { alloc_.construct(ptr, T()); }
 
 	void construct(pointer ptr, const_reference value) {
@@ -321,6 +313,8 @@ namespace ft {
 			alloc_.construct(p);
 		}
 	}
+
+	public:
 	allocator_type get_allocator() const { return alloc_;}
 
 
@@ -338,6 +332,7 @@ namespace ft {
 			}
 		}
 
+	private:
 	void destroy(pointer ptr) {alloc_.destroy(ptr);}
 
 	void destroy_range(iterator first, iterator last) {

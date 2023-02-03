@@ -718,8 +718,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 
 			time_end(start, "std[erase]");
 		}
-		std::cout  << std::endl;
 	}
+		std::cout  << std::endl;
 	{
 		clock_t start = time_begin();
 		ft::map<int, std::string > a;
