@@ -61,7 +61,6 @@ namespace ft {
 		typedef ft::reverse_iterator<iterator> reverse_iterator;
 		typedef ft::reverse_iterator<const_iterator> const_reverse_iterator;
 
-
 		explicit map(const key_compare& comp = key_compare(),
 					 const allocator_type& alloc = allocator_type())
 				: tree_(value_compare(comp), alloc) {}
@@ -73,20 +72,16 @@ namespace ft {
 				: tree_(value_compare(comp), alloc) {
 			insert(first, last);
 		}
-
 		map(const map& other) : tree_(other.tree_) {}
-
 		~map() {
 
 		}
-
 		map& operator=(const map& other) {
 			if (*this != other) {
 				tree_ = other.tree_;
 				return *this;
 			}
 		}
-
 
 		const_iterator begin() const { return tree_.begin(); }
 		iterator begin() { return tree_.begin(); }
