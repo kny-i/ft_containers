@@ -656,8 +656,8 @@ void map(std::ofstream &mine, std::ofstream &std) {
 	}
 		std::cout  << std::endl;
 	{
-		try {
 			clock_t start = time_begin();
+		try {
 			ft::map<int, std::string > a;
 			a[1] = "one";
 			a[2] = "two";
@@ -675,15 +675,15 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			mine << b.at(2) << std::endl;
 			mine << c.at(4) << std::endl;
 			mine << a.at(1) << std::endl;
-			time_end(start, "ft[at]");
 		}
 		catch (std::exception const &e) {
 			mine << e.what() << std::endl;
 		}
+			time_end(start, "mine[at]");
 	}
 	{
-		try {
 			clock_t start = time_begin();
+		try {
 			std::map<int, std::string > a;
 			a[1] = "one";
 			a[2] = "two";
@@ -701,12 +701,13 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std << b.at(2) << std::endl;
 			std << c.at(4) << std::endl;
 			std << a.at(1) << std::endl;
-			time_end(start, "std[at]");
 		}
 		catch (std::exception const &e) {
 			std << e.what() << std::endl;
 		}
+			time_end(start, "std[at]");
 	}
+	std::cout << std::endl;
 	{
 		{
 			clock_t start = time_begin();
@@ -838,7 +839,7 @@ void map(std::ofstream &mine, std::ofstream &std) {
 			std << it->second << ' ';
 		}
 
-		time_end(start, "mine[swap]");
+		time_end(start, "std[swap]");
 	}
 	std::cout  << std::endl;
 	{
@@ -1392,7 +1393,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = 0; i < 100; ++i) {
 			mine << b[i] << std::endl;
 		}
-		time_end(start, "mine[]");
+		time_end(start, "mine[[]]");
 	}
 	{
 		clock_t start = time_begin();
@@ -1413,7 +1414,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for (int i = 0; i < 100; ++i) {
 			std << b[i] << std::endl;
 		}
-		time_end(start, "std[]");
+		time_end(start, "std[[]]");
 	}
 	std::cout << std::endl;
 	{
@@ -1844,9 +1845,10 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[erase]");
 	}
+	std::cout << std::endl;
 	{
-		try {
 			clock_t start = time_begin();
+		try {
 			ft::vector<int> a;
 			std::allocator<int> alloc;
 			ft::vector<int> c(alloc);
@@ -1874,17 +1876,17 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			c.reserve(0);
 //			d.reserve(d.max_size() - 1);
 
-			time_end(start, "std[reserve]");
 
 
 		}catch (const std::exception &e){
 			//bad alloc
 			mine << e.what() << std::endl;
 		}
+			time_end(start, "mine[reserve]");
 	}
 	{
-		try {
 			clock_t start = time_begin();
+		try {
 			std::vector<int> a;
 			std::allocator<int> alloc;
 			std::vector<int> c(alloc);
@@ -1911,13 +1913,11 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 			b.reserve(50);
 			c.reserve(0);
 //			d.reserve(d.max_size() - 1);
-			time_end(start, "std[reserve]");
-
-
 		}catch (const std::exception &e){
 			//bad alloc
 			std << e.what() << std::endl;
 		}
+			time_end(start, "std[reserve]");
 	}
 	std::cout << std::endl;
 	{
@@ -1937,7 +1937,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		mine << d.capacity();
 		mine << e.capacity();
 		mine << f.capacity();
-		time_end(start, "std[capacity]");
+		time_end(start, "mine[capacity]");
 	}
 	{
 		clock_t start = time_begin();
@@ -1984,7 +1984,6 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		}
 		time_end(start, "std[insert]");
 	}
-	std::cout << std::endl;
 	{
 		clock_t start = time_begin();
 		std::vector<int> a;
@@ -2110,7 +2109,7 @@ void vector(std::ofstream &mine, std::ofstream &std) {
 		for(std::vector<int>::iterator it = c.begin(); it != c.end(); ++it) {
 			std << *it << std::endl;
 		}
-		time_end(start, "mine[resize]");
+		time_end(start, "std[resize]");
 	}
 	std::cout << std::endl;
 	{
