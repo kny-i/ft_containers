@@ -136,14 +136,16 @@ namespace ft {
 				begin_ = erase_node->get_next_node();
 			}
 			node_pointer alternate;
+			/* 末端のnodeを消す場合 */
 			if (!erase_node->left_ && !erase_node->right_) {
 				alternate = NULL;
 			} else if (erase_node->get_scale() <= 0) {
-				//　　　[weight on left]
+				//　　　[weight on left or same weight]
 				// 下の逆パターン
 				alternate = erase_node->left_->get_max_node();
 			} else {
 				alternate = erase_node->right_->get_min_node();
+				//９を消そうとしている時
 				//　　　[weight on right]
 				//          ( 9 )
 				//         /    \
@@ -154,6 +156,7 @@ namespace ft {
 
 			node_pointer bottom_node;
 			if (alternate == NULL) {
+				//場所に変化のあったnodeで最もbottomにあるものがerase_nodeのペアレントになる
 				bottom_node = erase_node->parent_;
 			} else if (alternate->parent_ == erase_node) {
 				//          ( 9 )                     (11)
