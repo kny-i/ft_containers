@@ -65,6 +65,7 @@ test_clean:
 	rm -rf ./srcs/std.d
 	rm -rf ./srcs/ft.o
 	rm -rf ./srcs/std.o
+	rm -rf ./test
 
 .PHONY: test_fclean
 test_fclean: test_clean
